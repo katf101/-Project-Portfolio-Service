@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Hashtag = sequelize.define(
-    "Hashtag",
+  const Stack = sequelize.define(
+    "stack",
     {
       name: {
         type: DataTypes.STRING(20),
@@ -8,12 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      modelName: "Stack",
+      tableName: "stacks",
       charset: "utf8mb4",
       collate: "utf8mb4_general_ci",
     }
   );
-  Hashtag.associate = (db) => {
-    db.Hashtag.belongsToMany(db.Post, { through: "PostHashtag" }); // 해쉬태그 N : 게시글 N
+  Stack.associate = (db) => {
+    db.Stack.belongsToMany(db.Post, { through: "PostStack" }); // 해쉬태그 N : 게시글 N
   };
-  return Hashtag;
+  return Stack;
 };
