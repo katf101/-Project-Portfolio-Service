@@ -1,7 +1,7 @@
 # Portfolio-Service
 포트폴리오 서비스를 만들어보는 프로젝트입니다.
 
-#사용할 스택
+# 사용할 스택
 1. React
 2. Next.js
 3. styled-components
