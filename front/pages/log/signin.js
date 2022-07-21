@@ -7,12 +7,12 @@ const signin = () => {
   return (
     <Layout>
       <MainDiv>
-        <input type="text" />
-        <input type="text" />
+        <input type="text" placeholder="이메일" />
+        <input type="text" placeholder="비밀번호" />
+        <button>로그인</button>
         <div>
           <Link href="/log/signup">회원가입</Link>
         </div>
-        <button>로그인</button>
       </MainDiv>
     </Layout>
   );
