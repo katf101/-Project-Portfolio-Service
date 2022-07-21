@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
-const notification = () => {
+const Notification = () => {
   return <Layout>알림</Layout>;
 };
 
-export default notification;
+export default Notification;

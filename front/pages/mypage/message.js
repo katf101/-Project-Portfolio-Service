@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
-const message = () => {
+const Message = () => {
   return <Layout>채팅</Layout>;
 };
 
-export default message;
+export default Message;

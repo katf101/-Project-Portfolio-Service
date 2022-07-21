@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import ProTypes from "prop-types";
 
 const Layout = ({ children }) => {
   return (
@@ -28,6 +29,10 @@ const Layout = ({ children }) => {
       {children}
     </>
   );
+};
+
+Layout.propTypes = {
+  children: ProTypes.node.isRequired,
 };
 
 export default Layout;

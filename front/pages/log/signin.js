@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Layout from "../../components/Layout";
 import Link from "next/link";
 
-const signin = () => {
+const Signin = () => {
   return (
     <Layout>
       <MainDiv>
@@ -18,7 +18,7 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default Signin;
 
 const MainDiv = styled.div`
   margin-left: 10%;

@@ -1,73 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import SignupForm from "../../components/SignupForm";
 import Layout from "../../components/Layout";
-import Link from "next/link";
 
-const signup = () => {
+const Signup = () => {
   return (
-    <Layout>
-      <MainDiv>
-        <input type="text" placeholder="이메일" />
-        <input type="text" placeholder="이름" />
-        <input type="text" placeholder="비밀번호" />
-        <input type="text" placeholder="비밀번호 확인" />
-
-        <button>회원가입</button>
-        <div>
-          <Link href="/log/signin">로그인</Link>
-        </div>
-      </MainDiv>
-    </Layout>
+    <>
+      <Layout />
+      <SignupForm />
+    </>
   );
 };
 
-export default signup;
-
-const MainDiv = styled.div`
-  margin-left: 10%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 80%;
-  height: 960px;
-
-  /* background: #d9d9d9; */
-
-  input {
-    margin-top: 30px;
-
-    width: 331px;
-    height: 40px;
-
-    background: #ffffff;
-    border: 1px solid #e0581d;
-    border-radius: 15px;
-  }
-  div {
-    &:nth-child(3) {
-      margin-top: 15px;
-
-      width: 112px;
-      height: 33px;
-
-      text-align: center;
-
-      /* background: #964545; */
-    }
-  }
-  button {
-    /* Rectangle 23 */
-
-    width: 144px;
-    height: 34px;
-
-    background: #b9dfeb;
-    border-radius: 15px;
-    border: 0px;
-    &:hover {
-      background: #5ec7e9;
-    }
-  }
-`;
+export default Signup;
