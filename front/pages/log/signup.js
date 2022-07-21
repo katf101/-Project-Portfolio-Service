@@ -32,8 +32,6 @@ const MainDiv = styled.div`
 
   width: 80%;
   height: 960px;
-  left: 276px;
-  top: 86px;
 
   /* background: #d9d9d9; */
 
