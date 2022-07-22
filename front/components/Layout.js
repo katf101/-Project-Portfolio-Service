@@ -2,8 +2,13 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import ProTypes from "prop-types";
+import { useSelector } from "react-redux";
+import Image from "next/image";
+import userButton from "../components/assests/userButton.png";
 
 const Layout = ({ children }) => {
+  const { me } = useSelector((state) => state.user);
+
   return (
     <>
       <Header>
@@ -13,9 +18,12 @@ const Layout = ({ children }) => {
           </div>
         </div>
         <div>
-          <Link href="/log/login">
-            <SigninButton>로그인</SigninButton>
-          </Link>
+          {!me && (
+            <Link href="/log/login">
+              <SigninButton>로그인</SigninButton>
+            </Link>
+          )}
+          {me && <Image src={userButton} alt="user button" />}
         </div>
         {/* <Link href="/">홈</Link> */}
         {/* <Link href="/post/detail">상세게시글</Link> */}

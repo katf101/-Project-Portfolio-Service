@@ -39,6 +39,7 @@ const userSlice = createSlice({
         state.signupLoading = false;
         state.signupError = action.payload;
       })
+
       // 로그인
       .addCase(login.pending, (state) => {
         state.loginLoading = true;

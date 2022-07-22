@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/user";
-
+import Router, { useRouter } from "next/router";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
@@ -47,6 +47,7 @@ const LoginForm = () => {
             })
           );
           setAction({ setSubmitting, resetForm });
+          Router.push("/");
         }}
       >
         <Form_styled>
