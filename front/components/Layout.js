@@ -9,11 +9,11 @@ const Layout = ({ children }) => {
       <Header>
         <div>
           <div>
-            <Link href="/">홈</Link>
+            <Link href="/">내포폴을보아라</Link>
           </div>
         </div>
         <div>
-          <Link href="/log/signin">
+          <Link href="/log/login">
             <SigninButton>로그인</SigninButton>
           </Link>
         </div>

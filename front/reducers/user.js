@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { signup } from "../actions/user";
+import { signup, login } from "../actions/user";
 
 export const initialState = {
   me: null,
   signupLoading: false, // 회원가입 시도중
   signupDone: false,
   signupError: null,
+  loginLoading: false, // 로그인 시도중
+  loginDone: false,
+  loginError: null,
 };
 
 const userSlice = createSlice({
@@ -22,7 +25,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      // signup
+      // 회원가입
       .addCase(signup.pending, (state) => {
         state.signupLoading = true;
         state.signupDone = false;
@@ -35,6 +38,21 @@ const userSlice = createSlice({
       .addCase(signup.rejected, (state, action) => {
         state.signupLoading = false;
         state.signupError = action.payload;
+      })
+      // 로그인
+      .addCase(login.pending, (state) => {
+        state.loginLoading = true;
+        state.loginDone = false;
+        state.loginError = null;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loginLoading = false;
+        state.me = action.payload;
+        state.loginDone = true;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loginLoading = false;
+        state.loginError = action.payload;
       })
       .addDefaultCase((state) => state),
 });
