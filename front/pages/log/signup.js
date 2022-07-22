@@ -4,8 +4,9 @@ import Layout from "../../components/Layout";
 const Signup = () => {
   return (
     <>
-      <Layout />
-      <SignupForm />
+      <Layout>
+        <SignupForm />
+      </Layout>
     </>
   );
 };

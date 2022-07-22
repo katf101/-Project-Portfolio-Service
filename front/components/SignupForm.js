@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
 
-import useInput from "../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
 import axios from "axios";
@@ -91,7 +90,8 @@ const SignupForm = () => {
           <button
             type="primary"
             htmltype="submit"
-            loading={signupLoading.toString()}
+            loading={signupLoading}
+            // loading={signupLoading.toString()}
           >
             회원가입
           </button>

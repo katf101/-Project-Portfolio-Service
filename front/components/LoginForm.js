@@ -23,7 +23,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (action) {
       if (loginError) {
-        console("에러");
+        console.log("에러");
         // message.error(JSON.stringify(loginError, null, 4)).then();
       }
       action.setSubmitting(false);
@@ -58,7 +58,14 @@ const LoginForm = () => {
             placeholder="비밀번호"
             required
           />
-          <button>로그인</button>
+          <button
+            type="primary"
+            htmltype="submit"
+            loading={loginLoading}
+            // loading={loginLoading.toString()}
+          >
+            로그인
+          </button>
           <div style={{ marginTop: "15px" }}>
             <Link href="/log/signup">회원가입</Link>
           </div>
