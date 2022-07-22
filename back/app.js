@@ -4,11 +4,14 @@ const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
-
+const morgan = require("morgan");
+const path = require("path");
 const userRouter = require("./routes/user");
-// const upostRouter = require("./routes/post");
+
 const db = require("./models");
 const passportConfig = require("./passport");
+
+// ################################################################# //
 
 dotenv.config();
 const app = express();
@@ -22,18 +25,23 @@ db.sequelize
 
 passportConfig();
 
+app.use(morgan("dev"));
 app.use(
   cors({
     origin: "http://localhost:3000",
+    // origin: "*",
+    // origin: true,
     credentials: true,
   })
 );
+app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(express.json()); // 프론트에서 data를 json으로 보냈을때 req.body 안에 넣어줌
 app.use(express.urlencoded({ extended: true })); // 프론트에서 form(form 은 url)으로 data를 보냇을때 req.body 안에 넣어줌
+// app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
-    saveUninitalized: false,
+    saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
   })

@@ -1,5 +1,5 @@
 const passport = require("passport");
-const { Strategy: LocalStrategy } = require("passport-local"); // 구조분해 시 명칭을 바꾸는 방법
+const { Strategy: LocalStrategy } = require("passport-local");
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
 
@@ -15,11 +15,10 @@ module.exports = () => {
           const user = await User.findOne({
             where: { email },
           });
-          // passport 에서는 응답을 보내지 않음
           if (!user) {
-            return done(null, false, { reason: "존재하지 않는 사용자입니다!" }); // done(서버에러, 성공, 클라이언트 에러)
+            return done(null, false, { reason: "존재하지 않는 이메일입니다!" });
           }
-          const result = await bcrypt.compare(password, user.password); //compare는 비동기 함수
+          const result = await bcrypt.compare(password, user.password);
           if (result) {
             return done(null, user);
           }
