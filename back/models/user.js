@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false, // false면 필수
         unique: true, // 고유값
       },
-      nickname: {
+      name: {
         type: DataTypes.STRING(30),
         allowNull: false,
       },

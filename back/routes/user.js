@@ -4,8 +4,11 @@ const { User } = require("../models");
 
 const router = express.Router();
 
+// post /user/login
+// router.post("/login", (req, res, next) => {});
+
+// POST /user/
 router.post("/", async (req, res, next) => {
-  // POST /user/
   try {
     const exUser = await User.findOne({
       where: {
@@ -18,7 +21,7 @@ router.post("/", async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
     await User.create({
       email: req.body.email,
-      nickname: req.body.nickname,
+      name: req.body.name,
       password: hashedPassword,
     });
     res.status(201).send("ok");
