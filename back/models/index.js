@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
 
 // 리콰이어 후 실행 해줌
 db.Stack = require("./stack")(sequelize, Sequelize);
-db.Image = require("./image")(sequelize, Sequelize);
+// db.Image = require("./image")(sequelize, Sequelize);
 db.Post = require("./post")(sequelize, Sequelize);
 db.User = require("./user")(sequelize, Sequelize);
 

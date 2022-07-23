@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const path = require("path");
 const userRouter = require("./routes/user");
+const postRouter = require("./routes/post");
 
 const db = require("./models");
 const passportConfig = require("./passport");
@@ -53,7 +54,7 @@ app.get("/", (req, res) => {
   res.send("hello express");
 });
 
-// app.use("/post", postRouter);
+app.use("/post", postRouter);
 app.use("/user", userRouter);
 
 app.listen(3060, () => {
