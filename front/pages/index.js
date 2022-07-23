@@ -52,11 +52,16 @@ const MainDiv = styled.div`
 
   width: 90%;
   height: 960px;
+
+  z-index: 1;
+
   background: #d9d9d9;
   div {
     &:nth-child(1) {
       width: 100%;
       height: 110px;
+
+      z-index: 1;
 
       background: #e87777;
     }

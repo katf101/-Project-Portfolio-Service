@@ -40,10 +40,14 @@ const MainDiv = styled.div`
   background: #ffffff;
   border: 1px solid #e0581d;
   border-radius: 15px;
+  z-index: 1;
+
   div {
     &:nth-child(1) {
       width: 385px;
       height: 43px;
+
+      z-index: 1;
 
       /* background: #33bfb7; */
       ul {
@@ -58,7 +62,7 @@ const MainDiv = styled.div`
       width: 385px;
       height: 43px;
 
-      /* background: #4c34dd; */
+      background: #4c34dd;
       ul {
         list-style: none;
         display: flex;

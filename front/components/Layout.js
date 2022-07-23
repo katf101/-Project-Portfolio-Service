@@ -7,8 +7,8 @@ import Image from "next/image";
 import styled from "styled-components";
 import ProTypes from "prop-types";
 
-import userButton from "../public/assests/userButton.png";
-import hoverButton from "../public/assests/hoverButton.png";
+import UserButton from "../public/assests/UserButton.png";
+import hoverUserButton from "../public/assests/hoverUserButton.png";
 import hoverLogout from "../public/assests/hoverLogout.png";
 import Logout from "../public/assests/Logout.png";
 
@@ -28,6 +28,10 @@ const Layout = ({ children }) => {
     setIsProfileHovered(false);
   }, []);
 
+  const onProfileClickHandler = useCallback(() => {
+    setIsProfileHovered(!isProfileHovering);
+  });
+
   const [isLogoutHovering, setIsLogoutHovered] = useState(false);
   const onMouseLogoutEnter = useCallback(() => {
     setIsLogoutHovered(true);
@@ -45,23 +49,15 @@ const Layout = ({ children }) => {
           </div>
         </div>
         <div>
-          {!me && (
-            <Link href="/log/login">
-              <SigninButton>로그인</SigninButton>
-            </Link>
-          )}
           {me && (
             <ImageMainDiv>
-              <LoginImageButton
-                onMouseEnter={onMouseProfileEnter}
-                onMouseLeave={onMouseProfileLeave}
-              >
+              <ProfileImageButton onClick={onProfileClickHandler}>
                 {isProfileHovering ? (
-                  <Image src={hoverButton} alt="user button" />
+                  <Image src={hoverUserButton} alt="user button" />
                 ) : (
-                  <Image src={userButton} alt="user button" />
+                  <Image src={UserButton} alt="user button" />
                 )}
-              </LoginImageButton>
+              </ProfileImageButton>
               <LogoutImageButton
                 onMouseEnter={onMouseLogoutEnter}
                 onMouseLeave={onMouseLogoutLeave}
@@ -77,16 +73,32 @@ const Layout = ({ children }) => {
               </LogoutImageButton>
             </ImageMainDiv>
           )}
+          {!me && (
+            <Link href="/log/login">
+              <SigninButton>로그인</SigninButton>
+            </Link>
+          )}
         </div>
         {/* <Link href="/">홈</Link> */}
         {/* <Link href="/post/detail">상세게시글</Link> */}
-        {/* <Link href="/mypage/resume">이력서</Link> */}
-        {/* <Link href="/mypage/profile">프로필</Link> */}
-        {/* <Link href="/mypage/notification">알림</Link> */}
         {/* <Link href="/mypage/message">메세지</Link> */}
-        {/* <Link href="/log/signin">로그인</Link> */}
-        {/* <Link href="/log/signup">회원가입</Link> */}
       </Header>
+      {isProfileHovering && (
+        <DropBoxDiv>
+          <DropBox>
+            <div>
+              <Link href="/mypage/profile">프로필</Link>
+            </div>
+            <div>
+              <Link href="/mypage/resume">내 이력서</Link>
+            </div>
+            <div>
+              <Link href="/mypage/notification">알림</Link>
+            </div>
+          </DropBox>
+        </DropBoxDiv>
+      )}
+
       {children}
     </>
   );
@@ -97,6 +109,48 @@ Layout.propTypes = {
 };
 
 export default Layout;
+
+const DropBox = styled.div`
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 126px;
+  height: 108px;
+
+  z-index: 10;
+
+  background: #ffffff;
+  border: 1px solid #a9a9a9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  div {
+    display: block;
+    width: 97px;
+    height: 36px;
+    line-height: 36px;
+    text-align: left;
+  }
+`;
+
+const DropBoxDiv = styled.div`
+  margin-left: 5%;
+
+  position: absolute;
+  /* width: 126px; */
+  width: 89%;
+  height: 108px;
+
+  display: flex;
+  flex-direction: row-reverse;
+
+  z-index: 10;
+
+  /* border: 1px solid #000000; */
+`;
+
 const LogoutImageButton = styled.button`
   width: 35px;
   height: 35px;
@@ -105,7 +159,8 @@ const LogoutImageButton = styled.button`
   border: 0px solid #000000;
 `;
 
-const LoginImageButton = styled.button`
+const ProfileImageButton = styled.button`
+  margin-right: 10px;
   width: 35px;
   height: 35px;
 
