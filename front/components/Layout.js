@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { logout } from "../actions/user";
 import { useDispatch, useSelector } from "react-redux";
+import Router from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -18,6 +19,7 @@ const Layout = ({ children }) => {
 
   const onLogout = useCallback(() => {
     dispatch(logout());
+    Router.push("/");
   }, [dispatch]);
 
   const [isProfileHovering, setIsProfileHovered] = useState(false);

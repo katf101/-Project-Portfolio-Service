@@ -30,7 +30,7 @@ export const initialState = {
 
 const userSlice = createSlice({
   name: "user",
-  initialState: initialState,
+  initialState,
   reducers: {
     addPostToMe(state, action) {
       state.me.Posts.unshift({ id: action.payload });
@@ -70,7 +70,7 @@ const userSlice = createSlice({
         state.loginLoading = false;
         state.loginError = action.payload;
       })
-      // logout
+      // 로그아웃
       .addCase(logout.pending, (state) => {
         state.logoutLoading = true;
         state.logoutDone = false;

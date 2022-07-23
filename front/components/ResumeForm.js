@@ -1,55 +1,165 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost } from "../actions/post";
+
 import styled from "styled-components";
 import UserImage from "../public/assests/UserImage.png";
 import Image from "next/image";
 
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+
+const PostSchema = Yup.object().shape({
+  content: Yup.string().min(2, "게시글은 2자 이상 입력하여 주십시오."),
+  // .required("게시글은 필수 입력 항목 입니다."),
+});
+
 const ResumeForm = () => {
+  const dispatch = useDispatch();
+  const [action, setAction] = useState(null);
+  const { mePost, addPostLoading, addPostDone, addPostError } = useSelector(
+    (state) => state.post
+  );
+  const { me } = useSelector((state) => state.user);
+
+  const [active, setActive] = useState(false);
+  const onActiveHandler = () => {
+    setActive(!active);
+  };
+
+  useEffect(() => {
+    if (action) {
+      if (addPostDone) {
+        message.success("이력서가 등록되었습니다.").then();
+      }
+      if (addPostError) {
+        console.log("에러");
+        // message.error(JSON.stringify(addPostError, null, 4)).then();
+      }
+      action.setSubmitting(false);
+      action.resetForm();
+      setAction(null);
+    }
+  }, [addPostDone, addPostError]);
+
   return (
     <MainDiv>
-      <ImageDiv>
-        <div>
-          <Image
-            style={{ cursor: "pointer" }}
-            src={UserImage}
-            alt="user image"
-          />
-        </div>
-      </ImageDiv>
-      <UserNameDiv>
-        <input type="text" placeholder="이름" />
-      </UserNameDiv>
-      <IntroDiv>
-        <textarea placeholder="자기소개를 적어 주세요." />
-      </IntroDiv>
-      <JobDiv>
-        <input type="text" placeholder="ex) 프론트 엔드" />
-        <input type="text" placeholder="ex) 2년, 신입일 경우 신입" />
-      </JobDiv>
-      <StackDiv>
-        <div>
-          <input type="text" /> <button>기술 스택</button>
-        </div>
-        <div>
-          <div>React</div>
-          <div>Redux</div>
-          <div>Node.js</div>
-        </div>
-      </StackDiv>
-      <ActivityDiv>
-        <button>구직</button>
-        <div>셀프 구직 활동 중입니다.</div>
-      </ActivityDiv>
-      <PortfolioDiv>
-        <input type="text" placeholder="포트폴리오" />
-        <input type="text" placeholder="Github" />
-        <input type="text" placeholder="Blog" />
-        <button>저장</button>
-      </PortfolioDiv>
+      <Formik
+        initialValues={{
+          user_image: "",
+          //   user_name: "",
+          user_intro: "",
+          user_position: "",
+          user_career: "",
+          user_job: "",
+          user_portfolio: "",
+          user_github: "",
+          user_blog: "",
+        }}
+        validationSchema={PostSchema}
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          dispatch(
+            addPost({
+              //   src: values.user_image,
+              introduce: values.user_intro,
+              position: values.user_position,
+              career: values.user_career,
+              //   job: values.user_job,
+              portfolio: values.user_portfolio,
+              github: values.user_github,
+              blog: values.user_blog,
+            })
+          );
+          setAction({ setSubmitting, resetForm });
+        }}
+      >
+        <Form>
+          <ImageDiv>
+            <div>
+              <Image
+                style={{ cursor: "pointer" }}
+                src={UserImage}
+                alt="user image"
+              />
+            </div>
+          </ImageDiv>
+          <UserNameDiv>
+            <input
+              type="text"
+              name="user_name"
+              placeholder={me ? me.name : ""}
+            />
+          </UserNameDiv>
+          <IntroDiv>
+            <Field
+              as="textarea"
+              name="user_intro"
+              placeholder="자기소개를 적어 주세요."
+              required
+            />
+          </IntroDiv>
+          <JobDiv>
+            <Field
+              type="text"
+              name="user_position"
+              placeholder="ex) 프론트 엔드"
+            />
+            <Field
+              type="text"
+              name="user_career"
+              placeholder="ex) 2년, 신입일 경우 신입"
+              required
+            />
+          </JobDiv>
+          <StackDiv>
+            <div>
+              <input type="text" name="user_stack" />
+              <button>기술 스택</button>
+            </div>
+            <div>
+              <div>React</div>
+              <div>Redux</div>
+              <div>Node.js</div>
+            </div>
+          </StackDiv>
+          <ActivityDiv>
+            <button onClick={onActiveHandler}>구직</button>
+            <div>셀프 구직 활동 중입니다.</div>
+          </ActivityDiv>
+          <PortfolioDiv>
+            <Field
+              name="user_portfolio"
+              type="text"
+              placeholder="포트폴리오"
+              required
+            />
+            <Field
+              name="user_github"
+              type="text"
+              placeholder="Github"
+              required
+            />
+            <Field name="user_blog" type="text" placeholder="Blog" required />
+            {!mePost ? <button>수정</button> : ""}
+            <button
+              onClick={onMePostHandler}
+              type="primary"
+              htmltype="submit"
+              loading={addPostLoading}
+            >
+              올리기
+            </button>
+            {mePost ? <button>내리기</button> : ""}
+          </PortfolioDiv>
+        </Form>
+      </Formik>
     </MainDiv>
   );
 };
 
 export default ResumeForm;
+
+// ############################## //
 
 const PortfolioDiv = styled.div`
   width: 100%;
