@@ -2,10 +2,6 @@ module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "Post", // Mysql에는 posts 테이블 생성
     {
-      src: {
-        type: DataTypes.STRING(200),
-        allowNull: true, // false면 필수
-      },
       introduce: {
         type: DataTypes.TEXT,
         allowNull: false, // false면 필수
@@ -45,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
   Post.associate = (db) => {
     db.Post.hasOne(db.User); // 게시글은 사람한태 속해있다. // post.addUser, post.getUser, post.setUser
     db.Post.belongsToMany(db.Stack, { through: "PostStack" }); // 게시글 N : 기술스택 N // post.addHashtags
-    // db.Post.hasMany(db.Image); // 게시글 1 : 이미지 N // post.addImages, post.getImages
+    // db.Post.hasOne(db.Image); // 게시글 1 : 이미지 1 // post.addImages, post.getImages
     db.Post.belongsToMany(db.User, { through: "Like", as: "Likers" }); // 게시글 N : 유저 N // 좋아요 , // post.addLikers, post.removeLikers
   };
   return Post;
