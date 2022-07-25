@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const PostCard = () => {
+const PostCard = ({ children }) => {
   return (
     <>
       <MainDiv>
-        <div>
+        {/* <div>
           <ul>
             <li>사진</li>
             <li>이름</li>
@@ -20,7 +20,8 @@ const PostCard = () => {
             <li>리덕스</li>
             <li>노드</li>
           </ul>
-        </div>
+        </div> */}
+        {children}
       </MainDiv>
     </>
   );

@@ -8,10 +8,10 @@ import Image from "next/image";
 import styled from "styled-components";
 import ProTypes from "prop-types";
 
-import UserButton from "../public/assests/UserButton.png";
-import hoverUserButton from "../public/assests/hoverUserButton.png";
-import hoverLogout from "../public/assests/hoverLogout.png";
-import Logout from "../public/assests/Logout.png";
+import UserButton from "../public/images/UserButton.png";
+import hoverUserButton from "../public/images/hoverUserButton.png";
+import hoverLogout from "../public/images/hoverLogout.png";
+import Logout from "../public/images/Logout.png";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();

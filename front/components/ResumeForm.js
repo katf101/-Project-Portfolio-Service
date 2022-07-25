@@ -1,13 +1,16 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../actions/post";
+import { addPost, uploadImage } from "../actions/post";
+import postSlice from "../reducers/post";
 
+import { imageUrl } from "../config/config";
 import styled from "styled-components";
-import UserImage from "../public/assests/UserImage.png";
+import UserImage from "../public/images/UserImage.png";
 import Image from "next/image";
 
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 const PostSchema = Yup.object().shape({
   content: Yup.string().min(2, "게시글은 2자 이상 입력하여 주십시오."),
@@ -17,12 +20,40 @@ const PostSchema = Yup.object().shape({
 const ResumeForm = () => {
   const dispatch = useDispatch();
   const [action, setAction] = useState(null);
-  const { mePost, addPostLoading, addPostDone, addPostError } = useSelector(
+
+  const { imagePaths, addPostLoading, addPostDone, addPostError } = useSelector(
     (state) => state.post
   );
   const { me } = useSelector((state) => state.user);
 
   const [active, setActive] = useState(false);
+
+  //######################################################//
+  // const imageInput = useRef();
+  // const onClickImageUpload = useCallback(() => {
+  //   imageInput.current.click();
+  // }, [imageInput.current]);
+
+  // const onChangeImages = useCallback((e) => {
+  //   console.log("image", e.target.files);
+  //   const imageFormData = new FormData(); // FormData를 사용하면 back 에서 muler로 처리 가능
+  //   [].forEach.call(e.target.files, (image) => {
+  //     imageFormData.append("image", image);
+  //   });
+  //   // imageFormData.append("image", e.target.files);
+  //   console.log(imageFormData);
+  //   for (var value of imageFormData) {
+  //     console.log(value);
+  //   }
+  //   dispatch(uploadImage(imageFormData));
+  // }, []);
+  // const onRemoveImage = useCallback(
+  //   (index) => () => {
+  //     dispatch(postSlice.actions.removeImage(index));
+  //   },
+  //   []
+  // );
+  //#######################################################//
   const onActiveHandler = () => {
     setActive(!active);
   };
@@ -46,7 +77,7 @@ const ResumeForm = () => {
     <MainDiv>
       <Formik
         initialValues={{
-          user_image: "",
+          // user_image: "",
           //   user_name: "",
           user_intro: "",
           user_position: "",
@@ -60,7 +91,6 @@ const ResumeForm = () => {
         onSubmit={(values, { setSubmitting, resetForm }) => {
           dispatch(
             addPost({
-              //   src: values.user_image,
               introduce: values.user_intro,
               position: values.user_position,
               career: values.user_career,
@@ -73,16 +103,7 @@ const ResumeForm = () => {
           setAction({ setSubmitting, resetForm });
         }}
       >
-        <Form>
-          <ImageDiv>
-            <div>
-              <Image
-                style={{ cursor: "pointer" }}
-                src={UserImage}
-                alt="user image"
-              />
-            </div>
-          </ImageDiv>
+        <Form encType="multipart/form-data">
           <UserNameDiv>
             <input
               type="text"
@@ -93,6 +114,7 @@ const ResumeForm = () => {
           <IntroDiv>
             <Field
               as="textarea"
+              id="user_intro"
               name="user_intro"
               placeholder="자기소개를 적어 주세요."
               required
@@ -101,11 +123,13 @@ const ResumeForm = () => {
           <JobDiv>
             <Field
               type="text"
+              id="user_position"
               name="user_position"
               placeholder="ex) 프론트 엔드"
             />
             <Field
               type="text"
+              id="user_career"
               name="user_career"
               placeholder="ex) 2년, 신입일 경우 신입"
               required
@@ -113,7 +137,7 @@ const ResumeForm = () => {
           </JobDiv>
           <StackDiv>
             <div>
-              <input type="text" name="user_stack" />
+              <input type="text" id="user_stack" name="user_stack" />
               <button>기술 스택</button>
             </div>
             <div>
@@ -123,33 +147,35 @@ const ResumeForm = () => {
             </div>
           </StackDiv>
           <ActivityDiv>
-            <button onClick={onActiveHandler}>구직</button>
+            <button>구직</button>
             <div>셀프 구직 활동 중입니다.</div>
           </ActivityDiv>
           <PortfolioDiv>
             <Field
+              id="user_portfolio"
               name="user_portfolio"
               type="text"
               placeholder="포트폴리오"
               required
             />
             <Field
+              id="user_github"
               name="user_github"
               type="text"
               placeholder="Github"
               required
             />
             <Field name="user_blog" type="text" placeholder="Blog" required />
-            {!mePost ? <button>수정</button> : ""}
+            <button>수정</button>
             <button
-              onClick={onMePostHandler}
+              onClick={onActiveHandler}
               type="primary"
               htmltype="submit"
               loading={addPostLoading}
             >
               올리기
             </button>
-            {mePost ? <button>내리기</button> : ""}
+            <button>내리기</button>
           </PortfolioDiv>
         </Form>
       </Formik>
@@ -160,6 +186,15 @@ const ResumeForm = () => {
 export default ResumeForm;
 
 // ############################## //
+
+const Imageinput = styled.input`
+  width: 100px;
+  height: 100px;
+  /* display: none; */
+  /* z-index: 100; */
+  /* background-image: url("../public/images/UserImage.png"); */
+  /* background-size: 100% 100%; */
+`;
 
 const PortfolioDiv = styled.div`
   width: 100%;
@@ -355,6 +390,8 @@ const IntroDiv = styled.div`
 `;
 
 const UserNameDiv = styled.div`
+  margin-top: 100px;
+
   width: 100%;
   height: 72px;
   display: flex;
