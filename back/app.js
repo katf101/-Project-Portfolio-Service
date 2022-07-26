@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const path = require("path");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
+const postsRouter = require("./routes/posts");
 
 const db = require("./models");
 const passportConfig = require("./passport");
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
   res.send("hello express");
 });
 
+app.use("/posts", postsRouter);
 app.use("/post", postRouter);
 app.use("/user", userRouter);
 
