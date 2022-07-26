@@ -21,7 +21,7 @@ const ResumeForm = () => {
   const dispatch = useDispatch();
   const [action, setAction] = useState(null);
 
-  const { imagePaths, addPostLoading, addPostDone, addPostError } = useSelector(
+  const { mainPosts, addPostLoading, addPostDone, addPostError } = useSelector(
     (state) => state.post
   );
   const { me } = useSelector((state) => state.user);
@@ -61,7 +61,9 @@ const ResumeForm = () => {
   useEffect(() => {
     if (action) {
       if (addPostDone) {
-        message.success("이력서가 등록되었습니다.").then();
+        console.log("이력서 올리기 성공");
+        console.log("배열", mainPosts);
+        // message.success("이력서가 등록되었습니다.").then();
       }
       if (addPostError) {
         console.log("에러");
@@ -71,7 +73,7 @@ const ResumeForm = () => {
       action.resetForm();
       setAction(null);
     }
-  }, [addPostDone, addPostError]);
+  }, [addPostDone, addPostError, mainPosts]);
 
   return (
     <MainDiv>

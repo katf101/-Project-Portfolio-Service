@@ -85,33 +85,12 @@ const ResumeImage = () => {
       onSubmit={onSubmit}
     >
       <ImageDiv>
-        {/* {imagePaths.map((v, i) => (
-          <div style={{ margin: "5px 0 5px 0" }}>
-            {id && (
-              <image
-                width={100}
-                height={100}
-                src={
-                  imageUrl
-                    ? `${imageUrl}/${id}/${v}`
-                    : v.replace(/\/thumb\//, "/original/")
-                }
-                alt={v}
-              />
-            )}
-            <div style={{ marginTop: "5px" }}>
-              <button type="danger" onClick={onRemoveImage(i)}>
-                제거
-              </button>
-            </div>
-          </div>
-        ))} */}
         <input
           type="file"
           id="image"
           name="image"
           multiple
-          //   hidden
+          // hidden
           ref={imageInput}
           onChange={onChangeImages}
         />
@@ -120,6 +99,20 @@ const ResumeImage = () => {
         <button type="primary" htmltype="submit">
           올리기
         </button>
+        <div>
+          {imagePaths.map((v, i) => (
+            <div key={v} style={{ display: "inline-block" }}>
+              <img
+                src={`http://localhost:3060/${v}`}
+                style={{ width: "200px" }}
+                alt={v}
+              />
+              <div>
+                <button onClick={onRemoveImage(i)}>제거</button>
+              </div>
+            </div>
+          ))}
+        </div>
       </ImageDiv>
     </form>
   );

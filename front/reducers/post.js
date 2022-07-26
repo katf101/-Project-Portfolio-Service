@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addPost, uploadImage, addImage } from "../actions/post";
+import { addPost, uploadImage, addImage, loadPosts } from "../actions/post";
 import _concat from "lodash/concat";
 
 export const initialState = {
   mainPosts: [],
   imagePaths: [],
+  hasMorePosts: true,
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
+  loadPostsLoading: false,
+  loadPostsDone: false,
+  loadPostsError: null,
   uploadImageLoading: false,
   uploadImageDone: false,
   uploadImageError: null,
@@ -18,7 +22,7 @@ export const initialState = {
 
 const postSlice = createSlice({
   name: "post",
-  initialState,
+  initialState: initialState,
   reducers: {
     removeImage(state, action) {
       state.imagePaths = state.imagePaths.filter(
@@ -38,11 +42,26 @@ const postSlice = createSlice({
         state.addPostLoading = false;
         state.addPostDone = true;
         state.mainPosts.unshift(action.payload);
-        state.imagePaths = [];
       })
       .addCase(addPost.rejected, (state, action) => {
         state.addPostLoading = false;
         state.addPostError = action.error.message;
+      })
+      // loadPosts
+      .addCase(loadPosts.pending, (state) => {
+        state.loadPostsLoading = true;
+        state.loadPostsDone = false;
+        state.loadPostsError = null;
+      })
+      .addCase(loadPosts.fulfilled, (state, action) => {
+        state.loadPostsLoading = false;
+        state.loadPostsDone = true;
+        state.mainPosts = _concat(state.mainPosts, action.payload);
+        state.hasMorePosts = action.payload.length === 10;
+      })
+      .addCase(loadPosts.rejected, (state, action) => {
+        state.loadPostsLoading = false;
+        state.loadPostsError = action.error.message;
       })
       // uploadImage
       .addCase(uploadImage.pending, (state) => {

@@ -6,7 +6,7 @@ import { backendUrl } from "../config/config";
 axios.defaults.baseURL = backendUrl;
 axios.defaults.withCredentials = true; // front, backend 간 쿠키공유
 
-// 로드 마이 인포
+// 로드 내정보
 export const loadMyInfo = createAsyncThunk("user/loadMyInfo", async () => {
   const response = await axios.get("/user");
   return response.data;

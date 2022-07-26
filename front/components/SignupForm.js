@@ -39,7 +39,7 @@ const SignupForm = () => {
     if (action) {
       if (signupDone) {
         alert("회원가입 성공");
-        Router.push("/").then();
+        Router.push("/log/login").then();
       }
       if (signupError) {
         console.log("error");

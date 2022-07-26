@@ -4,19 +4,71 @@ import { useSelector, useDispatch } from "react-redux";
 import Layout from "../components/Layout";
 import styled from "styled-components";
 import PostCard from "../components/UI/PostCard";
+import { useInView } from "react-intersection-observer";
 
 import axios from "axios";
 import { loadMyInfo } from "../actions/user";
+import { loadPosts } from "../actions/post";
 import wrapper from "../store/configureStore";
 
 // ######################################################## //
 const Home = () => {
+  const dispatch = useDispatch();
+  const { mainPosts, loadPostsLoading, hasMorePosts } = useSelector(
+    (state) => state.post
+  );
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView && hasMorePosts && !loadPostsLoading) {
+      const lastId = mainPosts[mainPosts.length - 1]?.id;
+      dispatch(
+        loadPosts({
+          lastId,
+        })
+      );
+    }
+  }, [inView, hasMorePosts, loadPostsLoading, mainPosts]);
+
+  // useEffect(() => {
+  //   function onScroll() {
+  //     // window.scrollY : 얼마나 내렸는지
+  //     // document.documentElement.clientHeight : 화면에 보이는 길이
+  //     // document.documentElement.scrollHeight : 총길이
+  //     if (hasMorePosts && !loadPostsLoading) {
+  //       if (
+  //         window.scrollY + document.documentElement.clientHeight >
+  //         document.documentElement.scrollHeight - 100
+  //       ) {
+  //         const lastId = mainPosts[mainPosts.length - 1]?.id;
+  //         dispatch(
+  //           loadPosts({
+  //             lastId,
+  //           })
+  //         );
+  //       }
+  //     }
+  //   }
+  //   window.addEventListener("scroll", onScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", onScroll);
+  //   };
+  // }, [hasMorePosts, loadPostsLoading, mainPosts]);
+
   return (
     <Layout>
       <MainDiv>
-        <div>서치 폼</div>
-        <div></div>
-        <PostCard></PostCard>
+        <SearchDiv>서치 폼</SearchDiv>
+        {/* <div></div> */}
+        <CardDiv>
+          {mainPosts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+          <div
+            ref={hasMorePosts && !loadPostsLoading ? ref : undefined}
+            style={{ height: 10 }}
+          />
+        </CardDiv>
       </MainDiv>
     </Layout>
   );
@@ -32,7 +84,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     if (context.req && cookie) {
       axios.defaults.headers.Cookie = cookie;
     }
-    // await context.store.dispatch(loadPosts());
+    await context.store.dispatch(loadPosts());
     await context.store.dispatch(loadMyInfo());
 
     return {
@@ -45,27 +97,37 @@ export default Home;
 
 // ############################################################## //
 
-const MainDiv = styled.div`
-  margin-left: 5%;
+const CardDiv = styled.div`
+  width: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  /* background: #e87777; */
+`;
+
+const SearchDiv = styled.div`
+  width: 100%;
+  height: 110px;
+
+  /* z-index: 1; */
+
+  background: #e87777;
+`;
+
+const MainDiv = styled.div`
+  margin-left: 5%;
+
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+
   width: 90%;
-  height: 960px;
+  /* height: 960px; */
+  /* height: 1; */
 
   z-index: 1;
 
   background: #d9d9d9;
-  div {
-    &:nth-child(1) {
-      width: 100%;
-      height: 110px;
-
-      z-index: 1;
-
-      background: #e87777;
-    }
-  }
 `;
