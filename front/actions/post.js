@@ -6,6 +6,31 @@ import userSlice from "../reducers/user";
 axios.defaults.baseURL = backendUrl;
 axios.defaults.withCredentials = true; // front, backend 간 쿠키공유
 
+export const removePost = createAsyncThunk(
+  "post/removePost",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/post/${data.postId}`); // DELETE /post/1/comment
+      // thunkAPI.dispatch(userSlice.actions.removePostToMe(response.data.id));
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updatePost = createAsyncThunk(
+  "post/updatePost",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(`/post/${data.postId}`, data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const loadPosts = createAsyncThunk(
   "post/loadPosts",
   async (data) => {

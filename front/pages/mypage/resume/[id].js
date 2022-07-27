@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { loadMyInfo } from "../../../actions/user";
-import { loadPost } from "../../../actions/post";
+import { loadPost, loadPosts } from "../../../actions/post";
+import Head from "next/head";
 
 import Layout from "../../../components/Layout";
 import ResumeForm from "../../../components/ResumeForm";
@@ -24,8 +25,22 @@ const Resume = () => {
 
   return (
     <Layout>
-      <ResumeImage />
-      <ResumeForm post={singlePost} />
+      {/* {singlePost && ( */}
+      <>
+        <Head>
+          <meta
+            property="og:title"
+            // content={`${singlePost.User.name}님의 게시글`}
+          />
+          <meta
+            property="og:url"
+            content={`https://localhost3000/mypage/resume/${id}`}
+          />
+        </Head>
+        <ResumeImage />
+        <ResumeForm post={singlePost} />
+      </>
+      {/* )} */}
     </Layout>
   );
 };
@@ -40,6 +55,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       axios.defaults.headers.Cookie = cookie;
     }
     // await context.store.dispatch(loadPost({ postId }));
+    await context.store.dispatch(loadPosts());
     await context.store.dispatch(loadPost({ postId: context.params.id }));
     await context.store.dispatch(loadMyInfo());
 

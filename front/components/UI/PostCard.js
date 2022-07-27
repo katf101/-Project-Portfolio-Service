@@ -1,21 +1,23 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
+  const name = useSelector((state) => state.user.me?.name);
+  const { mainPosts } = useSelector((state) => state.post);
 
   return (
     <>
       <MainDiv>
         <MainTopDiv>
-          <div></div>
+          <div>{mainPosts.UserId}</div>
           <div>{post.career}</div>
           <div>{post.position}</div>
           <div>{post.job === true ? "구직활동 중입니다!" : ""}</div>
         </MainTopDiv>
         <MainBottomDiv>
+          <div>{post.User.name}</div>
           <div>리액트</div>
           <div>리덕스</div>
           <div>노드</div>

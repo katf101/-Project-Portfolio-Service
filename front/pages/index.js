@@ -1,23 +1,32 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import styled from "styled-components";
 import PostCard from "../components/UI/PostCard";
 import { useInView } from "react-intersection-observer";
 
 import axios from "axios";
-import { loadMyInfo } from "../actions/user";
-import { loadPosts } from "../actions/post";
+import { loadMyInfo, loadUser, userInfo } from "../actions/user";
+import { loadPosts, loadPost } from "../actions/post";
 import wrapper from "../store/configureStore";
 
 // ######################################################## //
 const Home = () => {
   const dispatch = useDispatch();
-  const { mainPosts, loadPostsLoading, hasMorePosts } = useSelector(
+  const router = useRouter();
+  const { id } = router.query;
+  const { mainPosts, loadPostsLoading, hasMorePosts, singlePost } = useSelector(
     (state) => state.post
   );
+  const { loadUser } = useSelector((state) => state.user);
   const [ref, inView] = useInView();
+
+  useEffect(() => {
+    console.log("메인 싱글포스트", singlePost);
+    console.log("메인 싱글포스트", mainPosts);
+    console.log("미", userInfo);
+  });
 
   useEffect(() => {
     if (inView && hasMorePosts && !loadPostsLoading) {
@@ -54,6 +63,9 @@ const Home = () => {
   //     window.removeEventListener("scroll", onScroll);
   //   };
   // }, [hasMorePosts, loadPostsLoading, mainPosts]);
+  useEffect(() => {
+    console.log("맵", mainPosts);
+  });
 
   return (
     <Layout>
@@ -85,6 +97,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       axios.defaults.headers.Cookie = cookie;
     }
     await context.store.dispatch(loadPosts());
+    // await context.store.dispatch(loadPost({ postId: context.params.id }));
     await context.store.dispatch(loadMyInfo());
 
     return {

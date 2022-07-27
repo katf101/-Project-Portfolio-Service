@@ -5,8 +5,12 @@ import {
   addImage,
   loadPosts,
   loadPost,
+  updatePost,
+  removePost,
 } from "../actions/post";
 import _concat from "lodash/concat";
+import _remove from "lodash/remove";
+import _find from "lodash/find";
 
 export const initialState = {
   mainPosts: [],
@@ -19,7 +23,12 @@ export const initialState = {
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
-
+  updatePostLoading: false,
+  updatePostDone: false,
+  updatePostError: null,
+  removePostLoading: false,
+  removePostDone: false,
+  removePostError: null,
   uploadImageLoading: false,
   uploadImageDone: false,
   uploadImageError: null,
@@ -40,6 +49,43 @@ const postSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
+      // removePost
+      .addCase(removePost.pending, (state) => {
+        state.removePostLoading = true;
+        state.removePostDone = false;
+        state.removePostError = null;
+      })
+      .addCase(removePost.fulfilled, (state, action) => {
+        state.removePostLoading = false;
+        state.removePostDone = true;
+        _remove(state.mainPosts, { id: action.payload.PostId });
+      })
+      .addCase(removePost.rejected, (state, action) => {
+        state.removePostLoading = false;
+        state.removePostError = action.error.message;
+      })
+      // updatePost
+      .addCase(updatePost.pending, (state) => {
+        state.updatePostLoading = true;
+        state.updatePostDone = false;
+        state.updatePostError = null;
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        // const post = _.find(state.singlePost, { id: action.payload.PostId });
+        state.updatePostLoading = false;
+        state.updatePostDone = true;
+        // post.introduce = action.payload.introduce;
+        // post.position = action.payload.position;
+        // post.job = action.payload.job;
+        // post.career = action.payload.career;
+        // post.portfolio = action.payload.portfolio;
+        // post.github = action.payload.github;
+        // post.blog = action.payload.blog;
+      })
+      .addCase(updatePost.rejected, (state, action) => {
+        state.updatePostLoading = false;
+        state.updatePostError = action.error.message;
+      })
       // loadPost
       .addCase(loadPost.pending, (state) => {
         state.loadPostsLoading = true;

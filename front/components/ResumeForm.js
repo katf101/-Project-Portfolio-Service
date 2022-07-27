@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, uploadImage, loadPost } from "../actions/post";
+import { addPost, updatePost, removePost } from "../actions/post";
 import { loadMyInfo } from "../actions/user";
 import wrapper from "../store/configureStore";
 import postSlice from "../reducers/post";
@@ -23,13 +23,23 @@ const PostSchema = Yup.object().shape({
 const ResumeForm = ({ post }) => {
   const dispatch = useDispatch();
   const [action, setAction] = useState(null);
-  const [job, setJob] = useState(false);
+  const [job, setJob] = useState(post?.job);
   const onJobHandler = () => {
     setJob(!job);
   };
 
-  const { singlePost, mainPosts, addPostLoading, addPostDone, addPostError } =
-    useSelector((state) => state.post);
+  const {
+    mainPosts,
+    singlePost,
+    addPostLoading,
+    addPostDone,
+    addPostError,
+    updatePostLoading,
+    updatePostDone,
+    updatePostError,
+    removePostLoading,
+    retweetError,
+  } = useSelector((state) => state.post);
   const { me, addPostToMe } = useSelector((state) => state.user);
 
   const [active, setActive] = useState(false);
@@ -42,13 +52,17 @@ const ResumeForm = ({ post }) => {
   const userPostInfo = mainPosts.filter((v, i) => v.UserId === me?.id);
 
   useEffect(() => {
-    console.log("미", me?.id);
-    console.log("렌더배열", mainPosts);
-    console.log("렌더배열1", post);
+    console.log("미.아이디", me?.id);
+    // console.log("포스트아디", post?.id);
+    console.log("메인포스트스", mainPosts);
+    // console.log("포스트", post);
+    console.log("싱글포스트", singlePost);
+    // console.log("포스트아디", post?.id);
     console.log("렌더배열2", userPostInfo);
-    console.log("렌더배열3", me);
+    console.log("미", me);
+
     // console.log("렌더배열3", userPostInfo[0].introduce);
-  }, [mainPosts, me, userPostInfo, singlePost, addPostToMe]);
+  }, [mainPosts, me, userPostInfo, addPostToMe, singlePost]);
 
   // (me.id ? me.id : null)
   useEffect(() => {
@@ -68,6 +82,33 @@ const ResumeForm = ({ post }) => {
     }
   }, [addPostDone, addPostError, mainPosts]);
 
+  useEffect(() => {
+    if (action) {
+      if (updatePostDone) {
+        // message.success("게시글이 수정되었습니다.").then();
+      }
+      if (updatePostError) {
+        // message.error(JSON.stringify(updatePostError, null, 4)).then();
+      }
+      action.setSubmitting(false);
+      action.resetForm();
+      // onToggleChangePost();
+      setAction(null);
+    }
+  }, [updatePostDone, updatePostError]);
+
+  const onRemovePost = useCallback(() => {
+    if (!me.id) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+    dispatch(
+      removePost({
+        postId: post.id,
+      })
+    );
+  }, [post]);
+
   return (
     <MainDiv>
       <Formik
@@ -84,18 +125,38 @@ const ResumeForm = ({ post }) => {
         }}
         validationSchema={PostSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          dispatch(
-            addPost({
-              introduce: values.user_intro,
-              position: values.user_position,
-              career: values.user_career,
-              job,
-              // job: values.user_job,
-              portfolio: values.user_portfolio,
-              github: values.user_github,
-              blog: values.user_blog,
-            })
-          );
+          {
+            {
+              !post &&
+                dispatch(
+                  addPost({
+                    introduce: values.user_intro,
+                    position: values.user_position,
+                    career: values.user_career,
+                    job,
+                    portfolio: values.user_portfolio,
+                    github: values.user_github,
+                    blog: values.user_blog,
+                  })
+                );
+            }
+            {
+              post &&
+                dispatch(
+                  updatePost({
+                    postId: post?.id,
+                    introduce: values.user_intro,
+                    position: values.user_position,
+                    career: values.user_career,
+                    job,
+                    portfolio: values.user_portfolio,
+                    github: values.user_github,
+                    blog: values.user_blog,
+                  })
+                ) &&
+                Router.replace(`/mypage/resume/${me.id}`);
+            }
+          }
           setAction({ setSubmitting, resetForm });
         }}
       >
@@ -116,7 +177,7 @@ const ResumeForm = ({ post }) => {
               //   mainPosts.filter((v) => v.UserId === me.id)[0].introduce
               // )}
               placeholder={post ? post.introduce : "자기소개를 적어 주세요."}
-              required
+              // required
             />
           </IntroDiv>
           <JobDiv>
@@ -131,7 +192,7 @@ const ResumeForm = ({ post }) => {
               id="user_career"
               name="user_career"
               placeholder={post ? post.career : "ex) 2년, 신입일 경우 신입"}
-              required
+              // required
             />
           </JobDiv>
           <StackDiv>
@@ -167,22 +228,30 @@ const ResumeForm = ({ post }) => {
               name="user_portfolio"
               type="text"
               placeholder={post ? post.portfolio : "포트폴리오"}
-              required
+              // required
             />
             <Field
               id="user_github"
               name="user_github"
               type="text"
               placeholder={post ? post.github : "Github"}
-              required
+              // required
             />
             <Field
               name="user_blog"
               type="text"
               placeholder={post ? post.blog : "Blog"}
-              required
+              // required
             />
-            <button>수정</button>
+            {post && (
+              <button
+                htmltype="submit"
+                type="primary"
+                loading={updatePostLoading}
+              >
+                수정
+              </button>
+            )}
             {!post ? (
               <button
                 onClick={onActiveHandler}
@@ -193,7 +262,14 @@ const ResumeForm = ({ post }) => {
                 올리기
               </button>
             ) : (
-              <button>내리기</button>
+              <button
+                htmltype="button"
+                type="primary"
+                loading={removePostLoading}
+                onClick={onRemovePost}
+              >
+                내리기
+              </button>
             )}
           </PortfolioDiv>
         </Form>
@@ -202,25 +278,25 @@ const ResumeForm = ({ post }) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  async (context) => {
-    const cookie = context.req ? context.req.headers.cookie : "";
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   async (context) => {
+//     const cookie = context.req ? context.req.headers.cookie : "";
 
-    axios.defaults.headers.Cookie = "";
-    // 쿠키가 브라우저에 있는경우만 넣어서 실행
-    // (주의, 아래 조건이 없다면 다른 사람으로 로그인 될 수도 있음)
-    if (context.req && cookie) {
-      axios.defaults.headers.Cookie = cookie;
-    }
-    await context.store.dispatch(loadPost({ postId: context.params.id }));
-    await context.store.dispatch(loadPosts());
-    await context.store.dispatch(loadMyInfo());
+//     axios.defaults.headers.Cookie = "";
+//     // 쿠키가 브라우저에 있는경우만 넣어서 실행
+//     // (주의, 아래 조건이 없다면 다른 사람으로 로그인 될 수도 있음)
+//     if (context.req && cookie) {
+//       axios.defaults.headers.Cookie = cookie;
+//     }
+//     // await context.store.dispatch(loadPost({ postId: context.params.id }));
+//     await context.store.dispatch(loadPosts());
+//     await context.store.dispatch(loadMyInfo());
 
-    return {
-      props: {},
-    };
-  }
-);
+//     return {
+//       props: {},
+//     };
+//   }
+// );
 
 export default ResumeForm;
 
