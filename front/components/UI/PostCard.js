@@ -13,7 +13,7 @@ const PostCard = ({ post }) => {
           <div></div>
           <div>{post.career}</div>
           <div>{post.position}</div>
-          <div>{post.job === null && "구직활동 중입니다!"}</div>
+          <div>{post.job === true ? "구직활동 중입니다!" : ""}</div>
         </MainTopDiv>
         <MainBottomDiv>
           <div>리액트</div>

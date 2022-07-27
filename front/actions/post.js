@@ -27,13 +27,25 @@ export const loadPosts = createAsyncThunk(
   }
 );
 
+export const loadPost = createAsyncThunk(
+  "post/loadPost",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/post/${data.postId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 // addPost
 export const addPost = createAsyncThunk(
   "post/addPost",
   async (data, thunkAPI) => {
     try {
       const response = await axios.post("/post", data);
-      // thunkAPI.dispatch(userSlice.actions.addPostToMe(response.data.id));
+      thunkAPI.dispatch(userSlice.actions.addPostToMe(response.data.id));
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

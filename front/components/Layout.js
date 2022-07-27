@@ -16,10 +16,12 @@ import Logout from "../public/images/Logout.png";
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const { me, logoutLoading } = useSelector((state) => state.user);
+  // const { id } = useSelector((state) => state.user.me);
 
   const onLogout = useCallback(() => {
     dispatch(logout());
-    Router.push("/");
+    // Router.push("/");
+    Router.replace("/");
   }, [dispatch]);
 
   const [isProfileHovering, setIsProfileHovered] = useState(false);
@@ -92,7 +94,7 @@ const Layout = ({ children }) => {
               <Link href="/mypage/profile">프로필</Link>
             </div>
             <div>
-              <Link href="/mypage/resume">내 이력서</Link>
+              <Link href={`/mypage/resume/${me.id}`}>내 이력서</Link>
             </div>
             <div>
               <Link href="/mypage/notification">알림</Link>

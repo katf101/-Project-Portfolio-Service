@@ -1,7 +1,10 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, uploadImage } from "../actions/post";
+import { addPost, uploadImage, loadPost } from "../actions/post";
+import { loadMyInfo } from "../actions/user";
+import wrapper from "../store/configureStore";
 import postSlice from "../reducers/post";
+import Router from "next/router";
 
 import { imageUrl } from "../config/config";
 import styled from "styled-components";
@@ -17,47 +20,37 @@ const PostSchema = Yup.object().shape({
   // .required("게시글은 필수 입력 항목 입니다."),
 });
 
-const ResumeForm = () => {
+const ResumeForm = ({ post }) => {
   const dispatch = useDispatch();
   const [action, setAction] = useState(null);
+  const [job, setJob] = useState(false);
+  const onJobHandler = () => {
+    setJob(!job);
+  };
 
-  const { mainPosts, addPostLoading, addPostDone, addPostError } = useSelector(
-    (state) => state.post
-  );
-  const { me } = useSelector((state) => state.user);
+  const { singlePost, mainPosts, addPostLoading, addPostDone, addPostError } =
+    useSelector((state) => state.post);
+  const { me, addPostToMe } = useSelector((state) => state.user);
 
   const [active, setActive] = useState(false);
 
-  //######################################################//
-  // const imageInput = useRef();
-  // const onClickImageUpload = useCallback(() => {
-  //   imageInput.current.click();
-  // }, [imageInput.current]);
-
-  // const onChangeImages = useCallback((e) => {
-  //   console.log("image", e.target.files);
-  //   const imageFormData = new FormData(); // FormData를 사용하면 back 에서 muler로 처리 가능
-  //   [].forEach.call(e.target.files, (image) => {
-  //     imageFormData.append("image", image);
-  //   });
-  //   // imageFormData.append("image", e.target.files);
-  //   console.log(imageFormData);
-  //   for (var value of imageFormData) {
-  //     console.log(value);
-  //   }
-  //   dispatch(uploadImage(imageFormData));
-  // }, []);
-  // const onRemoveImage = useCallback(
-  //   (index) => () => {
-  //     dispatch(postSlice.actions.removeImage(index));
-  //   },
-  //   []
-  // );
-  //#######################################################//
   const onActiveHandler = () => {
     setActive(!active);
+    Router.replace(`/mypage/resume/${me.id}`);
   };
 
+  const userPostInfo = mainPosts.filter((v, i) => v.UserId === me?.id);
+
+  useEffect(() => {
+    console.log("미", me?.id);
+    console.log("렌더배열", mainPosts);
+    console.log("렌더배열1", post);
+    console.log("렌더배열2", userPostInfo);
+    console.log("렌더배열3", me);
+    // console.log("렌더배열3", userPostInfo[0].introduce);
+  }, [mainPosts, me, userPostInfo, singlePost, addPostToMe]);
+
+  // (me.id ? me.id : null)
   useEffect(() => {
     if (action) {
       if (addPostDone) {
@@ -96,7 +89,8 @@ const ResumeForm = () => {
               introduce: values.user_intro,
               position: values.user_position,
               career: values.user_career,
-              //   job: values.user_job,
+              job,
+              // job: values.user_job,
               portfolio: values.user_portfolio,
               github: values.user_github,
               blog: values.user_blog,
@@ -118,7 +112,10 @@ const ResumeForm = () => {
               as="textarea"
               id="user_intro"
               name="user_intro"
-              placeholder="자기소개를 적어 주세요."
+              // placeholder={JSON.stringify(
+              //   mainPosts.filter((v) => v.UserId === me.id)[0].introduce
+              // )}
+              placeholder={post ? post.introduce : "자기소개를 적어 주세요."}
               required
             />
           </IntroDiv>
@@ -127,13 +124,13 @@ const ResumeForm = () => {
               type="text"
               id="user_position"
               name="user_position"
-              placeholder="ex) 프론트 엔드"
+              placeholder={post ? post.position : "ex) 프론트 엔드"}
             />
             <Field
               type="text"
               id="user_career"
               name="user_career"
-              placeholder="ex) 2년, 신입일 경우 신입"
+              placeholder={post ? post.career : "ex) 2년, 신입일 경우 신입"}
               required
             />
           </JobDiv>
@@ -149,41 +146,81 @@ const ResumeForm = () => {
             </div>
           </StackDiv>
           <ActivityDiv>
-            <button>구직</button>
-            <div>셀프 구직 활동 중입니다.</div>
+            <Field
+              onClick={onJobHandler}
+              as="button"
+              type="button"
+              id="user_job"
+              name="user_job"
+            >
+              구직
+            </Field>
+            {job === true ? (
+              <div>셀프 구직 활동 중입니다.</div>
+            ) : (
+              <div>구직 활동중이 아닙니다.</div>
+            )}
           </ActivityDiv>
           <PortfolioDiv>
             <Field
               id="user_portfolio"
               name="user_portfolio"
               type="text"
-              placeholder="포트폴리오"
+              placeholder={post ? post.portfolio : "포트폴리오"}
               required
             />
             <Field
               id="user_github"
               name="user_github"
               type="text"
-              placeholder="Github"
+              placeholder={post ? post.github : "Github"}
               required
             />
-            <Field name="user_blog" type="text" placeholder="Blog" required />
+            <Field
+              name="user_blog"
+              type="text"
+              placeholder={post ? post.blog : "Blog"}
+              required
+            />
             <button>수정</button>
-            <button
-              onClick={onActiveHandler}
-              type="primary"
-              htmltype="submit"
-              loading={addPostLoading}
-            >
-              올리기
-            </button>
-            <button>내리기</button>
+            {!post ? (
+              <button
+                onClick={onActiveHandler}
+                type="primary"
+                htmltype="submit"
+                loading={addPostLoading}
+              >
+                올리기
+              </button>
+            ) : (
+              <button>내리기</button>
+            )}
           </PortfolioDiv>
         </Form>
       </Formik>
     </MainDiv>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async (context) => {
+    const cookie = context.req ? context.req.headers.cookie : "";
+
+    axios.defaults.headers.Cookie = "";
+    // 쿠키가 브라우저에 있는경우만 넣어서 실행
+    // (주의, 아래 조건이 없다면 다른 사람으로 로그인 될 수도 있음)
+    if (context.req && cookie) {
+      axios.defaults.headers.Cookie = cookie;
+    }
+    await context.store.dispatch(loadPost({ postId: context.params.id }));
+    await context.store.dispatch(loadPosts());
+    await context.store.dispatch(loadMyInfo());
+
+    return {
+      props: {},
+    };
+  }
+);
 
 export default ResumeForm;
 
@@ -261,6 +298,10 @@ const ActivityDiv = styled.div`
     background: #44c82f;
     border: none;
     border-radius: 15px;
+
+    :hover {
+      background: #2a8c1a;
+    }
 
     font-family: "Inter";
     font-style: normal;
