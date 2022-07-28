@@ -4,15 +4,16 @@
 
 # 참여자 : 1명
 
-# 사용할 스택
+### 디자인툴
+Figma
+### 사용할 스택
 1. React
 2. Next.js
 3. styled-components
 4. Axios
 5. Redux-toolkit
 6. node.js / express
-7. Mysql
-8. Sequelize
+7. Mysql / Sequelize
 
 ### 2022/07/20
 1. db설계
