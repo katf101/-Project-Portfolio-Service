@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Post.associate = (db) => {
     db.Post.belongsTo(db.User); // 유저 1: 게시글 N. // post.addUser, post.getUser, post.setUser
-    db.Post.belongsToMany(db.Stack, { through: "PostStack" }); // 게시글 N : 기술스택 N // post.addHashtags
+    // db.Post.hasMany(db.Stack); // 게시글 N : 기술스택 N // post.addHashtags
     // db.Post.hasOne(db.Image); // 게시글 1 : 이미지 1 // post.addImages, post.getImages
     db.Post.belongsToMany(db.User, { through: "Like", as: "Likers" }); // 게시글 N : 유저 N // 좋아요 , // post.addLikers, post.removeLikers
   };

@@ -9,6 +9,7 @@ const path = require("path");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 const postsRouter = require("./routes/posts");
+const stackRouter = require("./routes/stack");
 
 const db = require("./models");
 const passportConfig = require("./passport");
@@ -58,6 +59,7 @@ app.get("/", (req, res) => {
 app.use("/posts", postsRouter);
 app.use("/post", postRouter);
 app.use("/user", userRouter);
+app.use("/stack", stackRouter);
 
 app.listen(3060, () => {
   console.log("서버 실행 중!");

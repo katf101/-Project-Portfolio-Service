@@ -2,9 +2,9 @@ module.exports = (sequelize, DataTypes) => {
   const Stack = sequelize.define(
     "stack",
     {
-      name: {
+      stack: {
         type: DataTypes.STRING(20),
-        allowNull: false, // false면 필수
+        allowNull: true, // false면 필수
       },
     },
     {
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Stack.associate = (db) => {
-    db.Stack.belongsToMany(db.Post, { through: "PostStack" }); // 해쉬태그 N : 게시글 N
+    db.Stack.belongsTo(db.User); // 해쉬태그 N : 유저 1
   };
   return Stack;
 };

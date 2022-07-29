@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   // 관계 작성
   User.associate = (db) => {
+    db.User.hasMany(db.Stack);
     db.User.hasOne(db.Image); // 유저 1 : 이미지 1 // post.addImages, post.getImages
     db.User.hasMany(db.Post); // 유저 1 : 게시글 n
     db.User.belongsToMany(db.Post, { through: "Like", as: "Liked" }); // 유저 N : 게시글 N // 좋아요
