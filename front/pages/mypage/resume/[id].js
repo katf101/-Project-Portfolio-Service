@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { loadMyInfo } from "../../../actions/user";
-import { loadPost, loadPosts } from "../../../actions/post";
+import { loadPost, loadPosts, loadStack } from "../../../actions/post";
 import Head from "next/head";
 
 import Layout from "../../../components/Layout";
@@ -15,13 +15,16 @@ import wrapper from "../../../store/configureStore";
 const Resume = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { singlePost } = useSelector((state) => state.post);
+  const { singlePost, singleStack } = useSelector((state) => state.post);
+  const { me } = useSelector((state) => state.user);
 
   useEffect(() => {
     // console.log("게시글정보", mainPosts);
-    // console.log("유저정보", me);
-    console.log("투미", singlePost);
-  }, [singlePost]);
+
+    console.log("resume, 싱글포스", singlePost);
+    console.log("resume, 싱글스택", singleStack);
+    console.log("resume, 미", me);
+  }, [singlePost, singleStack, loadStack]);
 
   return (
     <Layout>
@@ -56,6 +59,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
     // await context.store.dispatch(loadPost({ postId }));
     await context.store.dispatch(loadPosts());
+    await context.store.dispatch(loadStack({ userId: context.params.id }));
     await context.store.dispatch(loadPost({ postId: context.params.id }));
     await context.store.dispatch(loadMyInfo());
 

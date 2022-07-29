@@ -94,7 +94,7 @@ const Layout = ({ children }) => {
               <Link href="/mypage/profile">프로필</Link>
             </div>
             <div>
-              <Link href={`/mypage/resume/${me.id}`}>내 이력서</Link>
+              <Link href={`/mypage/resume/${me?.id}`}>내 이력서</Link>
             </div>
             <div>
               <Link href="/mypage/notification">알림</Link>
@@ -140,9 +140,10 @@ const DropBox = styled.div`
 `;
 
 const DropBoxDiv = styled.div`
+  margin-top: 40px;
   margin-left: 5%;
 
-  position: absolute;
+  position: fixed;
   /* width: 126px; */
   width: 89%;
   height: 108px;
@@ -202,18 +203,22 @@ const SigninButton = styled.button`
 `;
 
 const Header = styled.div`
+  position: fixed;
+  margin-top: -10px;
   width: 100%;
-  height: 37px;
+  height: 50px;
 
   display: flex;
-
+  flex-direction: row;
+  align-items: center;
   background: #ffffff;
   border-bottom: 1px solid #e3e3e3;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   div {
     &:nth-child(1) {
       width: 50%;
       height: 37px;
-
+      line-height: 37px;
       flex-direction: row;
       /* background: #d9d9d9; */
     }

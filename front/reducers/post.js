@@ -4,9 +4,12 @@ import {
   uploadImage,
   addImage,
   loadPosts,
+  loadStack,
+  // loadStacks,
   loadPost,
   updatePost,
   removePost,
+  addStack,
 } from "../actions/post";
 import _concat from "lodash/concat";
 import _remove from "lodash/remove";
@@ -14,15 +17,23 @@ import _find from "lodash/find";
 
 export const initialState = {
   mainPosts: [],
+  mainStacks: [],
   imagePaths: [],
   hasMorePosts: true,
   singlePost: null,
+  singleStack: null,
+  addStackLoading: false,
+  addStackDone: false,
+  addStackError: null,
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
+  loadStacksLoading: false,
+  loadStacksDone: false,
+  loadStacksError: null,
   updatePostLoading: false,
   updatePostDone: false,
   updatePostError: null,
@@ -49,6 +60,21 @@ const postSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
+      // addStack
+      .addCase(addStack.pending, (state) => {
+        state.addStackLoading = true;
+        state.addStackDone = false;
+        state.addStackError = null;
+      })
+      .addCase(addStack.fulfilled, (state, action) => {
+        state.addStackLoading = false;
+        state.addStackDone = true;
+        state.mainStacks.unshift(action.payload);
+      })
+      .addCase(addStack.rejected, (state, action) => {
+        state.addStackLoading = false;
+        state.addStackError = action.error.message;
+      })
       // removePost
       .addCase(removePost.pending, (state) => {
         state.removePostLoading = true;
@@ -85,6 +111,22 @@ const postSlice = createSlice({
       .addCase(updatePost.rejected, (state, action) => {
         state.updatePostLoading = false;
         state.updatePostError = action.error.message;
+      })
+      // loadStack
+      .addCase(loadStack.pending, (state) => {
+        state.loadPostLoading = true;
+        state.loadPostDone = false;
+        state.loadPostError = null;
+      })
+      .addCase(loadStack.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.loadPostLoading = false;
+        state.loadPostDone = true;
+        state.singleStack = action.payload;
+      })
+      .addCase(loadStack.rejected, (state, action) => {
+        state.loadPostLoading = false;
+        state.loadPostError = action.error.message;
       })
       // loadPost
       .addCase(loadPost.pending, (state) => {
@@ -133,6 +175,22 @@ const postSlice = createSlice({
         state.loadPostsLoading = false;
         state.loadPostsError = action.error.message;
       })
+
+      // // loadStacks
+      // .addCase(loadStacks.pending, (state) => {
+      //   state.loadStacksLoading = true;
+      //   state.loadStacksDone = false;
+      //   state.loadStacksError = null;
+      // })
+      // .addCase(loadStacks.fulfilled, (state, action) => {
+      //   state.loadStacksLoading = false;
+      //   state.loadStacksDone = true;
+      //   state.postStacks = _concat(state.postStacks, action.payload);
+      // })
+      // .addCase(loadStacks.rejected, (state, action) => {
+      //   state.loadStacksLoading = false;
+      //   state.loadStacksError = action.error.message;
+      // })
 
       // uploadImage
       .addCase(uploadImage.pending, (state) => {

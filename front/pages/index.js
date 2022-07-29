@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
@@ -11,78 +11,87 @@ import { loadMyInfo, loadUser, userInfo } from "../actions/user";
 import { loadPosts, loadPost } from "../actions/post";
 import wrapper from "../store/configureStore";
 
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
 // ######################################################## //
-const Home = () => {
-  const dispatch = useDispatch();
+// ######################################################## //
+
+async function fetchProjects(page = 0) {
+  const id = window.location.href.substring(22);
+  const { data } = await axios.get(`/posts?id=${id}`);
+  return data;
+}
+
+const IndexPage = () => {
+  const queryClient = useQueryClient();
+  const [page, setPage] = React.useState(0);
   const router = useRouter();
-  const { id } = router.query;
-  const { mainPosts, loadPostsLoading, hasMorePosts, singlePost } = useSelector(
-    (state) => state.post
+
+  const { status, data, error, isFetching, isPreviousData } = useQuery(
+    ["projects", page],
+    () => fetchProjects(page),
+    { keepPreviousData: true, staleTime: 5000 }
   );
+
+  const dispatch = useDispatch();
+  // const { id } = router.query;
+  const {
+    postStack,
+    mainPosts,
+    loadPostsLoading,
+    hasMorePosts,
+    singlePost,
+    singleStack,
+  } = useSelector((state) => state.post);
   const { loadUser } = useSelector((state) => state.user);
   const [ref, inView] = useInView();
 
   useEffect(() => {
+    console.log("라우터", router);
+    console.log("데이터", data?.posts);
+    console.log("데이터길이", data?.numbering);
+    // console.log("넘어레이", numberingArr);
     console.log("메인 싱글포스트", singlePost);
-    console.log("메인 싱글포스트", mainPosts);
-    console.log("미", userInfo);
+    console.log("메인 싱글스택", singlePost);
+    console.log("메인 메인포스트", mainPosts);
+    console.log("메인 포스텍", postStack);
   });
 
-  useEffect(() => {
-    if (inView && hasMorePosts && !loadPostsLoading) {
-      const lastId = mainPosts[mainPosts.length - 1]?.id;
-      dispatch(
-        loadPosts({
-          lastId,
-        })
-      );
-    }
-  }, [inView, hasMorePosts, loadPostsLoading, mainPosts]);
-
-  // useEffect(() => {
-  //   function onScroll() {
-  //     // window.scrollY : 얼마나 내렸는지
-  //     // document.documentElement.clientHeight : 화면에 보이는 길이
-  //     // document.documentElement.scrollHeight : 총길이
-  //     if (hasMorePosts && !loadPostsLoading) {
-  //       if (
-  //         window.scrollY + document.documentElement.clientHeight >
-  //         document.documentElement.scrollHeight - 100
-  //       ) {
-  //         const lastId = mainPosts[mainPosts.length - 1]?.id;
-  //         dispatch(
-  //           loadPosts({
-  //             lastId,
-  //           })
-  //         );
-  //       }
-  //     }
-  //   }
-  //   window.addEventListener("scroll", onScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", onScroll);
-  //   };
-  // }, [hasMorePosts, loadPostsLoading, mainPosts]);
-  useEffect(() => {
-    console.log("맵", mainPosts);
-  });
+  // const numberingArr = new Array(data?.numbering); // new Array(3)
+  // const numberLink = numberingArr.map((v, i, z) => <button>{z}</button>);
+  // numberingArr.map((v, i) => <button />);
 
   return (
-    <Layout>
+    <div style={{ background: "#e87777" }}>
+      <Layout />
       <MainDiv>
         <SearchDiv>서치 폼</SearchDiv>
         {/* <div></div> */}
         <CardDiv>
-          {mainPosts.map((post) => (
+          {data?.posts &&
+            data.posts.map((post) => <PostCard key={post.id} post={post} />)}
+          {/* {mainPosts.map((post) => (
             <PostCard key={post.id} post={post} />
-          ))}
-          <div
-            ref={hasMorePosts && !loadPostsLoading ? ref : undefined}
-            style={{ height: 10 }}
-          />
+          ))} */}
         </CardDiv>
+        <PageDiv>
+          <button></button>
+          {/* {numberingArr && numberingArr.map((v, i) => <button />)} */}
+          <div>
+            {data?.numbering.map((v) => (
+              <button />
+            ))}
+          </div>
+          <button></button>
+        </PageDiv>
       </MainDiv>
-    </Layout>
+      {/* </Layout> */}
+    </div>
   );
 };
 
@@ -106,9 +115,24 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default Home;
+export default IndexPage;
 
 // ############################################################## //
+
+const PageDiv = styled.div`
+  width: 100%;
+  height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e87777;
+  button {
+    width: 50px;
+    height: 25px;
+  }
+`;
 
 const CardDiv = styled.div`
   width: 100%;
@@ -126,7 +150,7 @@ const SearchDiv = styled.div`
 
   /* z-index: 1; */
 
-  background: #e87777;
+  /* background: #e87777; */
 `;
 
 const MainDiv = styled.div`
@@ -137,10 +161,10 @@ const MainDiv = styled.div`
   /* align-items: center; */
 
   width: 90%;
-  /* height: 960px; */
+  height: 100rem;
   /* height: 1; */
 
-  z-index: 1;
+  /* z-index: 1; */
 
-  background: #d9d9d9;
+  background: #f6f1f1;
 `;

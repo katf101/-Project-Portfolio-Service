@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, updatePost, removePost } from "../actions/post";
+
 import { loadMyInfo } from "../actions/user";
 import wrapper from "../store/configureStore";
 import postSlice from "../reducers/post";
@@ -14,6 +15,7 @@ import Image from "next/image";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import StackForm from "./StackForm";
 
 const PostSchema = Yup.object().shape({
   content: Yup.string().min(2, "게시글은 2자 이상 입력하여 주십시오."),
@@ -50,19 +52,6 @@ const ResumeForm = ({ post }) => {
   };
 
   const userPostInfo = mainPosts.filter((v, i) => v.UserId === me?.id);
-
-  useEffect(() => {
-    console.log("미.아이디", me?.id);
-    // console.log("포스트아디", post?.id);
-    console.log("메인포스트스", mainPosts);
-    // console.log("포스트", post);
-    console.log("싱글포스트", singlePost);
-    // console.log("포스트아디", post?.id);
-    console.log("렌더배열2", userPostInfo);
-    console.log("미", me);
-
-    // console.log("렌더배열3", userPostInfo[0].introduce);
-  }, [mainPosts, me, userPostInfo, addPostToMe, singlePost]);
 
   // (me.id ? me.id : null)
   useEffect(() => {
@@ -195,17 +184,7 @@ const ResumeForm = ({ post }) => {
               // required
             />
           </JobDiv>
-          <StackDiv>
-            <div>
-              <input type="text" id="user_stack" name="user_stack" />
-              <button>기술 스택</button>
-            </div>
-            <div>
-              <div>React</div>
-              <div>Redux</div>
-              <div>Node.js</div>
-            </div>
-          </StackDiv>
+          <StackForm />
           <ActivityDiv>
             <Field
               onClick={onJobHandler}
@@ -402,42 +381,18 @@ const StackDiv = styled.div`
   width: 100%;
   height: 170px;
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
+  /* align-items: center; */
   /* justify-content: center; */
   /* background: #d34b4b; */
   div {
-    justify-content: center;
-    width: 100%;
-    &:nth-child(1) {
-      height: 72px;
-      display: flex;
-      /* justify-content: center; */
-      /* align-items: center; */
-      /* background: #3050c2; */
-    }
-    &:nth-child(2) {
-      height: 99px;
-      display: flex;
-      flex-direction: row;
-      /* background: #8da1e8; */
-      div {
-        width: 58px;
-        height: 28px;
-
-        background: #db7e57;
-        border-radius: 15px;
-        text-align: left;
-
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        color: #ffffff;
-      }
+    :nth-child(2) {
+      width: 100%;
+      height: 100px;
+      background: #d34b4b;
     }
   }
+
   input {
     :focus {
       outline: none;
