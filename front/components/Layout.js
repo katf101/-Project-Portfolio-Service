@@ -44,12 +44,25 @@ const Layout = ({ children }) => {
     setIsLogoutHovered(false);
   }, []);
 
+  const onJobhunt = () => {
+    Router.replace("/jobhunt/");
+  };
+
   return (
-    <>
+    <MainDiv>
       <Header>
         <div>
           <div>
-            <Link href="/">내포폴</Link>
+            <div>
+              <div>
+                <Link href="/">내포폴</Link>
+              </div>
+              <div>
+                <button onClick={onJobhunt}>잡헌트</button>
+              </div>
+
+              <Link href="/jobhunt">잡헌트</Link>
+            </div>
           </div>
         </div>
         <div>
@@ -102,9 +115,8 @@ const Layout = ({ children }) => {
           </DropBox>
         </DropBoxDiv>
       )}
-
       {children}
-    </>
+    </MainDiv>
   );
 };
 
@@ -113,6 +125,14 @@ Layout.propTypes = {
 };
 
 export default Layout;
+
+const MainDiv = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+`;
 
 const DropBox = styled.div`
   box-sizing: border-box;

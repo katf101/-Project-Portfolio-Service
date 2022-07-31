@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import wrapper from "../store/configureStore";
+import Layout from "../components/Layout";
 
 import {
   Hydrate,
@@ -21,7 +22,9 @@ const Portfolio = ({ Component, pageProps }) => {
             <meta charSet="utf-8" />
             <title>포폴사이트</title>
           </Head>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>
