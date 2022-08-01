@@ -59,7 +59,8 @@ router.get("/", async (req, res, next) => {
   console.log("쿼리서치", req.query.search);
   console.log("쿼리", req.query);
   console.log("난페이지", isNaN(req.query.page));
-  console.log("난서치", isNaN(req.query.search));
+  // console.log("난서치", isNaN(req.query.search));
+  const searchBool = isNaN(req.query.search);
   console.log("아디타입", typeof +req.query.page === "number");
   let pageNum = req.query.page ? req.query.page : 1;
   // let pageNum = req.query.page ? req.query.page : req.query.search;
@@ -73,7 +74,8 @@ router.get("/", async (req, res, next) => {
   try {
     // if (typeof req.query.search === "string") {
     // if (isNaN(req.query.id) === true) {
-    if (isNaN(req.query.search) === true && req.query.search !== undefined) {
+    // if (isNaN(req.query.search) === true && req.query.search !== undefined) {
+    if (searchBool === true && req.query.search !== undefined) {
       const posts = await Post.findAll({
         // where: { position: req.query.search },
         where: {
@@ -93,7 +95,11 @@ router.get("/", async (req, res, next) => {
         ],
       });
       let numbering = await Post.findAll({
-        // where,
+        where: {
+          position: {
+            [Op.like]: "%" + req.query.search + "%",
+          },
+        },
         order: [["createdAt", "DESC"]],
         include: [
           {
