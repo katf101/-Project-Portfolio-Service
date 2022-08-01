@@ -145,7 +145,7 @@ const DropBox = styled.div`
 
   background: #ffffff;
   border: 1px solid #a9a9a9;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   border-radius: 5px;
   display: flex;
   flex-direction: column;

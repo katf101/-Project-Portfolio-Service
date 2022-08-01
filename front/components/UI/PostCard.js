@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import Link from "next/link";
+
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
@@ -11,13 +13,32 @@ const PostCard = ({ post }) => {
     <>
       <MainDiv>
         <MainTopDiv>
-          <div>{mainPosts.UserId}</div>
+          <div>{/* {mainPosts.UserId} */}</div>
           <div>{post.career}</div>
           <div>{post.position}</div>
           <div>{post.job === true ? "구직활동 중입니다!" : ""}</div>
         </MainTopDiv>
         <MainBottomDiv>
-          <div>{post.User.name}</div>
+          <div style={{ width: "80px" }}>
+            <Link
+              href={{
+                pathname: "/post/detail",
+                query: {
+                  postName: JSON.stringify(post.User.name),
+                  postIntro: JSON.stringify(post.introduce),
+                  postPosition: JSON.stringify(post.position),
+                  postJob: JSON.stringify(post.job),
+                  postCareer: JSON.stringify(post.career),
+                  postPofol: JSON.stringify(post.postPofol),
+                  postGit: JSON.stringify(post.github),
+                  postBlog: JSON.stringify(post.blog),
+                  postUserId: JSON.stringify(post.User.id),
+                },
+              }}
+            >
+              {post.User.name}
+            </Link>
+          </div>
           <div>리액트</div>
           <div>리덕스</div>
           <div>노드</div>

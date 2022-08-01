@@ -8,7 +8,7 @@ import Link from "next/link";
 
 import axios from "axios";
 import { loadMyInfo, loadUser, userInfo } from "../../actions/user";
-import { loadPosts, loadPost } from "../../actions/post";
+import { loadPosts, loadPost, addStack } from "../../actions/post";
 import wrapper from "../../store/configureStore";
 
 import {
@@ -18,6 +18,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import SearchForm from "../../components/SearchForm";
 
 // ######################################################## //
 // ######################################################## //
@@ -26,9 +27,11 @@ async function fetchProjects(page = 0) {
   // async function fetchProjects(page = window.location.href.substring(37)) {
   const id = window.location.href.substring(30, 36);
   const idValue = window.location.href.substring(37);
+  const pageValue = window.location.href.substring(35);
   console.log("page", page);
   console.log("id", id);
-  console.log("id1", window.location.href.substring(36));
+  console.log("pageValue", pageValue);
+  console.log("id1", window.location.href.substring(37));
   console.log("id2", window.location.search);
   console.log("id3", window.location);
   console.log("test");
@@ -38,7 +41,7 @@ async function fetchProjects(page = 0) {
     const { data } = await axios.get(`/posts?search=${idValue}`);
     return data;
   } else {
-    const { data } = await axios.get(`/posts?page=${page}`);
+    const { data } = await axios.get(`/posts?page=${pageValue}`);
     return data;
   }
 
@@ -54,7 +57,9 @@ const IndexPage = () => {
   const { id } = router.query;
   //   const [page, setPage] = React.useState(router.query.index);
   //   const [page, setPage] = React.useState(0);
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(1); // 리액트-쿼리 페이지
+  const [pageNum, setPageNum] = useState(1); // 현재 페이지 넘버
+  const [btnIndex, setBtnIndex] = useState(0);
 
   const { status, data, error, isFetching, isPreviousData } = useQuery(
     ["projects", page],
@@ -89,8 +94,28 @@ const IndexPage = () => {
   // }, [data, page, queryClient]);
   useEffect(() => {
     console.log("유즈이펙트", page);
+    if (router.query.page < 3) {
+      setPageNum(1);
+      // console.log(prev);
+    } else if (btnIndex === "0") {
+      setPageNum((prev) => prev - 1);
+      // setCurrentPageNum(router.query.page);
+    } else if (btnIndex === "2") {
+      setPageNum((prev) => prev + 1);
+    }
+
     if (router.asPath === "/jobhunt") {
       setPage("http://localhost:3000/jobhunt");
+      setPageNum(1);
+    }
+    if (router.query?.page) {
+      setPage(`http://localhost:3000/jobhunt?page=${router.query.page}`);
+    }
+    if (router.query?.search) {
+      setPage(
+        `http://localhost:3000/jobhunt?search=${router.query.search}&page=${router.query.page}`
+      );
+      setPageNum(1);
     }
     // if (router.asPath !== "/jobhunt") {
     //   setPage(`http://localhost:3000/jobhunt?search=${router.query.search}`);
@@ -98,10 +123,13 @@ const IndexPage = () => {
   }, [router]);
 
   useEffect(() => {
+    console.log("버튼인덱스", btnIndex);
     console.log("쿼리클라이언트", queryClient);
     console.log("라우터쿼리인덱스", router.query.id);
     console.log("라우터쿼리", router.query);
+    console.log("Router", Router);
     console.log("페이지", page);
+    console.log("이전url", document.referrer);
     console.log("라우터", router);
     console.log("라우터패스", router.asPath);
     console.log("라우터쿼리", router.query);
@@ -116,10 +144,21 @@ const IndexPage = () => {
 
   const onPagePush = (e) => {
     console.log("타겟", e.target.value);
+    console.log("인덱스", e.target.dataset.index);
+    setBtnIndex(e.target.dataset.index);
     setPage(e.target.value);
     // setPage(router.query.index);
     // setPage(router.query.id);
     // Router.replace(`/jobhunt/${e.target.value}`);
+    if (router.query?.page && router.query?.search) {
+      return Router.replace(
+        `/jobhunt?search=${router.query.search}&page=${e.target.value}`
+      );
+    } else if (router.query?.search) {
+      return Router.replace(
+        `/jobhunt?search=${router.query.search}&page=${e.target.value}`
+      );
+    }
     Router.replace(`/jobhunt?page=${e.target.value}`);
     queryClient.invalidateQueries("projects");
   };
@@ -128,7 +167,8 @@ const IndexPage = () => {
     <div style={{ background: "#e87777" }}>
       {/* <Layout /> */}
       <MainDiv>
-        <SearchDiv>서치 폼</SearchDiv>
+        <SearchForm></SearchForm>
+        {/* <SearchDiv>서치 폼</SearchDiv> */}
         {/* <div></div> */}
         <CardDiv>
           {data?.posts &&
@@ -144,13 +184,21 @@ const IndexPage = () => {
           {/* {numberingArr && numberingArr.map((v, i) => <button />)} */}
           <div>
             {data?.numbering.map((v, i) =>
-              i < 3 ? (
-                // <Link href={`/${i + 1}`}>
-                <button key={i + 1} value={i + 1} onClick={onPagePush}>
-                  {i + 1}
-                </button>
+              i < Math.ceil(data?.numbering.length / 5) ? (
+                i < 3 ? (
+                  <button
+                    key={i}
+                    value={i + pageNum}
+                    data-index={i}
+                    onClick={onPagePush}
+                    disabled={router.query.page > 2 && i === 1 ? true : false}
+                  >
+                    {i + pageNum}
+                  </button>
+                ) : (
+                  ""
+                )
               ) : (
-                // </Link>
                 ""
               )
             )}
