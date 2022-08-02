@@ -29,7 +29,7 @@ const PostCard = ({ post }) => {
                   postPosition: JSON.stringify(post.position),
                   postJob: JSON.stringify(post.job),
                   postCareer: JSON.stringify(post.career),
-                  postPofol: JSON.stringify(post.postPofol),
+                  postPofol: JSON.stringify(post.portfolio),
                   postGit: JSON.stringify(post.github),
                   postBlog: JSON.stringify(post.blog),
                   postUserId: JSON.stringify(post.User.id),
