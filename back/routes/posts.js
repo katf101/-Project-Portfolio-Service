@@ -104,10 +104,11 @@ router.get("/", async (req, res, next) => {
         include: [
           {
             model: User,
-            attributes: ["id", "name"],
+            attributes: ["id", "name", "email"],
           },
         ],
       });
+
       return res.status(200).json({ posts: posts, numbering: numbering });
     } else {
       // const where = {};
@@ -129,7 +130,7 @@ router.get("/", async (req, res, next) => {
         include: [
           {
             model: User,
-            attributes: ["id", "name"],
+            attributes: ["id", "name", "email"],
           },
         ],
       });

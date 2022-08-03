@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Stack = sequelize.define(
-    "stack",
+    "Stack",
     {
       stack: {
         type: DataTypes.STRING(20),

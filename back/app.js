@@ -10,6 +10,7 @@ const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 const postsRouter = require("./routes/posts");
 const stackRouter = require("./routes/stack");
+const stacskRouter = require("./routes/stacks");
 
 const db = require("./models");
 const passportConfig = require("./passport");
@@ -18,6 +19,19 @@ const passportConfig = require("./passport");
 
 dotenv.config();
 const app = express();
+
+//######### 채팅 #########//
+// const io = require("socket.io")(app, {
+//   cors: {
+//     origin: "http://localhost:3001",
+//     methods: ["GET", "POST"],
+//   },
+// });
+// io.on("connection", () => {
+//   console.log("user baru terkoneksi");
+// });
+
+//######### 채팅 #########//
 
 db.sequelize
   .sync()
@@ -60,6 +74,7 @@ app.use("/posts", postsRouter);
 app.use("/post", postRouter);
 app.use("/user", userRouter);
 app.use("/stack", stackRouter);
+// app.use("/stacks", stacskRouter);
 
 app.listen(3060, () => {
   console.log("서버 실행 중!");
