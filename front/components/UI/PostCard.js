@@ -2,12 +2,19 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Link from "next/link";
+import { loadPosts, loadPost, addStack, loadStacks } from "../../actions/post";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, stack }) => {
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.user.me?.id);
-  const name = useSelector((state) => state.user.me?.name);
-  const { mainPosts } = useSelector((state) => state.post);
+  const { singleStack } = useSelector((state) => state.post);
+  // useEffect(() => {
+  //   console.log("싱포", allStacks);
+  //   console.log("포스트", post);
+  // }, [stack]);
+
+  // useEffect(() => {
+  //   // dispatch(loadStacks());
+  // }, [dispatch]);
 
   return (
     <>
@@ -39,9 +46,7 @@ const PostCard = ({ post }) => {
               {post.User.name}
             </Link>
           </div>
-          <div>리액트</div>
-          <div>리덕스</div>
-          <div>노드</div>
+          <div>{post.User.email}</div>
         </MainBottomDiv>
       </MainDiv>
       {/* {children} */}
@@ -110,7 +115,7 @@ const MainDiv = styled.div`
   flex-direction: column;
 
   background: #ffffff;
-  border: 1px solid #e0581d;
-  border-radius: 15px;
+  border: 1px solid #3b76cf;
+  border-radius: 10px;
   /* z-index: 1; */
 `;

@@ -17,6 +17,7 @@ import _find from "lodash/find";
 
 export const initialState = {
   mainPosts: [],
+  // allStacks: [],
   mainStacks: [],
   imagePaths: [],
   hasMorePosts: true,
@@ -185,7 +186,7 @@ const postSlice = createSlice({
       // .addCase(loadStacks.fulfilled, (state, action) => {
       //   state.loadStacksLoading = false;
       //   state.loadStacksDone = true;
-      //   state.postStacks = _concat(state.postStacks, action.payload);
+      //   state.allStacks = _concat(state.allStacks, action.payload);
       // })
       // .addCase(loadStacks.rejected, (state, action) => {
       //   state.loadStacksLoading = false;

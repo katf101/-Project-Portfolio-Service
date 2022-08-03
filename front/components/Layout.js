@@ -12,6 +12,7 @@ import UserButton from "../public/images/UserButton.png";
 import hoverUserButton from "../public/images/hoverUserButton.png";
 import hoverLogout from "../public/images/hoverLogout.png";
 import Logout from "../public/images/Logout.png";
+import Our from "../public/images/Our.png";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -43,9 +44,11 @@ const Layout = ({ children }) => {
   const onMouseLogoutLeave = useCallback(() => {
     setIsLogoutHovered(false);
   }, []);
-
-  const onJobhunt = () => {
-    Router.replace("/jobhunt/");
+  const onMainPush = () => {
+    Router.replace("/");
+  };
+  const onPostPush = () => {
+    Router.replace("/jobhunt");
   };
 
   return (
@@ -54,20 +57,23 @@ const Layout = ({ children }) => {
         <div>
           <div>
             <div>
-              <div>
-                <Link href="/">내포폴</Link>
+              <div
+                style={{ marginTop: "5px", cursor: "pointer" }}
+                onClick={onMainPush}
+              >
+                <Image src={Our} />
               </div>
-              <div>
-                <button onClick={onJobhunt}>잡헌트</button>
-              </div>
-
-              <Link href="/jobhunt">잡헌트</Link>
             </div>
           </div>
         </div>
+
         <div>
           {me && (
             <ImageMainDiv>
+              <div onClick={onPostPush} style={{ cursor: "pointer" }}>
+                게시글
+              </div>
+
               <ProfileImageButton onClick={onProfileClickHandler}>
                 {isProfileHovering ? (
                   <Image src={hoverUserButton} alt="user button" />
@@ -115,6 +121,7 @@ const Layout = ({ children }) => {
           </DropBox>
         </DropBoxDiv>
       )}
+
       {children}
     </MainDiv>
   );
@@ -125,6 +132,10 @@ Layout.propTypes = {
 };
 
 export default Layout;
+
+const PostsLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const MainDiv = styled.div`
   width: 100%;
@@ -227,6 +238,8 @@ const Header = styled.div`
   margin-top: -10px;
   width: 100%;
   height: 50px;
+
+  z-index: 20;
 
   display: flex;
   flex-direction: row;

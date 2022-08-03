@@ -49,70 +49,70 @@ const Detail = () => {
   }, []);
 
   return (
-    <Layout>
-      <MainDiv>
-        <ImageDiv></ImageDiv>
-        {/* <div></div> */}
-        <NameDiv>{route.query.postName.slice(1, -1)}</NameDiv>
-        <IntroDiv>{route.query.postIntro.slice(1, -1)}</IntroDiv>
-        <Line1Div>
-          <div></div>
-        </Line1Div>
-        <JobDiv>
-          <div>
-            구직 활동 여부:
-            {route.query.postJob === "true"
-              ? "활동중입니다."
-              : "활동중이 아닙니다."}
-          </div>
-        </JobDiv>
-        <PositionDiv>
-          <div>
-            <div>저의 활동분야는</div>
-            <div>#{route.query.postPosition.slice(1, -1)}</div>
-            <div>입니다.</div>
-          </div>
-        </PositionDiv>
-        <CareerDiv>
-          <div>
-            <div>저의 경력은</div>
-            <div>#{route.query.postCareer.slice(1, -1)}</div>
-            <div>입니다.</div>
-          </div>
-        </CareerDiv>
-        <StackDiv>
-          <div>
-            <div>제가 사용하는 </div>
-            <div>#기술 스택</div>
-            <div>입니다.</div>
-          </div>
-          <div>{stack && stack.map((v) => <div>{v.stack}</div>)}</div>
-        </StackDiv>
-        <Line2Div>
-          <div></div>
-        </Line2Div>
-        <AddressMainDiv>
-          <AddressDiv>
-            <PofolDiv>
-              <div>포트폴리오</div>
-              <div>{route.query.postPofol.slice(1, -1)}</div>
-            </PofolDiv>
-            <BlogDiv>
-              <div>Blog</div>
-              <div>{route.query.postBlog.slice(1, -1)}</div>
-            </BlogDiv>
-            <GitDiv>
-              <div>Github</div>
-              <div>{route.query.postGit.slice(1, -1)}</div>
-            </GitDiv>
-          </AddressDiv>
-        </AddressMainDiv>
-        <ButtonDiv>
-          <MessageButton>메시지</MessageButton>
-          <BackButton>뒤로가기</BackButton>
-        </ButtonDiv>
-      </MainDiv>
-    </Layout>
+    // <Layout>
+    <MainDiv>
+      <ImageDiv></ImageDiv>
+      {/* <div></div> */}
+      <NameDiv>{route.query.postName.slice(1, -1)}</NameDiv>
+      <IntroDiv>{route.query.postIntro.slice(1, -1)}</IntroDiv>
+      <Line1Div>
+        <div></div>
+      </Line1Div>
+      <JobDiv>
+        <div>
+          구직 활동 여부:
+          {route.query.postJob === "true"
+            ? "활동중입니다."
+            : "활동중이 아닙니다."}
+        </div>
+      </JobDiv>
+      <PositionDiv>
+        <div>
+          <div>저의 활동분야는</div>
+          <div>#{route.query.postPosition.slice(1, -1)}</div>
+          <div>입니다.</div>
+        </div>
+      </PositionDiv>
+      <CareerDiv>
+        <div>
+          <div>저의 경력은</div>
+          <div>#{route.query.postCareer.slice(1, -1)}</div>
+          <div>입니다.</div>
+        </div>
+      </CareerDiv>
+      <StackDiv>
+        <div>
+          <div>제가 사용하는 </div>
+          <div>#기술 스택</div>
+          <div>입니다.</div>
+        </div>
+        <div>{stack && stack.map((v) => <div>{v.stack}</div>)}</div>
+      </StackDiv>
+      <Line2Div>
+        <div></div>
+      </Line2Div>
+      <AddressMainDiv>
+        <AddressDiv>
+          <PofolDiv>
+            <div>포트폴리오</div>
+            <div>{route.query.postPofol.slice(1, -1)}</div>
+          </PofolDiv>
+          <BlogDiv>
+            <div>Blog</div>
+            <div>{route.query.postBlog.slice(1, -1)}</div>
+          </BlogDiv>
+          <GitDiv>
+            <div>Github</div>
+            <div>{route.query.postGit.slice(1, -1)}</div>
+          </GitDiv>
+        </AddressDiv>
+      </AddressMainDiv>
+      <ButtonDiv>
+        {/* <MessageButton>메시지</MessageButton> */}
+        <BackButton>뒤로가기</BackButton>
+      </ButtonDiv>
+      {/* </Layout> */}
+    </MainDiv>
   );
 };
 

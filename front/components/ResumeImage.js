@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, uploadImage, addImage } from "../actions/post";
 import postSlice from "../reducers/post";
+import basic from "../public/images/basic.png";
 
 import { imageUrl } from "../config/config";
 import styled from "styled-components";
@@ -85,21 +86,8 @@ const ResumeImage = () => {
       onSubmit={onSubmit}
     >
       <ImageDiv>
-        <input
-          type="file"
-          id="image"
-          name="image"
-          multiple
-          // hidden
-          ref={imageInput}
-          onChange={onChangeImages}
-        />
-        <button onClick={onClickImageUpload}>이미지 업로드</button>
-        {/* <button type="primary" htmltype="submit" loading={addImageLoading}> */}
-        <button type="primary" htmltype="submit">
-          올리기
-        </button>
-        <div>
+        <MiddleDiv>
+          {!imagePaths[0] && <Image src={basic} />}
           {imagePaths.map((v, i) => (
             <div key={v} style={{ display: "inline-block" }}>
               <img
@@ -112,7 +100,27 @@ const ResumeImage = () => {
               </div>
             </div>
           ))}
-        </div>
+          <button style={{ display: "none" }} onClick={onClickImageUpload}>
+            이미지 업로드
+          </button>
+          {/* <button type="primary" htmltype="submit" loading={addImageLoading}> */}
+          {imagePaths[0] && (
+            <button type="primary" htmltype="submit">
+              올리기
+            </button>
+          )}
+          <BottomDiv>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              multiple
+              // hidden
+              ref={imageInput}
+              onChange={onChangeImages}
+            />
+          </BottomDiv>
+        </MiddleDiv>
       </ImageDiv>
     </form>
   );
@@ -120,11 +128,38 @@ const ResumeImage = () => {
 
 export default ResumeImage;
 
-const ImageDiv = styled.div`
-  width: 100%;
-  height: 200px;
-  /* background: #8e2c2c; */
+const BottomDiv = styled.div`
+  width: 500px;
+  height: 50px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  input {
+    margin-left: 180px;
+  }
+
+  /* background: #8e2c2c; */
+`;
+
+const MiddleDiv = styled.div`
+  width: 500px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background: #334eab; */
+`;
+
+const ImageDiv = styled.div`
+  margin-top: 50px;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* background: #8e2c2c; */
 `;

@@ -70,7 +70,7 @@ export const loadPosts = createAsyncThunk(
 export const loadStacks = createAsyncThunk(
   "post/loadStacks",
   async (data) => {
-    const response = await axios.get(`/stacks?lastId=${data?.lastId || 0}`);
+    const response = await axios.get("/stacks");
     return response.data;
   },
   {

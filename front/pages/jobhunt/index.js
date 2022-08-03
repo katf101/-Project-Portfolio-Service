@@ -102,6 +102,8 @@ const IndexPage = () => {
       // setCurrentPageNum(router.query.page);
     } else if (btnIndex === "2") {
       setPageNum((prev) => prev + 1);
+    } else if (btnIndex === ">>") {
+      setPageNum(Math.ceil(data?.numbering.length / 5) - 1);
     }
 
     if (router.asPath === "/jobhunt") {
@@ -110,6 +112,7 @@ const IndexPage = () => {
     }
     if (router.query?.page) {
       setPage(`http://localhost:3000/jobhunt?page=${router.query.page}`);
+      // setBtnIndex(router.query.page);
     }
     if (router.query?.search) {
       setPage(
@@ -123,6 +126,7 @@ const IndexPage = () => {
   }, [router]);
 
   useEffect(() => {
+    console.log("싱글스택", data);
     console.log("버튼인덱스", btnIndex);
     console.log("쿼리클라이언트", queryClient);
     console.log("라우터쿼리인덱스", router.query.id);
@@ -140,13 +144,23 @@ const IndexPage = () => {
     console.log("메인 싱글스택", singlePost);
     console.log("메인 메인포스트", mainPosts);
     console.log("메인 포스텍", postStack);
-  }, [queryClient, page, router, data, singlePost, mainPosts, postStack]);
+  }, [
+    queryClient,
+    page,
+    router,
+    data,
+    singlePost,
+    mainPosts,
+    postStack,
+    singleStack,
+  ]);
 
   const onPagePush = (e) => {
     console.log("타겟", e.target.value);
     console.log("인덱스", e.target.dataset.index);
-    setBtnIndex(e.target.dataset.index);
     setPage(e.target.value);
+    // setBtnIndex(router.query.page);
+    setBtnIndex(e.target.dataset.index);
     // setPage(router.query.index);
     // setPage(router.query.id);
     // Router.replace(`/jobhunt/${e.target.value}`);
@@ -163,8 +177,15 @@ const IndexPage = () => {
     queryClient.invalidateQueries("projects");
   };
 
+  // const onEndPush = (e) => {
+  //   // setPage(e.target.value);
+  //   setBtnIndex(e.target.dataset.index);
+  //   setPageNum(e.target.value);
+  // };
+
   return (
-    <div style={{ background: "#e87777" }}>
+    <div>
+      {/* <div style={{ background: "#e87777" }}> */}
       {/* <Layout /> */}
       <MainDiv>
         <SearchForm></SearchForm>
@@ -172,14 +193,16 @@ const IndexPage = () => {
         {/* <div></div> */}
         <CardDiv>
           {data?.posts &&
-            data.posts.map((post) => <PostCard key={post.id} post={post} />)}
+            data.posts.map((post) => (
+              <PostCard key={post.id} post={post} stack={singlePost} />
+            ))}
           {/* {mainPosts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))} */}
         </CardDiv>
         <PageDiv>
           <button value={1} onClick={onPagePush}>
-            {"<<"}
+            {"<"}
           </button>
           {/* {numberingArr && numberingArr.map((v, i) => <button />)} */}
           <div>
@@ -191,7 +214,7 @@ const IndexPage = () => {
                     value={i + pageNum}
                     data-index={i}
                     onClick={onPagePush}
-                    disabled={router.query.page > 2 && i === 1 ? true : false}
+                    disabled={router.query.page > 1 && i === 1 ? true : false}
                   >
                     {i + pageNum}
                   </button>
@@ -205,9 +228,10 @@ const IndexPage = () => {
           </div>
           <button
             value={Math.ceil(data?.numbering.length / 5)}
+            data-index={">>"}
             onClick={onPagePush}
           >
-            {">>"}
+            {">"}
           </button>
         </PageDiv>
       </MainDiv>
@@ -248,16 +272,21 @@ export default IndexPage;
 const PageDiv = styled.div`
   /* position: fixed; */
   width: 100%;
-  height: 25px;
+  height: 150px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #e87777;
+  /* background: #e87777; */
   button {
     width: 50px;
     height: 25px;
+
+    /* Rectangle 46 */
+
+    background: #ffffff;
+    border: 1px solid #a7dfff;
   }
 `;
 
@@ -272,28 +301,10 @@ const CardDiv = styled.div`
   /* background: #e87777; */
 `;
 
-const SearchDiv = styled.div`
-  margin-top: 40px;
-  width: 100%;
-  height: 250px;
-
-  /* z-index: 1; */
-
-  background: #8d54ba;
-`;
-
 const MainDiv = styled.div`
   margin-left: 5%;
-
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-
   width: 90%;
-  height: 100rem;
-  /* height: 1; */
+  height: 1000px;
 
-  /* z-index: 1; */
-
-  background: #f6f1f1;
+  /* background: #f6f1f1; */
 `;

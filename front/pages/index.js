@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Router, { useRouter } from "next/router";
 import Layout from "../components/Layout";
+import SlideForm from "../components/SlideForm";
+import MyForm from "../components/MyForm";
 import styled from "styled-components";
 import PostCard from "../components/UI/PostCard";
 import Link from "next/link";
+import Our from "../public/images/Our.png";
+import Image from "next/image";
 
 import axios from "axios";
 import { loadMyInfo, loadUser, userInfo } from "../actions/user";
@@ -28,10 +32,16 @@ const Home = () => {
     <div>
       <Layout>
         <MainDiv>
+          <MainLogoDiv>
+            <div>
+              <Image src={Our} />
+            </div>
+          </MainLogoDiv>
           <SearchForm />
-          <RankMainDiv>
-            <div></div>
-          </RankMainDiv>
+          <MiddleDiv>
+            <SlideForm />
+            <MyForm />
+          </MiddleDiv>
         </MainDiv>
       </Layout>
     </div>
@@ -67,35 +77,48 @@ export default Home;
 
 // ############################################################## //
 
-const RankMainDiv = styled.div`
+const MiddleDiv = styled.div`
+  margin-top: 20px;
   width: 100%;
   height: 500px;
 
   display: flex;
   justify-content: center;
-  align-items: center;
 
-  background: #8d54ba;
+  /* border: 1px solid #000000; */
+  background: #fafdff;
+`;
 
+const MainLogoDiv = styled.div`
+  /* margin-top: px; */
+  width: 100%;
+  height: 150px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   div {
-    :nth-child(1) {
-      width: 500px;
-      height: 250px;
+    width: 500px;
+    height: 150px;
 
-      background: #d9d9d9;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    /* background: #fafdff; */
   }
+  /* background: #d9d9d9; */
 `;
 
 const MainDiv = styled.div`
   /* margin-left: 5%; */
 
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   width: 100%;
-  height: 100rem;
+  height: 1100px;
   /* height: 1; */
 
   /* z-index: 1; */

@@ -84,6 +84,7 @@ const Form_styled = styled(Form)`
 `;
 
 const MainDiv = styled.div`
+  margin-top: 50px;
   margin-left: 10%;
 
   width: 80%;

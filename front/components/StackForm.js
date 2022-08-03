@@ -12,7 +12,8 @@ const StackForm = () => {
   //   const [renderStack, setRenderStack] = useState(singleStack);
   const dispatch = useDispatch();
   const [userStack, setUserStack] = useState("");
-  const [render, setRender] = useState(mainStacks);
+  const [render, setRender] = useState("");
+  // const [render, setRender] = useState(mainStacks);
   const {
     mainStacks,
     singleStack,
