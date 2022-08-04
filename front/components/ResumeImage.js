@@ -13,12 +13,13 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const ResumeImage = () => {
+const ResumeImage = ({ imagedata }) => {
   const { imagePaths, addImageLoading, addImageDone, addImageError } =
     useSelector((state) => state.post);
-
   const [action, setAction] = useState(null);
-
+  const [toggle, setToggle] = useState(false);
+  const [test, setTest] = useState("false");
+  // const imagedata = imagedata;
   //   const { me } = useSelector((state) => state.user);
   // const { id } = useSelector((state) => state.user.me);
 
@@ -29,12 +30,18 @@ const ResumeImage = () => {
     imageInput.current.click();
   }, [imageInput.current]);
 
+  // useEffect(() => {
+  //   setTest(PreviewImg);
+  // }, [PreviewImg]);
+
   useEffect(() => {
     console.log("이펙트", imagePaths);
-  }, [imagePaths]);
+  }, [imagePaths, test]);
 
   const onChangeImages = useCallback((e) => {
+    setTest(PreviewImg);
     console.log("image", e.target.files);
+    const isFile = e.target.files;
     const imageFormData = new FormData(); // FormData를 사용하면 back 에서 muler로 처리 가능
     [].forEach.call(e.target.files, (image) => {
       imageFormData.append("image", image);
@@ -42,6 +49,7 @@ const ResumeImage = () => {
     console.log("이미지 확인", imageFormData);
 
     dispatch(uploadImage(imageFormData));
+    return isFile;
   }, []);
 
   const onRemoveImage = useCallback(
@@ -78,6 +86,9 @@ const ResumeImage = () => {
     // console.log("폼데이터", formData);
     dispatch(addImage(formData));
   };
+  const onToggle = () => {
+    setToggle(!toggle);
+  };
 
   return (
     <form
@@ -87,12 +98,30 @@ const ResumeImage = () => {
     >
       <ImageDiv>
         <MiddleDiv>
-          {!imagePaths[0] && <Image src={basic} />}
+          {imagePaths.length === 0 ? (
+            imagedata ? (
+              <Image
+                src={`http://localhost:3060/${imagedata}`}
+                width={150}
+                height={150}
+              />
+            ) : (
+              <Image src={basic} />
+            )
+          ) : (
+            <Image
+              src={`http://localhost:3060/${imagedata}`}
+              width={150}
+              height={150}
+            />
+          )}
+          {/* <Image src={basic} /> */}
+          {/* {!imagePaths[0] && <Image src={basic} />} */}
           {imagePaths.map((v, i) => (
             <div key={v} style={{ display: "inline-block" }}>
-              <img
+              <PreviewImg
                 src={`http://localhost:3060/${v}`}
-                style={{ width: "200px" }}
+                style={{ width: "150px", height: "150px" }}
                 alt={v}
               />
               <div>
@@ -119,6 +148,11 @@ const ResumeImage = () => {
               ref={imageInput}
               onChange={onChangeImages}
             />
+            {!imagePaths[0] && (
+              <label onClick={onToggle} className="image-button" for="image">
+                edit
+              </label>
+            )}
           </BottomDiv>
         </MiddleDiv>
       </ImageDiv>
@@ -128,6 +162,18 @@ const ResumeImage = () => {
 
 export default ResumeImage;
 
+const PreviewImg = styled.img``;
+
+const TestDiv = styled(Image)`
+  background-image: url("../public/images/basic.png");
+  background-image: url(basic);
+  background-size: cover;
+  background-position: center;
+  width: 150px;
+  height: 150px;
+  border: 1px #000000 solid;
+`;
+
 const BottomDiv = styled.div`
   width: 500px;
   height: 50px;
@@ -136,7 +182,19 @@ const BottomDiv = styled.div`
   justify-content: center;
   align-items: center;
 
+  label {
+    width: 74px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #8b8b8b;
+    border-radius: 5px;
+  }
+
   input {
+    display: none;
     margin-left: 180px;
   }
 

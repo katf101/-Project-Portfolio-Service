@@ -8,6 +8,7 @@ import {
   // loadStacks,
   loadPost,
   updatePost,
+  removeStack,
   removePost,
   addStack,
 } from "../actions/post";
@@ -17,7 +18,6 @@ import _find from "lodash/find";
 
 export const initialState = {
   mainPosts: [],
-  // allStacks: [],
   mainStacks: [],
   imagePaths: [],
   hasMorePosts: true,
@@ -41,6 +41,9 @@ export const initialState = {
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,
+  removeStackLoading: false,
+  removeStackDone: false,
+  removeStackError: null,
   uploadImageLoading: false,
   uploadImageDone: false,
   uploadImageError: null,
@@ -75,6 +78,21 @@ const postSlice = createSlice({
       .addCase(addStack.rejected, (state, action) => {
         state.addStackLoading = false;
         state.addStackError = action.error.message;
+      })
+      // removeStack
+      .addCase(removeStack.pending, (state) => {
+        state.removeStackLoading = true;
+        state.removeStackDone = false;
+        state.removeStackError = null;
+      })
+      .addCase(removeStack.fulfilled, (state, action) => {
+        state.removeStackLoading = false;
+        state.removeStackDone = true;
+        _remove(state.mainStacks, { id: action.payload.StackId });
+      })
+      .addCase(removeStack.rejected, (state, action) => {
+        state.removeStackLoading = false;
+        state.removeStackError = action.error.message;
       })
       // removePost
       .addCase(removePost.pending, (state) => {

@@ -1,13 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { removeStack } from "../../actions/post";
 
 const StackCard = ({ stack }) => {
-  const { mainPosts } = useSelector((state) => state.post);
+  const { removeStackLoading } = useSelector((state) => state.post);
+  const dispatch = useDispatch();
+
+  const onRemoveStack = () => {
+    dispatch(
+      removeStack({
+        stackId: stack.id,
+      })
+    );
+  };
 
   return (
-    <Maindiv stackdiv>
-      <button>{stack.stack}</button>
+    <Maindiv>
+      <button
+        htmltype="button"
+        type="primary"
+        onClick={onRemoveStack}
+        loading={removeStackLoading}
+      >
+        {stack.stack}
+      </button>
     </Maindiv>
   );
 };

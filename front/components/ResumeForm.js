@@ -23,9 +23,21 @@ const PostSchema = Yup.object().shape({
 });
 
 const ResumeForm = ({ post }) => {
+  const [introValue, setIntroValue] = useState("");
+  const [positionValue, setPositionValue] = useState("");
+  const [careerValue, setCareerValue] = useState("");
+  const [portfolioValue, setPortfolioValue] = useState("");
+  const [githubValue, setGithubValue] = useState("");
+  const [blogValue, setBlogValue] = useState("");
+
   const dispatch = useDispatch();
   const [action, setAction] = useState(null);
-  const [job, setJob] = useState(post?.job);
+
+  const [job, setJob] = useState(false);
+  useEffect(() => {
+    setJob(post?.job);
+  }, [post]);
+
   const onJobHandler = () => {
     setJob(!job);
   };
@@ -119,13 +131,19 @@ const ResumeForm = ({ post }) => {
               !post &&
                 dispatch(
                   addPost({
-                    introduce: values.user_intro,
-                    position: values.user_position,
-                    career: values.user_career,
+                    introduce: introValue,
+                    // introduce: values.user_intro,
+                    position: positionValue,
+                    // position: values.user_position,
+                    career: careerValue,
+                    // career: values.user_career,
                     job,
-                    portfolio: values.user_portfolio,
-                    github: values.user_github,
-                    blog: values.user_blog,
+                    portfolio: portfolioValue,
+                    // portfolio: values.user_portfolio,
+                    github: githubValue,
+                    // github: values.user_github,
+                    blog: blogValue,
+                    // blog: values.user_blog,
                   })
                 );
             }
@@ -134,13 +152,19 @@ const ResumeForm = ({ post }) => {
                 dispatch(
                   updatePost({
                     postId: post?.id,
-                    introduce: values.user_intro,
-                    position: values.user_position,
-                    career: values.user_career,
+                    introduce: introValue,
+                    // introduce: values.user_intro,
+                    position: positionValue,
+                    // position: values.user_position,
+                    career: careerValue,
+                    // career: values.user_career,
                     job,
-                    portfolio: values.user_portfolio,
-                    github: values.user_github,
-                    blog: values.user_blog,
+                    portfolio: portfolioValue,
+                    // portfolio: values.user_portfolio,
+                    github: githubValue,
+                    // github: values.user_github,
+                    blog: blogValue,
+                    // blog: values.user_blog,
                   })
                 ) &&
                 Router.replace(`/mypage/resume/${me.id}`);
@@ -154,7 +178,9 @@ const ResumeForm = ({ post }) => {
             <input
               type="text"
               name="user_name"
-              placeholder={me ? me.name : ""}
+              value={me?.name}
+              disabled
+              placeholder={me?.name}
             />
           </UserNameDiv>
           <IntroDiv>
@@ -162,6 +188,10 @@ const ResumeForm = ({ post }) => {
               as="textarea"
               id="user_intro"
               name="user_intro"
+              onChange={(e) => setIntroValue(e.target.value)}
+              value={post?.introduce ? introValue : null}
+              // value={post?.introduce ? post.introduce : introValue}
+              // value={introValue}
               // placeholder={JSON.stringify(
               //   mainPosts.filter((v) => v.UserId === me.id)[0].introduce
               // )}
@@ -174,12 +204,18 @@ const ResumeForm = ({ post }) => {
               type="text"
               id="user_position"
               name="user_position"
+              onChange={(e) => setPositionValue(e.target.value)}
+              value={post?.position ? positionValue : null}
+              // value={post?.position ? post.position : null}
               placeholder={post ? post.position : "ex) 프론트 엔드"}
             />
             <Field
               type="text"
               id="user_career"
               name="user_career"
+              onChange={(e) => setCareerValue(e.target.value)}
+              value={post?.career ? careerValue : null}
+              // value={post?.career ? post.career : null}
               placeholder={post ? post.career : "ex) 2년, 신입일 경우 신입"}
               // required
             />
@@ -206,6 +242,9 @@ const ResumeForm = ({ post }) => {
               id="user_portfolio"
               name="user_portfolio"
               type="text"
+              onChange={(e) => setPortfolioValue(e.target.value)}
+              value={post?.portfolio ? portfolioValue : null}
+              // value={post?.portfolio ? post.portfolio : null}
               placeholder={post ? post.portfolio : "포트폴리오"}
               // required
             />
@@ -213,12 +252,18 @@ const ResumeForm = ({ post }) => {
               id="user_github"
               name="user_github"
               type="text"
+              onChange={(e) => setGithubValue(e.target.value)}
+              value={post?.github ? githubValue : null}
+              // value={post?.github ? post.github : null}
               placeholder={post ? post.github : "Github"}
               // required
             />
             <Field
               name="user_blog"
               type="text"
+              onChange={(e) => setBlogValue(e.target.value)}
+              value={post?.blog ? blogValue : null}
+              // value={post?.blog ? post.blog : null}
               placeholder={post ? post.blog : "Blog"}
               // required
             />

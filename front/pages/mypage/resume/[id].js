@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -17,10 +17,20 @@ const Resume = () => {
   const { id } = router.query;
   const { singlePost, singleStack } = useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
+  const [imageData, setImageData] = useState("");
+
+  async function getImage() {
+    try {
+      const { data } = await axios.get(`/image?info=${me.id}`);
+      return setImageData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
-    // console.log("게시글정보", mainPosts);
-
+    console.log("이미지", getImage());
+    console.log("이미지", imageData);
     console.log("resume, 싱글포스", singlePost);
     console.log("resume, 싱글스택", singleStack);
     console.log("resume, 미", me);
@@ -40,7 +50,7 @@ const Resume = () => {
             content={`https://localhost3000/mypage/resume/${id}`}
           />
         </Head>
-        <ResumeImage />
+        <ResumeImage imagedata={imageData.src} />
         <ResumeForm post={singlePost} />
       </>
       {/* )} */}

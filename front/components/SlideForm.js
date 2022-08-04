@@ -13,7 +13,7 @@ const SlideForm = () => {
     arrows: true,
     infinite: true,
     autoplay: true, //자동 재생 할 것인지
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3500,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,

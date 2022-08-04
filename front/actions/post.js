@@ -20,6 +20,18 @@ export const addStack = createAsyncThunk(
   }
 );
 
+export const removeStack = createAsyncThunk(
+  "post/removeStack",
+  async (data) => {
+    try {
+      const response = await axios.delete(`/stack/${data.stackId}`); // DELETE /post/1/comment
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const removePost = createAsyncThunk(
   "post/removePost",
   async (data, thunkAPI) => {

@@ -101,6 +101,7 @@ const MainDiv = styled.div`
     background: #ffffff;
     border: 1px solid #e0581d;
     border-radius: 15px;
+    z-index: 100;
   }
   div {
     &:nth-child(3) {
