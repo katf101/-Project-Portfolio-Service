@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       job: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
         allowNull: true, // false면 필수
       },
       career: {

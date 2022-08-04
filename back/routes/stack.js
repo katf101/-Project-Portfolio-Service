@@ -61,4 +61,20 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+router.delete("/:stackId", isLoggedIn, async (req, res, next) => {
+  // DELETE /post/10
+  try {
+    await Stack.destroy({
+      where: {
+        id: req.params.stackId,
+        UserId: req.user.id,
+      },
+    });
+    res.status(200).json({ StackId: parseInt(req.params.stackId, 10) });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 module.exports = router;

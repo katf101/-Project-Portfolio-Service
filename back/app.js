@@ -10,7 +10,8 @@ const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
 const postsRouter = require("./routes/posts");
 const stackRouter = require("./routes/stack");
-const stacskRouter = require("./routes/stacks");
+const imagekRouter = require("./routes/image");
+// const stacskRouter = require("./routes/stacks");
 
 const db = require("./models");
 const passportConfig = require("./passport");
@@ -74,6 +75,7 @@ app.use("/posts", postsRouter);
 app.use("/post", postRouter);
 app.use("/user", userRouter);
 app.use("/stack", stackRouter);
+app.use("/image", imagekRouter);
 // app.use("/stacks", stacskRouter);
 
 app.listen(3060, () => {
