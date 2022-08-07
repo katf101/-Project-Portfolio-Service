@@ -66,7 +66,7 @@ const IndexPage = () => {
     () => fetchProjects(page),
     {
       onSuccess: (data) => {
-        console.log("온석세스", data);
+        console.log("온석세스", data.posts[0]?.UserId);
       },
       keepPreviousData: true,
       staleTime: 5000,
@@ -84,7 +84,6 @@ const IndexPage = () => {
     singleStack,
   } = useSelector((state) => state.post);
   const { loadUser } = useSelector((state) => state.user);
-
   // React.useEffect(() => {
   //   if (data?.hasMore) {
   //     queryClient.prefetchQuery(["projects", page + 1], () =>
@@ -185,26 +184,18 @@ const IndexPage = () => {
 
   return (
     <div>
-      {/* <div style={{ background: "#e87777" }}> */}
-      {/* <Layout /> */}
       <MainDiv>
         <SearchForm></SearchForm>
-        {/* <SearchDiv>서치 폼</SearchDiv> */}
-        {/* <div></div> */}
         <CardDiv>
           {data?.posts &&
             data.posts.map((post) => (
               <PostCard key={post.id} post={post} stack={singlePost} />
             ))}
-          {/* {mainPosts.map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))} */}
         </CardDiv>
         <PageDiv>
           <button value={1} onClick={onPagePush}>
             {"<"}
           </button>
-          {/* {numberingArr && numberingArr.map((v, i) => <button />)} */}
           <div>
             {data?.numbering.map((v, i) =>
               i < Math.ceil(data?.numbering.length / 5) ? (
@@ -235,7 +226,6 @@ const IndexPage = () => {
           </button>
         </PageDiv>
       </MainDiv>
-      {/* </Layout> */}
     </div>
   );
 };
@@ -302,9 +292,10 @@ const CardDiv = styled.div`
 `;
 
 const MainDiv = styled.div`
-  margin-left: 5%;
-  width: 90%;
+  /* margin-left: 5%; */
+  width: 100%;
+  /* width: 90%; */
   height: 1000px;
 
-  /* background: #f6f1f1; */
+  background: #f6f1f1;
 `;

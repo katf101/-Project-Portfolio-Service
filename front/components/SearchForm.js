@@ -1,29 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Router, { useRouter } from "next/router";
 import styled from "styled-components";
 import Image from "next/image";
 import searchbutton from "../public/images/searchbutton.png";
 
 const SearchForm = () => {
-  const [search, setSearch] = useState("");
-  const onInputChange = (e) => {
-    setSearch(e.target.value);
-  };
+  const inputRef = useRef();
 
   const onButtonHandler = () => {
-    Router.push(`/jobhunt?search=${search}`);
+    Router.push(`/jobhunt?search=${inputRef.current.value}`);
+  };
+
+  const onEnterInput = (e) => {
+    if (e.key === "Enter") {
+      onButtonHandler();
+    }
   };
 
   return (
     <SearchMainDiv>
-      {/* <div>
-        <div></div>
-      </div> */}
       <div>
         <input
-          value={search}
-          onChange={onInputChange}
+          ref={inputRef}
+          onKeyDown={onEnterInput}
           type="text"
+          style={{ zIndex: "1" }}
           placeholder="원하는 포지션을 검색해주세요!"
         />
         <button onClick={onButtonHandler}>
@@ -37,30 +38,37 @@ const SearchForm = () => {
 export default SearchForm;
 
 const SearchMainDiv = styled.div`
-  /* padding-top: 40px; */
-  margin-top: 40px;
   width: 100%;
-  height: 200px;
+  height: 7.81vw;
   display: flex;
   justify-content: center;
   align-items: center;
   /* background: #79d2cd; */
 
   div {
-    width: 100%;
-    height: 150px;
+    width: 28.65vw;
+    height: 6.25vw;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
 
-    background: #21aea6;
+    background: rgb(83, 107, 107);
+    background: linear-gradient(
+      239deg,
+      rgba(83, 107, 107, 1) 0%,
+      rgba(108, 181, 147, 1) 46%,
+      rgba(196, 174, 124, 1) 99%
+    );
+
+    /* background: #97a5b6; */
   }
 
   input {
     padding: 5px;
-    width: 330px;
-    height: 35px;
+    width: 23.44vw;
+    height: 2.08vw;
 
     background: #ffffff;
     border: 0px;
@@ -69,7 +77,7 @@ const SearchMainDiv = styled.div`
 
   button {
     width: 49px;
-    height: 45px;
+    height: 2.6vw;
 
     background: #eaeaea;
     border: 0px;

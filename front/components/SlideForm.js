@@ -25,13 +25,13 @@ const SlideForm = () => {
         <div>
           <StyledSlide {...settings}>
             <div>
+              <Image src={wanted2} />
+            </div>
+            <div>
               <Image src={wanted} />
             </div>
             <div>
               <Image src={roket} />
-            </div>
-            <div>
-              <Image src={wanted2} />
             </div>
           </StyledSlide>
         </div>

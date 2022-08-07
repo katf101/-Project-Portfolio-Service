@@ -62,6 +62,7 @@ const LoginForm = () => {
             type="primary"
             htmltype="submit"
             loading={loginLoading}
+            style={{ zIndex: "1" }}
             // loading={loginLoading.toString()}
           >
             로그인
@@ -101,7 +102,6 @@ const MainDiv = styled.div`
     background: #ffffff;
     border: 1px solid #e0581d;
     border-radius: 15px;
-    z-index: 100;
   }
   div {
     &:nth-child(3) {

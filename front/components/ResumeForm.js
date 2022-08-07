@@ -1,102 +1,52 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, updatePost, removePost } from "../actions/post";
-
-import { loadMyInfo } from "../actions/user";
-import wrapper from "../store/configureStore";
-import postSlice from "../reducers/post";
 import Router from "next/router";
 
-import { imageUrl } from "../config/config";
 import styled from "styled-components";
-import UserImage from "../public/images/UserImage.png";
-import Image from "next/image";
 
-import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import StackForm from "./StackForm";
 
-const PostSchema = Yup.object().shape({
-  content: Yup.string().min(2, "게시글은 2자 이상 입력하여 주십시오."),
-  // .required("게시글은 필수 입력 항목 입니다."),
-});
-
 const ResumeForm = ({ post }) => {
-  const [introValue, setIntroValue] = useState("");
-  const [positionValue, setPositionValue] = useState("");
-  const [careerValue, setCareerValue] = useState("");
-  const [portfolioValue, setPortfolioValue] = useState("");
-  const [githubValue, setGithubValue] = useState("");
-  const [blogValue, setBlogValue] = useState("");
+  const introduceRef = useRef();
+  const positionRef = useRef();
+  const careerRef = useRef();
+  const portfolioRef = useRef();
+  const githubRef = useRef();
+  const blogRef = useRef();
 
   const dispatch = useDispatch();
-  const [action, setAction] = useState(null);
+  const { addPostLoading, updatePostLoading, removePostLoading } = useSelector(
+    (state) => state.post
+  );
 
+  const { me } = useSelector((state) => state.user);
   const [job, setJob] = useState(false);
+
   useEffect(() => {
     setJob(post?.job);
-  }, [post]);
+  }, [post?.job]);
 
-  const onJobHandler = () => {
+  const onJobHandler = useCallback(() => {
     setJob(!job);
-  };
+  }, [job]);
 
-  const {
-    mainPosts,
-    singlePost,
-    addPostLoading,
-    addPostDone,
-    addPostError,
-    updatePostLoading,
-    updatePostDone,
-    updatePostError,
-    removePostLoading,
-    retweetError,
-  } = useSelector((state) => state.post);
-  const { me, addPostToMe } = useSelector((state) => state.user);
-
-  const [active, setActive] = useState(false);
-
-  const onActiveHandler = () => {
-    setActive(!active);
+  const onAddPost = useCallback(() => {
+    dispatch(
+      addPost({
+        introduce: introduceRef.current.value,
+        position: positionRef.current.value,
+        career: careerRef.current.value,
+        job,
+        portfolio: portfolioRef.current.value,
+        github: githubRef.current.value,
+        blog: blogRef.current.value,
+      })
+    );
     Router.replace(`/mypage/resume/${me.id}`);
-  };
-
-  const userPostInfo = mainPosts.filter((v, i) => v.UserId === me?.id);
-
-  // (me.id ? me.id : null)
-  useEffect(() => {
-    if (action) {
-      if (addPostDone) {
-        console.log("이력서 올리기 성공");
-        console.log("배열", mainPosts);
-        // message.success("이력서가 등록되었습니다.").then();
-      }
-      if (addPostError) {
-        console.log("에러");
-        // message.error(JSON.stringify(addPostError, null, 4)).then();
-      }
-      action.setSubmitting(false);
-      action.resetForm();
-      setAction(null);
-    }
-  }, [addPostDone, addPostError, mainPosts]);
-
-  useEffect(() => {
-    if (action) {
-      if (updatePostDone) {
-        // message.success("게시글이 수정되었습니다.").then();
-      }
-      if (updatePostError) {
-        // message.error(JSON.stringify(updatePostError, null, 4)).then();
-      }
-      action.setSubmitting(false);
-      action.resetForm();
-      // onToggleChangePost();
-      setAction(null);
-    }
-  }, [updatePostDone, updatePostError]);
+  }, []);
 
   const onRemovePost = useCallback(() => {
     if (!me.id) {
@@ -108,286 +58,167 @@ const ResumeForm = ({ post }) => {
         postId: post.id,
       })
     );
-  }, [post]);
+    Router.replace(`/mypage/resume/${me.id}`);
+  }, [post?.id]);
+
+  const onPostUpdate = () => {
+    dispatch(
+      updatePost({
+        postId: post?.id,
+        introduce: introduceRef.current.value,
+        position: positionRef.current.value,
+        career: careerRef.current.value,
+        job,
+        portfolio: portfolioRef.current.value,
+        github: githubRef.current.value,
+        blog: blogRef.current.value,
+      })
+    );
+  };
 
   return (
     <MainDiv>
-      <Formik
-        initialValues={{
-          // user_image: "",
-          //   user_name: "",
-          user_intro: "",
-          user_position: "",
-          user_career: "",
-          user_job: "",
-          user_portfolio: "",
-          user_github: "",
-          user_blog: "",
-        }}
-        validationSchema={PostSchema}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
-          {
-            {
-              !post &&
-                dispatch(
-                  addPost({
-                    introduce: introValue,
-                    // introduce: values.user_intro,
-                    position: positionValue,
-                    // position: values.user_position,
-                    career: careerValue,
-                    // career: values.user_career,
-                    job,
-                    portfolio: portfolioValue,
-                    // portfolio: values.user_portfolio,
-                    github: githubValue,
-                    // github: values.user_github,
-                    blog: blogValue,
-                    // blog: values.user_blog,
-                  })
-                );
-            }
-            {
-              post &&
-                dispatch(
-                  updatePost({
-                    postId: post?.id,
-                    introduce: introValue,
-                    // introduce: values.user_intro,
-                    position: positionValue,
-                    // position: values.user_position,
-                    career: careerValue,
-                    // career: values.user_career,
-                    job,
-                    portfolio: portfolioValue,
-                    // portfolio: values.user_portfolio,
-                    github: githubValue,
-                    // github: values.user_github,
-                    blog: blogValue,
-                    // blog: values.user_blog,
-                  })
-                ) &&
-                Router.replace(`/mypage/resume/${me.id}`);
-            }
+      <UserNameDiv>
+        <input value={me?.name} disabled placeholder={me?.name} />
+      </UserNameDiv>
+      <IntroDiv>
+        <textarea
+          ref={introduceRef}
+          defaultValue={post?.introduce}
+          placeholder={
+            post !== null ? post.introduce : "자기소개를 적어 주세요."
           }
-          setAction({ setSubmitting, resetForm });
-        }}
-      >
-        <Form encType="multipart/form-data">
-          <UserNameDiv>
-            <input
-              type="text"
-              name="user_name"
-              value={me?.name}
-              disabled
-              placeholder={me?.name}
-            />
-          </UserNameDiv>
-          <IntroDiv>
-            <Field
-              as="textarea"
-              id="user_intro"
-              name="user_intro"
-              onChange={(e) => setIntroValue(e.target.value)}
-              value={post?.introduce ? introValue : null}
-              // value={post?.introduce ? post.introduce : introValue}
-              // value={introValue}
-              // placeholder={JSON.stringify(
-              //   mainPosts.filter((v) => v.UserId === me.id)[0].introduce
-              // )}
-              placeholder={post ? post.introduce : "자기소개를 적어 주세요."}
-              // required
-            />
-          </IntroDiv>
-          <JobDiv>
-            <Field
-              type="text"
-              id="user_position"
-              name="user_position"
-              onChange={(e) => setPositionValue(e.target.value)}
-              value={post?.position ? positionValue : null}
-              // value={post?.position ? post.position : null}
-              placeholder={post ? post.position : "ex) 프론트 엔드"}
-            />
-            <Field
-              type="text"
-              id="user_career"
-              name="user_career"
-              onChange={(e) => setCareerValue(e.target.value)}
-              value={post?.career ? careerValue : null}
-              // value={post?.career ? post.career : null}
-              placeholder={post ? post.career : "ex) 2년, 신입일 경우 신입"}
-              // required
-            />
-          </JobDiv>
-          <StackForm />
-          <ActivityDiv>
-            <Field
-              onClick={onJobHandler}
-              as="button"
-              type="button"
-              id="user_job"
-              name="user_job"
-            >
-              구직
-            </Field>
-            {job === true ? (
-              <div>셀프 구직 활동 중입니다.</div>
-            ) : (
-              <div>구직 활동중이 아닙니다.</div>
-            )}
-          </ActivityDiv>
-          <PortfolioDiv>
-            <Field
-              id="user_portfolio"
-              name="user_portfolio"
-              type="text"
-              onChange={(e) => setPortfolioValue(e.target.value)}
-              value={post?.portfolio ? portfolioValue : null}
-              // value={post?.portfolio ? post.portfolio : null}
-              placeholder={post ? post.portfolio : "포트폴리오"}
-              // required
-            />
-            <Field
-              id="user_github"
-              name="user_github"
-              type="text"
-              onChange={(e) => setGithubValue(e.target.value)}
-              value={post?.github ? githubValue : null}
-              // value={post?.github ? post.github : null}
-              placeholder={post ? post.github : "Github"}
-              // required
-            />
-            <Field
-              name="user_blog"
-              type="text"
-              onChange={(e) => setBlogValue(e.target.value)}
-              value={post?.blog ? blogValue : null}
-              // value={post?.blog ? post.blog : null}
-              placeholder={post ? post.blog : "Blog"}
-              // required
-            />
-            {post && (
-              <button
-                htmltype="submit"
-                type="primary"
-                loading={updatePostLoading}
-              >
-                수정
-              </button>
-            )}
-            {!post ? (
-              <button
-                onClick={onActiveHandler}
-                type="primary"
-                htmltype="submit"
-                loading={addPostLoading}
-              >
-                올리기
-              </button>
-            ) : (
-              <button
-                htmltype="button"
-                type="primary"
-                loading={removePostLoading}
-                onClick={onRemovePost}
-              >
-                내리기
-              </button>
-            )}
-          </PortfolioDiv>
-        </Form>
-      </Formik>
+          // required
+        />
+      </IntroDiv>
+      <JobDiv>
+        <input
+          ref={positionRef}
+          defaultValue={post?.position}
+          type="text"
+          placeholder={post ? post.position : "ex) 프론트 엔드"}
+        />
+        <input
+          ref={careerRef}
+          defaultValue={post?.career}
+          type="text"
+          placeholder={post ? post?.career : "ex) 2년, 신입일 경우 신입"}
+          // required
+        />
+      </JobDiv>
+      <StackForm />
+      <JobHuntDiv>
+        <button onClick={onJobHandler} type="button">
+          구직
+        </button>
+        {job === true ? (
+          <div>셀프 구직 활동 중입니다.</div>
+        ) : (
+          <div>구직 활동중이 아닙니다.</div>
+        )}
+      </JobHuntDiv>
+      <PortfolioDiv>
+        <input
+          ref={portfolioRef}
+          defaultValue={post?.portfolio}
+          type="text"
+          placeholder={post ? post.portfolio : "포트폴리오"}
+          // required
+        />
+        <input
+          ref={githubRef}
+          defaultValue={post?.github}
+          type="text"
+          placeholder={post ? post.github : "Github"}
+          // required
+        />
+        <input
+          ref={blogRef}
+          defaultValue={post?.blog}
+          type="text"
+          placeholder={post ? post.blog : "Blog"}
+          // required
+        />
+        {post && (
+          <button
+            htmltype="submit"
+            type="primary"
+            onClick={onPostUpdate}
+            loading={updatePostLoading}
+          >
+            수정
+          </button>
+        )}
+        {!post ? (
+          <button
+            type="primary"
+            htmltype="submit"
+            onClick={onAddPost}
+            loading={addPostLoading}
+          >
+            올리기
+          </button>
+        ) : (
+          <button
+            htmltype="button"
+            type="primary"
+            onClick={onRemovePost}
+            loading={removePostLoading}
+          >
+            내리기
+          </button>
+        )}
+      </PortfolioDiv>
     </MainDiv>
   );
 };
-
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   async (context) => {
-//     const cookie = context.req ? context.req.headers.cookie : "";
-
-//     axios.defaults.headers.Cookie = "";
-//     // 쿠키가 브라우저에 있는경우만 넣어서 실행
-//     // (주의, 아래 조건이 없다면 다른 사람으로 로그인 될 수도 있음)
-//     if (context.req && cookie) {
-//       axios.defaults.headers.Cookie = cookie;
-//     }
-//     // await context.store.dispatch(loadPost({ postId: context.params.id }));
-//     await context.store.dispatch(loadPosts());
-//     await context.store.dispatch(loadMyInfo());
-
-//     return {
-//       props: {},
-//     };
-//   }
-// );
 
 export default ResumeForm;
 
 // ############################## //
 
-const Imageinput = styled.input`
-  width: 100px;
-  height: 100px;
-  /* display: none; */
-  /* z-index: 100; */
-  /* background-image: url("../public/images/UserImage.png"); */
-  /* background-size: 100% 100%; */
-`;
-
 const PortfolioDiv = styled.div`
   width: 100%;
   height: 332px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   /* background: #334eab; */
   input {
     margin-top: 20px;
-
     width: 386px;
     height: 40px;
-
     background: #ffffff;
     border: 1px solid #e0581d;
     border-radius: 15px;
-
     font-family: "Inter";
     font-size: 20px;
     line-height: 24px;
-
     color: #000000;
   }
   button {
     margin-top: 58px;
-
     width: 97px;
     height: 39px;
-
     background: #0a5ab9;
     border: none;
     border-radius: 15px;
     :hover {
       background: #084995;
     }
-
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     /* identical to box height */
-
     color: #ffffff;
   }
 `;
 
-const ActivityDiv = styled.div`
+const JobHuntDiv = styled.div`
   width: 100%;
   height: 98px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -398,22 +229,18 @@ const ActivityDiv = styled.div`
     background: #44c82f;
     border: none;
     border-radius: 15px;
-
     :hover {
       background: #2a8c1a;
     }
-
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
-
     color: #000000;
   }
   div {
     text-align: center;
-
     width: 280px;
     height: 41px;
     line-height: 41px;
@@ -437,7 +264,6 @@ const StackDiv = styled.div`
       background: #d34b4b;
     }
   }
-
   input {
     :focus {
       outline: none;
@@ -451,20 +277,17 @@ const StackDiv = styled.div`
   button {
     width: 97px;
     height: 39px;
-
     background: #0a5ab9;
     border: none;
     border-radius: 15px;
     :hover {
       background: #084995;
     }
-
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
     line-height: 24px;
-
     color: #ffffff;
   }
 `;
@@ -472,7 +295,6 @@ const StackDiv = styled.div`
 const JobDiv = styled.div`
   width: 100%;
   height: 168px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -490,18 +312,14 @@ const JobDiv = styled.div`
 const IntroDiv = styled.div`
   width: 100%;
   height: 184px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   /* background: #952e2e; */
   textarea {
     width: 383px;
     height: 150px;
-
     resize: none;
-
     background: #ffffff;
     border: 1px solid #e0581d;
     border-radius: 15px;
@@ -510,13 +328,11 @@ const IntroDiv = styled.div`
 
 const UserNameDiv = styled.div`
   margin-top: 100px;
-
   width: 100%;
   height: 72px;
   display: flex;
   justify-content: center;
   align-items: center;
-
   /* background: #e05555; */
   input {
     width: 385px;
@@ -527,24 +343,12 @@ const UserNameDiv = styled.div`
   }
 `;
 
-const ImageDiv = styled.div`
-  width: 100%;
-  height: 200px;
-  /* background: #8e2c2c; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const MainDiv = styled.div`
   margin-left: 5%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 90%;
   height: 1250px;
-
   /* background: #d9d9d9; */
 `;

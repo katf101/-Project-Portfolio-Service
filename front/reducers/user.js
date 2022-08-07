@@ -41,20 +41,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      // 회원가입
-      .addCase(signup.pending, (state) => {
-        state.signupLoading = true;
-        state.signupDone = false;
-        state.signupError = null;
-      })
-      .addCase(signup.fulfilled, (state) => {
-        state.signupLoading = false;
-        state.signupDone = true;
-      })
-      .addCase(signup.rejected, (state, action) => {
-        state.signupLoading = false;
-        state.signupError = action.payload;
-      })
       // 로그인
       .addCase(login.pending, (state) => {
         state.loginLoading = true;
@@ -69,6 +55,20 @@ const userSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loginLoading = false;
         state.loginError = action.payload;
+      })
+      // 회원가입
+      .addCase(signup.pending, (state) => {
+        state.signupLoading = true;
+        state.signupDone = false;
+        state.signupError = null;
+      })
+      .addCase(signup.fulfilled, (state) => {
+        state.signupLoading = false;
+        state.signupDone = true;
+      })
+      .addCase(signup.rejected, (state, action) => {
+        state.signupLoading = false;
+        state.signupError = action.payload;
       })
       // 로그아웃
       .addCase(logout.pending, (state) => {

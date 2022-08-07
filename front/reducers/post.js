@@ -5,12 +5,12 @@ import {
   addImage,
   loadPosts,
   loadStack,
-  // loadStacks,
   loadPost,
   updatePost,
   removeStack,
   removePost,
   addStack,
+  removeCurrentImage,
 } from "../actions/post";
 import _concat from "lodash/concat";
 import _remove from "lodash/remove";
@@ -44,6 +44,9 @@ export const initialState = {
   removeStackLoading: false,
   removeStackDone: false,
   removeStackError: null,
+  removeCurrentImageLoading: false,
+  removeCurrentImageDone: false,
+  removeCurrentImageError: null,
   uploadImageLoading: false,
   uploadImageDone: false,
   uploadImageError: null,
@@ -240,6 +243,20 @@ const postSlice = createSlice({
       .addCase(addImage.rejected, (state, action) => {
         state.addImageLoading = false;
         state.addImageError = action.error.message;
+      })
+      // removeCurrentImage
+      .addCase(removeCurrentImage.pending, (state) => {
+        state.removeCurrentImageLoading = true;
+        state.removeCurrentImageDone = false;
+        state.removeCurrentImageError = null;
+      })
+      .addCase(removeCurrentImage.fulfilled, (state, action) => {
+        state.removeCurrentImageLoading = false;
+        state.removeCurrentImageDone = true;
+      })
+      .addCase(removeCurrentImage.rejected, (state, action) => {
+        state.removeCurrentImageLoading = false;
+        state.removeCurrentImageError = action.error.message;
       })
       .addDefaultCase((state) => state),
 });

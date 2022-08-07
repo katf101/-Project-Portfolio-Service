@@ -21,7 +21,7 @@ export const addStack = createAsyncThunk(
 );
 
 export const removeStack = createAsyncThunk(
-  "post/removeStack",
+  "stack/removeStack",
   async (data) => {
     try {
       const response = await axios.delete(`/stack/${data.stackId}`); // DELETE /post/1/comment
@@ -155,6 +155,19 @@ export const addImage = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post("/post/addImage", data);
+      thunkAPI.dispatch(userSlice.actions.addPostToMe(response.data.id));
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const removeCurrentImage = createAsyncThunk(
+  "post/image",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/image/${data.UserId}`);
       thunkAPI.dispatch(userSlice.actions.addPostToMe(response.data.id));
       return response.data;
     } catch (error) {

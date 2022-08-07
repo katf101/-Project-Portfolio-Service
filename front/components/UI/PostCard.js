@@ -1,121 +1,139 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Link from "next/link";
-import { loadPosts, loadPost, addStack, loadStacks } from "../../actions/post";
 
 const PostCard = ({ post, stack }) => {
-  const dispatch = useDispatch();
-  const { singleStack } = useSelector((state) => state.post);
-  // useEffect(() => {
-  //   console.log("싱포", allStacks);
-  //   console.log("포스트", post);
-  // }, [stack]);
-
-  // useEffect(() => {
-  //   // dispatch(loadStacks());
-  // }, [dispatch]);
-
   return (
-    <>
-      <MainDiv>
-        <MainTopDiv>
-          <div>{/* {mainPosts.UserId} */}</div>
-          <div>{post.career}</div>
-          <div>{post.position}</div>
-          <div>{post.job === true ? "구직활동 중입니다!" : ""}</div>
-        </MainTopDiv>
-        <MainBottomDiv>
-          <div style={{ width: "80px" }}>
-            <Link
-              href={{
-                pathname: "/post/detail",
-                query: {
-                  postName: JSON.stringify(post.User.name),
-                  postIntro: JSON.stringify(post.introduce),
-                  postPosition: JSON.stringify(post.position),
-                  postJob: JSON.stringify(post.job),
-                  postCareer: JSON.stringify(post.career),
-                  postPofol: JSON.stringify(post.portfolio),
-                  postGit: JSON.stringify(post.github),
-                  postBlog: JSON.stringify(post.blog),
-                  postUserId: JSON.stringify(post.User.id),
-                },
-              }}
-            >
-              {post.User.name}
-            </Link>
-          </div>
-          <div>{post.User.email}</div>
-        </MainBottomDiv>
-      </MainDiv>
-      {/* {children} */}
-    </>
+    <MainDiv>
+      <LeftDiv>
+        <Link
+          href={{
+            pathname: "/post/detail",
+            query: {
+              postName: JSON.stringify(post.User.name),
+              postIntro: JSON.stringify(post.introduce),
+              postPosition: JSON.stringify(post.position),
+              postJob: JSON.stringify(post.job),
+              postCareer: JSON.stringify(post.career),
+              postPofol: JSON.stringify(post.portfolio),
+              postGit: JSON.stringify(post.github),
+              postBlog: JSON.stringify(post.blog),
+              postUserId: JSON.stringify(post.User.id),
+            },
+          }}
+        >
+          <NameDiv>{post.User.name}</NameDiv>
+        </Link>
+        <EmailDiv>Email: {post.User.email}</EmailDiv>
+        <JobhuntDiv
+          style={{ color: post.job === true ? "#52b63a" : "#AEB6AC" }}
+        >
+          {post.job === true ? "구직활동 중입니다!" : "활동중이 아닙니다."}
+        </JobhuntDiv>
+      </LeftDiv>
+      <LineDiv>
+        <Line />
+      </LineDiv>
+      <RightDiv>
+        <CareerDiv>경력: {post.career}</CareerDiv>
+        <PositionDiv>분야: {post.position}</PositionDiv>
+      </RightDiv>
+    </MainDiv>
   );
 };
 
 export default PostCard;
 
-const MainBottomDiv = styled.div`
-  width: 400px;
+const PositionDiv = styled.div`
+  width: 178px;
   height: 33px;
+  line-height: 33px;
 
-  display: flex;
+  /* background: #8e3838; */
 `;
 
-const MainTopDiv = styled.div`
-  width: 400px;
-  height: 55px;
+const CareerDiv = styled.div`
+  width: 178px;
+  height: 33px;
+  line-height: 33px;
 
+  /* background: #8e3838; */
+`;
+
+const RightDiv = styled.div`
+  width: 170px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background: #8e3838; */
+`;
+
+const Line = styled.div`
+  width: 0px;
+  height: 80px;
+
+  border: 1px solid #338496;
+`;
+
+const LineDiv = styled.div`
+  width: 7px;
+  height: 100px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #8d8d8d;
+  /* background: #3e58b7; */
+`;
 
-  /* background: #75e39a; */
-  div {
-    :nth-child(1) {
-      width: 50px;
-      height: 50px;
+const JobhuntDiv = styled.div`
+  width: 230px;
+  height: 33px;
+  line-height: 33px;
+  font-weight: bold;
 
-      background: #75e39a;
-    }
-    :nth-child(2) {
-      width: 75px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      /* background: #fff; */
-    }
-    :nth-child(3) {
-      width: 125px;
-      height: 50px;
-      line-height: 50px;
-      text-align: start;
-      /* background: #fff; */
-    }
-    :nth-child(4) {
-      width: 150px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
+  /* background: #8e3838; */
+`;
 
-      color: #52b63a;
-    }
+const EmailDiv = styled.div`
+  width: 230px;
+  height: 33px;
+  line-height: 33px;
+
+  /* background: #8e3838; */
+`;
+
+const NameDiv = styled.div`
+  width: auto;
+  height: 33px;
+  line-height: 33px;
+  cursor: pointer;
+  :hover {
+    color: #485af4;
   }
+  /* background: #8e3838; */
+`;
+
+const LeftDiv = styled.div`
+  margin-left: 15px;
+  width: 240px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+
+  /* background: #d9d9d9; */
 `;
 
 const MainDiv = styled.div`
   margin-top: 20px;
 
   width: 425px;
-  height: 86px;
+  height: 100px;
 
   display: flex;
   align-items: center;
-  flex-direction: column;
 
   background: #ffffff;
   border: 1px solid #3b76cf;
   border-radius: 10px;
-  /* z-index: 1; */
+  z-index: 1;
 `;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Router, { useRouter } from "next/router";
 import styled from "styled-components";
 import StackCard from "./UI/StackCard";
@@ -9,39 +9,20 @@ import Link from "next/link";
 const StackForm = () => {
   const router = useRouter();
   const { id } = router.query;
-  //   const [renderStack, setRenderStack] = useState(singleStack);
   const dispatch = useDispatch();
   const [userStack, setUserStack] = useState("");
   const [render, setRender] = useState("");
-  // const [render, setRender] = useState(mainStacks);
-  const {
-    mainStacks,
-    singleStack,
-    addStackLoading,
-    addStackDone,
-    addStackError,
-    removeStackLoading,
-  } = useSelector((state) => state.post);
+  const { mainStacks, singleStack, addStackLoading, removeStackLoading } =
+    useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
 
   useEffect(() => {
     singleStack;
   }, [singleStack]);
 
-  // useEffect(() => {
-  //   console.log("렌더될까", addStackDone);
-  //   console.log("렌더될까2", mainStacks);
-  //   console.log("렌더될까3", render);
-  //   console.log("스택폼", singleStack);
-  //   if (addStackDone) {
-  //     console.log("스택이 추가되었습니다.");
-  //     // message.success("게시글이 수정되었습니다.").then();
-  //   }
-  //   if (addStackError) {
-  //     console.log("스택이 추가 실패");
-  //     // message.error(JSON.stringify(updatePostError, null, 4)).then();
-  //   }
-  // }, [addStackDone, addStackError, singleStack, loadStack, mainStacks, render]);
+  useEffect(() => {
+    console.log("스택폼", singleStack);
+  });
 
   const onInputHandler = (e) => {
     setUserStack(e.target.value);
@@ -56,14 +37,6 @@ const StackForm = () => {
     );
     setUserStack("");
   };
-
-  const onRemoveStack = useCallback(() => {
-    dispatch(
-      removeStack({
-        stackId: singleStack.stack,
-      })
-    );
-  }, [singleStack?.stack]);
 
   return (
     <>
@@ -94,12 +67,7 @@ const StackForm = () => {
         <StackCardDiv>
           {singleStack &&
             singleStack.map((stack) => (
-              <StackCard
-                key={stack.id}
-                stack={stack}
-                onClick={onRemoveStack}
-                loading={removeStackLoading}
-              />
+              <StackCard key={stack.id} stack={stack} />
             ))}
         </StackCardDiv>
       </MainDiv>
@@ -117,7 +85,6 @@ const InputButtonDiv = styled.div`
 const StackCardDiv = styled.div`
   width: 100%;
   height: 100px;
-
   display: flex;
   /* background: #d34b4b; */
 `;
@@ -125,19 +92,16 @@ const StackCardDiv = styled.div`
 const StackButton = styled.button`
   width: 97px;
   height: 39px;
-
   background: #0a5ab9;
   border: none;
   border-radius: 15px;
   :hover {
     background: #084995;
   }
-
   font-family: "Inter";
   /* font-style: normal; */
   /* font-weight: 400; */
   font-size: 15px;
-
   color: #ffffff;
 `;
 
@@ -146,7 +110,6 @@ const MainDiv = styled.div`
   height: 170px;
   display: flex;
   flex-direction: column;
-
   input {
     :focus {
       outline: none;
