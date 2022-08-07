@@ -63,6 +63,8 @@ router.get("/:userId", async (req, res, next) => {
 
 router.delete("/:stackId", isLoggedIn, async (req, res, next) => {
   // DELETE /post/10
+  console.log("스택아디", req.params.stackId);
+  console.log("유저아디", req.user.id);
   try {
     await Stack.destroy({
       where: {

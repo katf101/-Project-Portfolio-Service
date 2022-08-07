@@ -4,11 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       introduce: {
         type: DataTypes.TEXT,
-        allowNull: false, // false면 필수
+        allowNull: true, // false면 필수
       },
       position: {
         type: DataTypes.TEXT,
-        allowNull: false, // false면 필수
+        allowNull: true, // false면 필수
       },
       job: {
         type: DataTypes.BOOLEAN,
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       career: {
         type: DataTypes.TEXT,
-        allowNull: false, // false면 필수
+        allowNull: true, // false면 필수
       },
       portfolio: {
         type: DataTypes.TEXT,

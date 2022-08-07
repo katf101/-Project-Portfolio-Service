@@ -1,9 +1,6 @@
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 
-const { Post, Image, User, Stack } = require("../models");
+const { Image, User } = require("../models");
 const { isLoggedIn } = require("./middlewares");
 
 const router = express.Router();
@@ -38,6 +35,24 @@ router.get("/", async (req, res, next) => {
     //   ],
     // });
     res.status(200).json(image);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.delete("/:UserId", isLoggedIn, async (req, res, next) => {
+  // DELETE /post/10
+  console.log("444");
+  console.log("444", req.params.UserId);
+  try {
+    await Image.destroy({
+      where: {
+        UserId: req.params.UserId,
+      },
+    });
+    res.status(200);
+    // res.status(200).json({ PostId: parseInt(req.params.UserId, 10) });
   } catch (error) {
     console.error(error);
     next(error);
