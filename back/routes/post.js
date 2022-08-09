@@ -85,9 +85,12 @@ router.post(
   }
 );
 
-router.patch("/:postId", isLoggedIn, async (req, res, next) => {
+// router.patch("/", isLoggedIn, async (req, res, next) => {
+// router.patch("/:userId", isLoggedIn, async (req, res, next) => {
+router.put("/:postId", isLoggedIn, async (req, res, next) => {
   // PATCH /post/10
-  // const hashtags = req.body.content.match(/#[^\s#]+/g);
+  console.log("qwe", req.params.userId);
+  console.log("qwe", req.user.id);
   try {
     await Post.update(
       {
@@ -103,6 +106,7 @@ router.patch("/:postId", isLoggedIn, async (req, res, next) => {
         where: {
           id: req.params.postId,
           UserId: req.user.id,
+          // UserId: req.params.userId,
         },
       }
     );
@@ -134,18 +138,15 @@ router.patch("/:postId", isLoggedIn, async (req, res, next) => {
   }
 });
 
+// router.get("/", async (req, res, next) => {
 router.get("/:postId", async (req, res, next) => {
   // GET /post/1
-  // console.log("아디", req.params.postId);
+  console.log("params", req.params.postId);
+  console.log("params", req.params);
+  // console.log("아디", req.query.userId);
   try {
     const post = await Post.findOne({
-      where: { UserId: req.params.postId },
-    });
-    if (!post) {
-      return res.status(404).send("존재하지 않는 게시글입니다.");
-    }
-    const fullPost = await Post.findOne({
-      where: { id: post.id },
+      where: { id: req.params.postId },
       include: [
         {
           model: User,
@@ -153,7 +154,37 @@ router.get("/:postId", async (req, res, next) => {
         },
       ],
     });
-    res.status(200).json(fullPost);
+    if (!post) {
+      return res.status(404).send("존재하지 않는 게시글입니다.");
+    }
+    const image = await Image.findOne({
+      where: { UserId: post.UserId },
+    });
+    res.status(200).json({ post, image });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.get("/resume/:userId", async (req, res, next) => {
+  // GET /post/1
+  console.log("resumeuserid", req.params.userId);
+  // console.log("아디", req.query.userId);
+  try {
+    const post = await Post.findOne({
+      where: { UserId: req.params.userId },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "name"],
+        },
+      ],
+    });
+    if (!post) {
+      return res.status(404).send("존재하지 않는 게시글입니다.");
+    }
+    res.status(200).json(post);
   } catch (error) {
     console.error(error);
     next(error);

@@ -55,10 +55,10 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   // const id = req.query.id;
-  console.log("쿼리페이지", req.query.page);
-  console.log("쿼리서치", req.query.search);
-  console.log("쿼리", req.query);
-  console.log("난페이지", isNaN(req.query.page));
+  console.log("querypage", req.query.page);
+  console.log("querysearch", req.query.search);
+  console.log("query", req.query);
+  console.log("nanpage", isNaN(req.query.page));
   // console.log("난서치", isNaN(req.query.search));
   const searchBool = isNaN(req.query.search);
   console.log("아디타입", typeof +req.query.page === "number");

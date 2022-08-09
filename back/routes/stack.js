@@ -31,6 +31,9 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 
 router.get("/:userId", async (req, res, next) => {
   // GET /post/1
+  console.log("stackid", req.params.stackId);
+  console.log("stackid", req.params.userId);
+  console.log("userid", req.user.id);
   try {
     const stack = await Stack.findAll({
       where: { UserId: req.params.userId },
@@ -63,8 +66,8 @@ router.get("/:userId", async (req, res, next) => {
 
 router.delete("/:stackId", isLoggedIn, async (req, res, next) => {
   // DELETE /post/10
-  console.log("스택아디", req.params.stackId);
-  console.log("유저아디", req.user.id);
+  console.log("stackid", req.params.stackId);
+  console.log("userid", req.user.id);
   try {
     await Stack.destroy({
       where: {

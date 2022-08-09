@@ -15,25 +15,18 @@ router.get("/", async (req, res, next) => {
   try {
     const image = await Image.findOne({
       where: { UserId: req.query.info },
-      include: [
-        {
-          model: User,
-          attributes: ["id", "name"],
-        },
-      ],
+      // include: [
+      //   {
+      //     model: User,
+      //     attributes: ["id", "name"],
+      //   },
+      // ],
     });
     if (!image) {
-      return res.status(404).send("존재하지 않는 게시글입니다.");
+      res.status(404).send("존재하지 않는 이미지입니다.");
+      return res.status(404).send(image);
     }
-    // const fullPost = await Post.findOne({
-    //   where: { id: post.id },
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ["id", "name"],
-    //     },
-    //   ],
-    // });
+
     res.status(200).json(image);
   } catch (error) {
     console.error(error);
