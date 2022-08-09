@@ -295,9 +295,9 @@ const MiddleDiv = styled.div`
 `;
 
 const ImageDiv = styled.div`
-  /* margin-top: 50px; */
+  margin-top: 50px;
   width: 100%;
-  height: 300px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;

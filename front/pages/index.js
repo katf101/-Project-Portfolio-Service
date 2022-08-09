@@ -29,25 +29,24 @@ import SearchForm from "../components/SearchForm";
 
 const Home = () => {
   return (
-    <div>
-      <MainDiv>
-        <MiddleDiv>
-          <SlideForm />
+    <MainDiv>
+      <MiddleDiv>
+        <SlideForm />
+        <div>
           <MyForm />
-        </MiddleDiv>
-
-        {/* <MainLogoDiv>
+        </div>
+      </MiddleDiv>
+      {/* <MainLogoDiv>
           <div>
             <Image src={Our} />
           </div>
         </MainLogoDiv> */}
-        {/* <SearchForm /> */}
-        {/* <MiddleDiv>
+      {/* <SearchForm /> */}
+      {/* <MiddleDiv>
           <SlideForm />
           <MyForm />
         </MiddleDiv> */}
-      </MainDiv>
-    </div>
+    </MainDiv>
   );
 };
 
@@ -83,23 +82,19 @@ export default Home;
 const MiddleDiv = styled.div`
   /* margin-top: 20px; */
   position: absolute;
-  bottom: -3.65vw;
+  bottom: -3.28vw;
   width: 100%;
   height: 36.46vw;
 
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
   /* border: 1px solid #000000; */
   /* background: #000000; */
-  background: #fafdff;
-  background: rgb(247, 237, 203);
-  background: linear-gradient(
-    90deg,
-    rgba(247, 237, 203, 1) 0%,
-    rgba(227, 236, 195, 1) 100%
-  );
+  /* background: #fafdff; */
+  background: #826f66; /* fallback for old browsers */
 `;
 
 const MainLogoDiv = styled.div`
@@ -131,7 +126,7 @@ const MainDiv = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 1100px;
+  height: 770px;
   /* height: 1; */
 
   /* z-index: 1; */

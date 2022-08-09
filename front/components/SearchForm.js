@@ -62,7 +62,7 @@ const SearchMainDiv = styled.div`
       rgba(196, 174, 124, 1) 99%
     );
 
-    /* background: #97a5b6; */
+    background: #3a3845;
   }
 
   input {

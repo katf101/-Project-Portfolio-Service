@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Footer from "../components/Footer";
+import BlackLine from "../components/UI/BlackLine";
 
 const Portfolio = ({ Component, pageProps }) => {
   const [queryClient] = React.useState(() => new QueryClient());
@@ -35,6 +36,7 @@ const Portfolio = ({ Component, pageProps }) => {
             />
           </Head>
           <Layout>
+            <BlackLine />
             <Component {...pageProps} />
             <Footer />
           </Layout>

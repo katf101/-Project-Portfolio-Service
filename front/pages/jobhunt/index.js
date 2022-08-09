@@ -19,6 +19,9 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import SearchForm from "../../components/SearchForm";
+import Myform from "../../components/MyForm";
+import Footer from "../../components/Footer";
+import Resume from "../../components/Resume";
 
 // ######################################################## //
 // ######################################################## //
@@ -53,10 +56,7 @@ async function fetchProjects(page = 0) {
 const IndexPage = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
-
-  const { id } = router.query;
-  //   const [page, setPage] = React.useState(router.query.index);
-  //   const [page, setPage] = React.useState(0);
+  const [stateId, setStateId] = useState(0);
   const [page, setPage] = React.useState(1); // 리액트-쿼리 페이지
   const [pageNum, setPageNum] = useState(1); // 현재 페이지 넘버
   const [btnIndex, setBtnIndex] = useState(0);
@@ -126,33 +126,8 @@ const IndexPage = () => {
 
   useEffect(() => {
     console.log("싱글스택", data);
-    console.log("버튼인덱스", btnIndex);
     console.log("쿼리클라이언트", queryClient);
-    console.log("라우터쿼리인덱스", router.query.id);
-    console.log("라우터쿼리", router.query);
-    console.log("Router", Router);
-    console.log("페이지", page);
-    console.log("이전url", document.referrer);
-    console.log("라우터", router);
-    console.log("라우터패스", router.asPath);
-    console.log("라우터쿼리", router.query);
-    console.log("데이터", data?.posts);
-    console.log("데이터길이", data?.numbering);
-    // console.log("넘어레이", numberingArr);
-    console.log("메인 싱글포스트", singlePost);
-    console.log("메인 싱글스택", singlePost);
-    console.log("메인 메인포스트", mainPosts);
-    console.log("메인 포스텍", postStack);
-  }, [
-    queryClient,
-    page,
-    router,
-    data,
-    singlePost,
-    mainPosts,
-    postStack,
-    singleStack,
-  ]);
+  }, [queryClient]);
 
   const onPagePush = (e) => {
     console.log("타겟", e.target.value);
@@ -181,58 +156,79 @@ const IndexPage = () => {
   //   setBtnIndex(e.target.dataset.index);
   //   setPageNum(e.target.value);
   // };
+  const [testId, setTestId] = useState(0);
 
   return (
-    <div>
+    <>
       <MainDiv>
-        <SearchForm></SearchForm>
-        <CardDiv>
-          {data?.posts &&
-            data.posts.map((post) => (
-              <PostCard key={post.id} post={post} stack={singlePost} />
-            ))}
-        </CardDiv>
-        <PageDiv>
-          <button value={1} onClick={onPagePush}>
-            {"<"}
-          </button>
-          <div>
-            {data?.numbering.map((v, i) =>
-              i < Math.ceil(data?.numbering.length / 5) ? (
-                i < 3 ? (
-                  <button
-                    key={i}
-                    value={i + pageNum}
-                    data-index={i}
-                    onClick={onPagePush}
-                    disabled={router.query.page > 1 && i === 1 ? true : false}
-                  >
-                    {i + pageNum}
-                  </button>
-                ) : (
-                  ""
-                )
-              ) : (
-                ""
-              )
-            )}
-          </div>
-          <button
-            value={Math.ceil(data?.numbering.length / 5)}
-            data-index={">>"}
-            onClick={onPagePush}
-          >
-            {">"}
-          </button>
-        </PageDiv>
+        <LeftDiv>
+          <JobhuntLeftDiv>
+            <CardDiv>
+              {data?.posts &&
+                data.posts.map((data, i) => (
+                  <PostCard
+                    key={data.id}
+                    id={data.id}
+                    post={data}
+                    setTestId={setTestId}
+                  />
+                ))}
+            </CardDiv>
+            <PageDiv>
+              <button value={1} onClick={onPagePush}>
+                {"<"}
+              </button>
+              <div>
+                {data?.numbering.map((v, i) =>
+                  i < Math.ceil(data?.numbering.length / 5) ? (
+                    i < 3 ? (
+                      <button
+                        key={i}
+                        value={i + pageNum}
+                        data-index={i}
+                        onClick={onPagePush}
+                        disabled={
+                          router.query.page > 1 && i === 1 ? true : false
+                        }
+                      >
+                        {i + pageNum}
+                      </button>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )
+                )}
+              </div>
+              <button
+                value={Math.ceil(data?.numbering.length / 5)}
+                data-index={">>"}
+                onClick={onPagePush}
+              >
+                {">"}
+              </button>
+            </PageDiv>
+          </JobhuntLeftDiv>
+          <JobhuntRightDiv>
+            <Resume
+              testId={testId}
+              postInfo={data?.posts}
+              setStateId={setStateId}
+            />
+          </JobhuntRightDiv>
+        </LeftDiv>
+        <Myform />
+        {/* <RightDiv></RightDiv> */}
       </MainDiv>
-    </div>
+    </>
   );
 };
 
 // SSR (프론트 서버에서 실행)
 export const getServerSideProps = wrapper.getServerSideProps(
   async (context) => {
+    console.log("콘택", context);
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery("posts", () => fetchPosts(10));
 
@@ -244,7 +240,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       axios.defaults.headers.Cookie = cookie;
     }
     await context.store.dispatch(loadPosts());
-    // await context.store.dispatch(loadPost({ postId: context.params.id }));
+    // await context.store.dispatch(loadPost({ postId: 3 }));
     await context.store.dispatch(loadMyInfo());
 
     return {
@@ -257,11 +253,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 export default IndexPage;
 
-// ############################################################## //
-
 const PageDiv = styled.div`
   /* position: fixed; */
-  width: 100%;
+  width: 400px;
   height: 150px;
 
   display: flex;
@@ -276,13 +270,24 @@ const PageDiv = styled.div`
     /* Rectangle 46 */
 
     background: #ffffff;
-    border: 1px solid #a7dfff;
+    border: 2px solid #3a3845;
   }
 `;
 
+const JobhuntRightDiv = styled.div`
+  width: 44.27vw;
+  height: 56.94vw;
+
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  justify-content: center;
+`;
+
 const CardDiv = styled.div`
-  width: 100%;
-  height: 540px;
+  width: 31.25vw;
+  /* height: 36.46vw; */
+  /* height: 1000px; */
 
   display: flex;
   flex-direction: column;
@@ -291,11 +296,57 @@ const CardDiv = styled.div`
   /* background: #e87777; */
 `;
 
-const MainDiv = styled.div`
-  /* margin-left: 5%; */
-  width: 100%;
-  /* width: 90%; */
-  height: 1000px;
+const RightDiv = styled.div`
+  position: sticky;
+  right: 50px;
+  margin-top: 50px;
+  margin-bottom: 24.48vw;
+  width: 19.27vw;
+  height: 20.42vw;
+  /* height: 26.04vw; */
 
-  background: #f6f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #eeeeee;
+`;
+
+const JobhuntLeftDiv = styled.div`
+  width: 44.27vw;
+  height: 56.94vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background: #000000; */
+`;
+const LeftDiv = styled.div`
+  margin-top: 2.6vw;
+  width: 72.92vw;
+  /* height: 85.94vw; */
+  height: 53.13vw;
+
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+
+  /* background: #826f66; */
+`;
+
+const MainDiv = styled.div`
+  /* position: absolute; */
+  margin-bottom: -7.75vw;
+  margin-top: 11.98vw;
+  margin-left: -0.4vw;
+  width: 99.17vw;
+  right: 100vw;
+  /* height: 2500px; */
+  /* bottom: -27.08vw; */
+  /* bottom: -540px; */
+  /* border: 1px solid #000000; */
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+
+  background: #826f66;
 `;

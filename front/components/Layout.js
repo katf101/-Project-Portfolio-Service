@@ -1,73 +1,49 @@
-import React, { useCallback, useState } from "react";
-import { logout } from "../actions/user";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback } from "react";
 import Router from "next/router";
-import Link from "next/link";
 import Image from "next/image";
-
 import SearchForm from "../components/SearchForm";
-
 import styled from "styled-components";
 import ProTypes from "prop-types";
-
-import UserButton from "../public/images/UserButton.png";
-import hoverUserButton from "../public/images/hoverUserButton.png";
-import hoverLogout from "../public/images/hoverLogout.png";
-import Logout from "../public/images/Logout.png";
 import Foli from "../public/images/Foli.png";
-import Our from "../public/images/Our.png";
 import MenuForm from "./MenuForm";
+import Link from "next/link";
 
 const Layout = ({ children }) => {
-  const dispatch = useDispatch();
-  const { me, logoutLoading } = useSelector((state) => state.user);
-  // const { id } = useSelector((state) => state.user.me);
-
-  const onLogout = useCallback(() => {
-    dispatch(logout());
-    // Router.push("/");
+  const onMainPush = useCallback(() => {
     Router.replace("/");
-  }, [dispatch]);
-
-  const [isProfileHovering, setIsProfileHovered] = useState(false);
-
-  const onProfileClickHandler = useCallback(() => {
-    setIsProfileHovered(!isProfileHovering);
-  }, [isProfileHovering]);
-
-  const [isLogoutHovering, setIsLogoutHovered] = useState(false);
-  const onMouseLogoutEnter = useCallback(() => {
-    setIsLogoutHovered(true);
-  }, []);
-  const onMouseLogoutLeave = useCallback(() => {
-    setIsLogoutHovered(false);
-  }, []);
-  const onMainPush = () => {
-    Router.replace("/");
-  };
-  const onPostPush = () => {
-    Router.replace("/jobhunt");
-  };
+  }, [Router]);
 
   return (
-    <MainDiv>
+    <>
+      {/* <MainDiv> */}
       <HeaderDiv>
         <ContainerDiv>
-          <LogoDiv>
+          <LogoDiv onClick={onMainPush}>
             <div>
-              <Image src={Foli} width={150} height={120} />
+              <Image src={Foli} width={250} height={120} />
             </div>
           </LogoDiv>
           <Div />
           <SearchDiv>
             <SearchForm />
           </SearchDiv>
+          <MyChanner>
+            <div></div>
+            <div>
+              ☺ My Github: <a href="https://github.com/katf101">Click Me!</a>
+            </div>
+            <div>
+              ☺ My Blog: <a href="https://101devroom.tistory.com">Click Me!</a>
+            </div>
+            <div></div>
+          </MyChanner>
         </ContainerDiv>
+
         <MenuForm />
       </HeaderDiv>
-      <LineDiv>이력서를 작성하고 유저들과 공유해 보아요🔥</LineDiv>
       {children}
-    </MainDiv>
+      {/* </MainDiv> */}
+    </>
   );
 };
 
@@ -77,20 +53,30 @@ Layout.propTypes = {
 
 export default Layout;
 
-const LineDiv = styled.div`
-  width: 100%;
-  height: 2.08vw;
-  line-height: 2.08vw;
+const MyChanner = styled.div`
+  margin-bottom: -0vw;
+  margin-right: 4vw;
+  width: 14.63vw;
+  height: 6.25vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  background: #3a3845;
+  border-radius: 10px;
+  font-size: 18px;
   color: #ffffff;
-  background: #414f54;
-
-  position: absolute;
-  top: 9.64vw;
-
-  background: #414f54;
-  border: 0.05vw solid #3b76cf;
+  div {
+    margin-left: 15px;
+  }
+  a:visited {
+    color: #ffffff;
+  }
+  a:hover {
+    color: red;
+  }
+  a:active {
+    color: green;
+  }
 `;
 
 const SearchDiv = styled.div`
@@ -111,6 +97,7 @@ const Div = styled.div`
 `;
 
 const LogoDiv = styled.div`
+  margin-left: 15.63vw;
   width: 10.42vw;
   height: 5.21vw;
 
@@ -118,45 +105,49 @@ const LogoDiv = styled.div`
   justify-content: center;
   align-items: center;
 
+  cursor: pointer;
+
   /* background: #000000; */
 `;
 
 const ContainerDiv = styled.div`
-  width: 52.08vw;
+  /* width: 52.08vw; */
   height: 7.81vw;
 
-  position: sticky;
-  left: 26.04vw;
+  /* position: sticky; */
+  /* left: 26.04vw; */
 
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   /* background: #eeeeee; */
 `;
 
-const HeaderDiv = styled.div`
+const HeaderDiv = styled.header`
   position: fixed;
-  width: 100%;
+  width: 99.06vw;
   height: 9.9vw;
+  right: 0;
   top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-bottom: 1px solid #928f7e;
 
   /* align-items: center; */
-  z-index: 1;
-  background: #ffffff;
+  z-index: 10;
+  background: #d0cebe;
 `;
 
-const MainDiv = styled.div`
-  /* width: 100%; */
-  /* height: 100%; */
-  /* position: fixed; */
-  display: flex;
-  flex-direction: column;
-`;
+// const MainDiv = styled.div`
+//   /* width: 100%; */
+//   /* height: 100%; */
+//   /* position: fixed; */
+//   display: flex;
+//   flex-direction: column;
+// `;
 
 // pointer-events: none;
 

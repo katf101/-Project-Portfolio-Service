@@ -3,6 +3,7 @@ import styled from "styled-components";
 import wanted from "../public/images/wanted.png";
 import roket from "../public/images/roket.png";
 import wanted2 from "../public/images/wanted2.png";
+import sliderdiv from "../public/images/sliderdiv.png";
 import Slider from "react-slick";
 import Image from "next/image";
 
@@ -45,34 +46,34 @@ export default SlideForm;
 const StyledSlide = styled(Slider)`
   .slick-prev {
     /* background: #d9d9d9; */
-    width: 50px;
-    height: 496px;
-    left: 0px;
+    width: 2.6vw;
+    height: 25.83vw;
+    left: 0vw;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1;
   }
 
   .slick-next {
     /* background: #d9d9d9; */
-    width: 50px;
-    height: 496px;
-    left: 950px;
+    width: 2.6vw;
+    height: 25.83vw;
+    right: -0.05vw;
     cursor: pointer;
-    z-index: 100;
+    z-index: 1;
   }
 `;
 
 const SlideDiv = styled.div`
-  width: 100%;
-  height: 500px;
+  width: 41.67vw;
+  height: 26.04vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: #d9d9d9;
+  background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); ;
 `;
 const MainDiv = styled.div`
-  width: 1000px;
-  height: 500px;
+  width: 41.67vw;
+  height: 26.04vw;
   display: flex;
   flex-direction: column;
   /* border: 1px solid #21aea6; */

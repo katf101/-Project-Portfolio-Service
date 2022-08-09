@@ -68,7 +68,9 @@ const LoginForm = () => {
             로그인
           </button>
           <div style={{ marginTop: "15px" }}>
-            <Link href="/log/signup">회원가입</Link>
+            <Link href="/log/signup">
+              <a>회원가입</a>
+            </Link>
           </div>
         </Form_styled>
       </Formik>
@@ -85,13 +87,22 @@ const Form_styled = styled(Form)`
 `;
 
 const MainDiv = styled.div`
-  margin-top: 50px;
+  margin-top: 300px;
   margin-left: 10%;
 
   width: 80%;
   height: 960px;
 
   /* background: #d9d9d9; */
+  a:visited {
+    color: black;
+  }
+  a:hover {
+    color: black;
+  }
+  a:active {
+    color: #eeeeee;
+  }
 
   input {
     margin-top: 30px;

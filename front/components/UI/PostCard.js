@@ -1,42 +1,42 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { loadPost } from "../../actions/post";
+import Resume from "../Resume";
+import { useDispatch, useSelector } from "react-redux";
 
-const PostCard = ({ post, stack }) => {
+const PostCard = ({ post, id, setTestId }) => {
+  const dispatch = useDispatch();
+
+  //########//
+
+  //########//
+
+  const onNameClick = (e) => {
+    setTestId(e.target.id);
+    dispatch(
+      loadPost({
+        postId: e.target.id,
+      })
+    );
+  };
   return (
     <MainDiv>
       <LeftDiv>
-        <Link
-          href={{
-            pathname: "/post/detail",
-            query: {
-              postName: JSON.stringify(post.User.name),
-              postIntro: JSON.stringify(post.introduce),
-              postPosition: JSON.stringify(post.position),
-              postJob: JSON.stringify(post.job),
-              postCareer: JSON.stringify(post.career),
-              postPofol: JSON.stringify(post.portfolio),
-              postGit: JSON.stringify(post.github),
-              postBlog: JSON.stringify(post.blog),
-              postUserId: JSON.stringify(post.User.id),
-            },
-          }}
-        >
-          <NameDiv>{post.User.name}</NameDiv>
-        </Link>
-        <EmailDiv>Email: {post.User.email}</EmailDiv>
+        <NameDiv id={id} onClick={onNameClick} name={post?.User?.name}>
+          Name: {post?.User?.name}
+        </NameDiv>
+        {/* </Link> */}
+        <EmailDiv>Email: {post?.User?.email}</EmailDiv>
         <JobhuntDiv
-          style={{ color: post.job === true ? "#52b63a" : "#AEB6AC" }}
+          style={{ color: post?.job === true ? "#52b63a" : "#AEB6AC" }}
         >
-          {post.job === true ? "구직활동 중입니다!" : "활동중이 아닙니다."}
+          {post?.job === true ? "구직활동 중입니다!😄" : "활동중이 아닙니다.☹"}
         </JobhuntDiv>
       </LeftDiv>
-      <LineDiv>
-        <Line />
-      </LineDiv>
       <RightDiv>
         <CareerDiv>경력: {post.career}</CareerDiv>
-        <PositionDiv>분야: {post.position}</PositionDiv>
+        <PositionDiv>포지션: {post.position}</PositionDiv>
       </RightDiv>
     </MainDiv>
   );
@@ -61,12 +61,14 @@ const CareerDiv = styled.div`
 `;
 
 const RightDiv = styled.div`
-  width: 170px;
-  height: 100px;
+  padding-left: 15px;
+  width: 200px;
+  height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* background: #8e3838; */
+  border-radius: 5px;
+  background: #fff4cf;
 `;
 
 const Line = styled.div`
@@ -105,6 +107,7 @@ const NameDiv = styled.div`
   width: auto;
   height: 33px;
   line-height: 33px;
+
   cursor: pointer;
   :hover {
     color: #485af4;
@@ -113,27 +116,27 @@ const NameDiv = styled.div`
 `;
 
 const LeftDiv = styled.div`
-  margin-left: 15px;
-  width: 240px;
-  height: 100px;
+  padding-left: 15px;
+  width: 220px;
+  height: 120px;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-
-  /* background: #d9d9d9; */
+  justify-content: center;
+  border-radius: 5px;
+  background: #d9d8d5;
 `;
 
 const MainDiv = styled.div`
-  margin-top: 20px;
+  margin-bottom: 40px;
 
-  width: 425px;
-  height: 100px;
+  width: 500px;
+  height: 140px;
 
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 
-  background: #ffffff;
-  border: 1px solid #3b76cf;
-  border-radius: 10px;
-  z-index: 1;
+  background: #3a3845;
 `;

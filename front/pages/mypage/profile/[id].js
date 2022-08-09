@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import ProfileImage from "../../../components/ProfileImage";
 import { useSelector } from "react-redux";
 import { loadMyInfo } from "../../../actions/user";
-import ProfileForm from "../../../components/ProfileForm";
+// import ProfileForm from "../../../components/ProfileForm";
 import wrapper from "../../../store/configureStore";
 import Head from "next/head";
 import axios from "axios";
+import styled from "styled-components";
 
 const Profile = () => {
   const [imageData, setImageData] = useState("");
@@ -22,14 +23,20 @@ const Profile = () => {
 
   useEffect(() => {
     getImage();
-    // console.log("이미지", imageData);
+    console.log("이미지", imageData);
   }, []);
 
   return (
-    <>
+    <Maindiv style={{ marginTop: "150px" }}>
       <ProfileImage imagedata={imageData?.src} setImageData={setImageData} />
-      <ProfileForm me={me} />
-    </>
+      <NameDiv>
+        <div>{me.name}</div>
+      </NameDiv>
+      <EmailDiv>
+        <div>{me.email}</div>
+      </EmailDiv>
+      {/* <ProfileForm me={me} /> */}
+    </Maindiv>
   );
 };
 
@@ -52,3 +59,31 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 export default Profile;
+
+const EmailDiv = styled.div`
+  margin-bottom: 15px;
+  width: 200px;
+  height: 40px;
+  background: #ffffff;
+  border: 10px solid #3a3845;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NameDiv = styled.div`
+  margin-bottom: 15px;
+  width: 200px;
+  height: 40px;
+  background: #ffffff;
+  border: 10px solid #3a3845;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Maindiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

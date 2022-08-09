@@ -7,27 +7,27 @@ import { logout } from "../actions/user";
 
 const Myform = () => {
   const dispatch = useDispatch();
-  const onLogout = useCallback(() => {
-    dispatch(logout());
-    // Router.push("/");
-    Router.replace("/");
-  }, [dispatch]);
-
-  const { me } = useSelector((state) => state.user);
-
+  const me = useSelector((state) => state.user.me);
   useEffect(() => {
     console.log("dd", me);
   }, [me]);
 
-  const onResumPush = () => {
-    Router.push(`/mypage/resume/${me?.id}`);
-  };
-  const onLoginPush = () => {
+  const onProfilePush = useCallback(() => {
+    Router.push(`/mypage/profile/${me && me.id}`);
+  }, [me?.id]);
+  const onResumPush = useCallback(() => {
+    Router.push(`/mypage/resume/${me && me.id}`);
+  }, [me?.id]);
+  const onLoginPush = useCallback(() => {
     Router.push("/log/login");
-  };
-  const onSignUpPush = () => {
+  }, [Router]);
+  const onLogout = useCallback(() => {
+    dispatch(logout());
+    Router.replace("/");
+  }, [Router]);
+  const onSignUpPush = useCallback(() => {
     Router.push("/log/signup");
-  };
+  }, [Router]);
 
   return (
     <MainDiv>
@@ -40,7 +40,7 @@ const Myform = () => {
           </EmailDiv>
         )}
       </UserInfoDiv>
-      {me && <ProfileDiv>프로필😺</ProfileDiv>}
+      {me && <ProfileDiv onClick={onProfilePush}>프로필😺</ProfileDiv>}
       {me && <ResumeDiv onClick={onResumPush}>이력서 작성하기😸</ResumeDiv>}
       {!me && <div style={{ color: "#ffffff" }}>포트폴리오를 유저들과</div>}
       {!me && <div style={{ color: "#ffffff" }}>공유해 보아요😆</div>}
@@ -57,10 +57,10 @@ const LoginDiv = styled.button`
   width: 10.42vw;
   height: 2.6vw;
   :hover {
-    background: #c5eebe;
+    background: #95896c;
   }
   background: #ffffff;
-  border: 0.05vw #d5f0d3 solid;
+  border: 0.05vw #95896c solid;
   border-radius: 0.26vw;
 `;
 
@@ -69,10 +69,10 @@ const SignupDiv = styled.button`
   width: 10.42vw;
   height: 2.6vw;
   :hover {
-    background: #c5eebe;
+    background: #95896c;
   }
   background: #ffffff;
-  border: 0.05vw #d5f0d3 solid;
+  border: 0.05vw #95896c solid;
   border-radius: 0.26vw;
 `;
 
@@ -81,10 +81,10 @@ const ResumeDiv = styled.button`
   width: 10.42vw;
   height: 5.21vw;
   :hover {
-    background: #c5eebe;
+    background: #95896c;
   }
   background: #ffffff;
-  border: 0.05vw #d5f0d3 solid;
+  border: 0.05vw #95896c solid;
   border-radius: 0.26vw;
 `;
 
@@ -93,10 +93,10 @@ const ProfileDiv = styled.button`
   width: 10.42vw;
   height: 2.6vw;
   :hover {
-    background: #c5eebe;
+    background: #95896c;
   }
   background: #ffffff;
-  border: 0.05vw #d5f0d3 solid;
+  border: 0.05vw #95896c solid;
   border-radius: 0.26vw;
 `;
 
@@ -137,22 +137,15 @@ const UserInfoDiv = styled.div`
 `;
 
 const MainDiv = styled.div`
+  position: sticky;
+  top: 14.5vw;
   margin-left: 1.56vw;
-  width: 20%;
+  width: 19.79vw;
   height: 26.04vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* border: 1px solid #21aea6; */
   border-radius: 0.52vw;
-  background: #d0cebe;
-  background: rgb(83, 107, 107);
-  background: linear-gradient(
-    239deg,
-    rgba(83, 107, 107, 1) 0%,
-    rgba(108, 181, 147, 1) 46%,
-    rgba(196, 174, 124, 1) 99%
-  );
+
+  background: #3a3845;
 `;

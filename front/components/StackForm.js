@@ -16,13 +16,13 @@ const StackForm = () => {
     useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    singleStack;
-  }, [singleStack]);
+  // useEffect(() => {
+  //   singleStack;
+  // }, [singleStack]);
 
-  useEffect(() => {
-    console.log("스택폼", singleStack);
-  });
+  // useEffect(() => {
+  //   console.log("스택폼", singleStack);
+  // });
 
   const onInputHandler = (e) => {
     setUserStack(e.target.value);
@@ -86,6 +86,7 @@ const StackCardDiv = styled.div`
   width: 100%;
   height: 100px;
   display: flex;
+  justify-content: center;
   /* background: #d34b4b; */
 `;
 

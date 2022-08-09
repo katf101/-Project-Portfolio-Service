@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, updatePost, removePost } from "../actions/post";
+import { addPost, updatePost, removePost, loadStack } from "../actions/post";
 import Router from "next/router";
 
 import styled from "styled-components";
@@ -10,6 +10,13 @@ import axios from "axios";
 import StackForm from "./StackForm";
 
 const ResumeForm = ({ post }) => {
+  // const [inputRender, setInputRender] = useState(null);
+  // useEffect(() => {
+  //   singlePost;
+  //   singlePost?.post?.id;
+  //   console.log("마이리슘폼확인1", singlePost?.post);
+  //   console.log("마이리슘폼확인", post);
+  // }, [singlePost?.post?.id]);
   const introduceRef = useRef();
   const positionRef = useRef();
   const careerRef = useRef();
@@ -18,11 +25,10 @@ const ResumeForm = ({ post }) => {
   const blogRef = useRef();
 
   const dispatch = useDispatch();
-  const { addPostLoading, updatePostLoading, removePostLoading } = useSelector(
-    (state) => state.post
-  );
+  const { addPostLoading, updatePostLoading, removePostLoading, singleStack } =
+    useSelector((state) => state.post);
 
-  const { me } = useSelector((state) => state.user);
+  const me = useSelector((state) => state.user.me);
   const [job, setJob] = useState(false);
 
   useEffect(() => {
@@ -59,9 +65,9 @@ const ResumeForm = ({ post }) => {
       })
     );
     Router.replace(`/mypage/resume/${me.id}`);
-  }, [post?.id]);
+  }, [post?.id, me.id]);
 
-  const onPostUpdate = () => {
+  const onPostUpdate = useCallback(() => {
     dispatch(
       updatePost({
         postId: post?.id,
@@ -74,7 +80,16 @@ const ResumeForm = ({ post }) => {
         blog: blogRef.current.value,
       })
     );
-  };
+  }, [
+    post?.id,
+    introduceRef.current?.value,
+    positionRef.current?.value,
+    careerRef.current?.value,
+    job,
+    portfolioRef.current?.value,
+    githubRef.current?.value,
+    blogRef.current?.value,
+  ]);
 
   return (
     <MainDiv>
@@ -84,9 +99,9 @@ const ResumeForm = ({ post }) => {
       <IntroDiv>
         <textarea
           ref={introduceRef}
-          defaultValue={post?.introduce}
+          defaultValue={post?.position}
           placeholder={
-            post !== null ? post.introduce : "자기소개를 적어 주세요."
+            post !== null ? post?.introduce : "자기소개를 적어 주세요."
           }
           // required
         />
@@ -344,6 +359,7 @@ const UserNameDiv = styled.div`
 `;
 
 const MainDiv = styled.div`
+  margin-top: 200px;
   margin-left: 5%;
   display: flex;
   flex-direction: column;

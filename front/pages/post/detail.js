@@ -37,21 +37,6 @@ const Detail = () => {
     // console.log("스택", stack && stack[0].User.name);
     console.log("이미지", getImage());
     console.log("이미지2", imageData);
-    // console.log("스택", stack);
-    // console.log("싱글스택", singleStack);
-    // console.log("라우터", route);
-    // console.log("라우터쿼리", route.query);
-    // console.log("유저아디", route.query.postUserId);
-    // console.log("네임", route.query.postName.slice(1, -1));
-    // console.log("인트로", route.query.postIntro.slice(1, -1));
-    // console.log("좝", route.query.postJob);
-    // console.log("포지션", route.query.postPosition.slice(1, -1));
-    // console.log("유저", route.query.postCareer.slice(1, -1));
-    // console.log("유저", route.query.postName.slice(1, -1));
-    // console.log("포폴", route.query.postPofol.slice(1, -1));
-    // console.log("블로그", route.query.postBlog.slice(1, -1));
-    // console.log("깃", route.query.postGit.slice(1, -1));
-    // console.log("유저인포", userInfo["id"]);
   }, [route, singleStack]);
 
   useEffect(() => {

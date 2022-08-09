@@ -122,13 +122,6 @@ const postSlice = createSlice({
         // const post = _.find(state.singlePost, { id: action.payload.PostId });
         state.updatePostLoading = false;
         state.updatePostDone = true;
-        // post.introduce = action.payload.introduce;
-        // post.position = action.payload.position;
-        // post.job = action.payload.job;
-        // post.career = action.payload.career;
-        // post.portfolio = action.payload.portfolio;
-        // post.github = action.payload.github;
-        // post.blog = action.payload.blog;
       })
       .addCase(updatePost.rejected, (state, action) => {
         state.updatePostLoading = false;

@@ -49,7 +49,8 @@ export const updatePost = createAsyncThunk(
   "post/updatePost",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.patch(`/post/${data.postId}`, data);
+      // const response = await axios.patch(`/post`, data);
+      const response = await axios.put(`/post/${data.postId}`, data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -99,12 +100,21 @@ export const loadStacks = createAsyncThunk(
   }
 );
 
+// loadPost
 export const loadPost = createAsyncThunk(
   "post/loadPost",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/post/${data.postId}`);
-      return response.data;
+      console.log("액션", data.userId);
+      console.log("액션", data.postId);
+      if (data.userId !== undefined && data.postId === undefined) {
+        const response = await axios.get(`/post/resume/${data.userId}`);
+        return response.data;
+      }
+      if (data.postId !== undefined && data.userId === undefined) {
+        const response = await axios.get(`/post/${data.postId}`);
+        return response.data;
+      }
     } catch (error) {
       return rejectWithValue(error.response.data);
     }

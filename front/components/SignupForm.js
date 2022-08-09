@@ -113,7 +113,7 @@ const Form_styled = styled(Form)`
 `;
 
 const MainDiv = styled.div`
-  margin-top: 50px;
+  margin-top: 200px;
   margin-left: 10%;
 
   display: flex;
