@@ -9,6 +9,7 @@ axios.defaults.withCredentials = true; // front, backend 간 쿠키공유
 // 로드 내정보
 export const loadMyInfo = createAsyncThunk("user/loadMyInfo", async () => {
   const response = await axios.get("/user");
+  console.log("response", response);
   return response.data;
 });
 

@@ -12,6 +12,10 @@ const Profile = () => {
   const [imageData, setImageData] = useState("");
   const { me } = useSelector((state) => state.user);
 
+  useEffect(() => {
+    console.log("me", me);
+  });
+
   async function getImage() {
     try {
       const { data } = await axios.get(`/image?info=${me.id}`);

@@ -51,7 +51,7 @@ const ResumeForm = ({ post }) => {
         blog: blogRef.current.value,
       })
     );
-    Router.replace(`/mypage/resume/${me.id}`);
+    Router.replace(`/mypage/resume/${me?.id}`);
   }, [
     introduceRef.current?.value,
     positionRef.current?.value,
@@ -63,16 +63,16 @@ const ResumeForm = ({ post }) => {
   ]);
 
   const onRemovePost = useCallback(() => {
-    if (!me.id) {
+    if (!me?.id) {
       alert("로그인이 필요합니다.");
       return;
     }
     dispatch(
       removePost({
-        postId: post.id,
+        postId: post?.id,
       })
     );
-    Router.replace(`/mypage/resume/${me.id}`);
+    Router.replace(`/mypage/resume/${me?.id}`);
   }, [post?.id, me?.id]);
 
   const onPostUpdate = useCallback(() => {
