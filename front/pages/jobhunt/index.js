@@ -21,7 +21,7 @@ import {
 import SearchForm from "../../components/SearchForm";
 import Myform from "../../components/MyForm";
 import Footer from "../../components/Footer";
-import Resume from "../../components/Resume";
+import AllUserResume from "../../components/AllUserResume";
 
 // ######################################################## //
 // ######################################################## //
@@ -211,7 +211,7 @@ const IndexPage = () => {
             </PageDiv>
           </JobhuntLeftDiv>
           <JobhuntRightDiv>
-            <Resume
+            <AllUserResume
               testId={testId}
               postInfo={data?.posts}
               setStateId={setStateId}
@@ -219,7 +219,6 @@ const IndexPage = () => {
           </JobhuntRightDiv>
         </LeftDiv>
         <Myform />
-        {/* <RightDiv></RightDiv> */}
       </MainDiv>
     </>
   );

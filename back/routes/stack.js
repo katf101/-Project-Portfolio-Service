@@ -31,9 +31,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 
 router.get("/:userId", async (req, res, next) => {
   // GET /post/1
-  console.log("stackid", req.params.stackId);
   console.log("stackid", req.params.userId);
-  console.log("userid", req.user.id);
   try {
     const stack = await Stack.findAll({
       where: { UserId: req.params.userId },

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
 import axios from "axios";
 import { signup } from "../actions/user";
+import { TextField } from "./UI/TextField";
 
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -73,20 +74,27 @@ const SignupForm = () => {
         }}
       >
         <Form_styled>
-          <Field name="user_email" type="email" placeholder="이메일" required />
-          <Field name="user_name" placeholder="이름" required />
-          <Field
+          <TextField
+            name="user_email"
+            type="email"
+            placeholder="Email"
+            required
+          />
+          <TextField name="user_name" type="text" placeholder="Name" required />
+          <br />
+          <TextField
             name="user_password"
             type="password"
-            placeholder="비밀번호"
+            placeholder="password"
             required
           />
-          <Field
+          <TextField
             name="user_password_check"
             type="password"
-            placeholder="비밀번호 확인"
+            placeholder="Password Check"
             required
           />
+          <br />
           <button
             type="primary"
             htmltype="submit"
@@ -107,13 +115,16 @@ const SignupForm = () => {
 export default SignupForm;
 
 const Form_styled = styled(Form)`
+  width: 500px;
+  height: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* justify-content: center; */
 `;
 
 const MainDiv = styled.div`
-  margin-top: 200px;
+  margin-top: 250px;
   margin-left: 10%;
 
   display: flex;
@@ -126,13 +137,13 @@ const MainDiv = styled.div`
   /* background: #d9d9d9; */
 
   input {
-    margin-top: 30px;
+    margin-top: 15px;
 
     width: 331px;
     height: 40px;
 
     background: #ffffff;
-    border: 1px solid #e0581d;
+    border: 3px solid #414f54;
     border-radius: 15px;
   }
   div {
@@ -142,7 +153,7 @@ const MainDiv = styled.div`
       width: 112px;
       height: 33px;
 
-      text-align: center;
+      /* text-align: center; */
 
       /* background: #964545; */
     }

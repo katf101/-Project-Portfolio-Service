@@ -11,7 +11,7 @@ import Our from "../public/images/Our.png";
 import Image from "next/image";
 
 import axios from "axios";
-import { loadMyInfo, loadUser, userInfo } from "../actions/user";
+import { loadMyInfo } from "../actions/user";
 import { loadPosts, loadPost } from "../actions/post";
 import wrapper from "../store/configureStore";
 
@@ -36,16 +36,6 @@ const Home = () => {
           <MyForm />
         </div>
       </MiddleDiv>
-      {/* <MainLogoDiv>
-          <div>
-            <Image src={Our} />
-          </div>
-        </MainLogoDiv> */}
-      {/* <SearchForm /> */}
-      {/* <MiddleDiv>
-          <SlideForm />
-          <MyForm />
-        </MiddleDiv> */}
     </MainDiv>
   );
 };
@@ -63,7 +53,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
     if (context.req && cookie) {
       axios.defaults.headers.Cookie = cookie;
     }
-    await context.store.dispatch(loadPosts());
     // await context.store.dispatch(loadPost({ postId: context.params.id }));
     await context.store.dispatch(loadMyInfo());
 

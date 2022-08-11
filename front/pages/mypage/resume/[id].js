@@ -21,7 +21,7 @@ const Resume = () => {
   const me = useSelector((state) => state.user.me);
 
   useEffect(() => {
-    dispatch(loadPost({ userId: me.id }));
+    dispatch(loadPost({ userId: me?.id }));
   }, [me?.id]);
 
   const { singlePost, singleStack } = useSelector((state) => state.post);

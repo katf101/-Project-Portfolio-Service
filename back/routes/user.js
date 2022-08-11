@@ -45,6 +45,7 @@ router.get("/", async (req, res, next) => {
           exclude: ["password"],
         },
       });
+      console.log("fullUserWithoutPassword", fullUserWithoutPassword);
       res.status(200).json(fullUserWithoutPassword);
     } else {
       res.status(200).json(null);

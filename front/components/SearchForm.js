@@ -9,6 +9,7 @@ const SearchForm = () => {
 
   const onButtonHandler = () => {
     Router.push(`/jobhunt?search=${inputRef.current.value}`);
+    inputRef.current.value = "";
   };
 
   const onEnterInput = (e) => {

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { loadStack } from "../actions/post";
 
-const Resume = ({ postInfo, testId }) => {
+const AllUserResume = ({ postInfo, testId }) => {
   const singleStack = useSelector((state) => state.post.singleStack);
   const [imageData, setImageData] = useState("");
   const [idNum, setIdNum] = useState(0);
@@ -128,7 +128,7 @@ const Resume = ({ postInfo, testId }) => {
   );
 };
 
-export default Resume;
+export default AllUserResume;
 
 const DefaultBox = styled.div`
   width: 400px;
@@ -330,10 +330,12 @@ const PositionDiv = styled.div`
 `;
 
 const IntroBox = styled.div`
+  padding-top: 15px;
+  padding-bottom: 15px;
   padding-left: 15px;
   padding-right: 15px;
-  width: 400px;
-  height: 80px;
+  /* width: 400px; */
+  /* height: 80px; */
   display: flex;
   justify-content: center;
   align-items: center;

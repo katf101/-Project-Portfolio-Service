@@ -115,8 +115,8 @@ const MainDiv = styled.footer`
   /* top: 65vw; */
   /* top: -300px; */
   margin-top: 150px;
-  margin-left: -4px;
-  width: 99.11vw;
+  margin-left: -9px;
+  width: 99.2vw;
   height: 300px;
 
   z-index: 0;

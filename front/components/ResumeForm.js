@@ -45,14 +45,22 @@ const ResumeForm = ({ post }) => {
         introduce: introduceRef.current.value,
         position: positionRef.current.value,
         career: careerRef.current.value,
-        job,
+        job: job,
         portfolio: portfolioRef.current.value,
         github: githubRef.current.value,
         blog: blogRef.current.value,
       })
     );
     Router.replace(`/mypage/resume/${me.id}`);
-  }, []);
+  }, [
+    introduceRef.current?.value,
+    positionRef.current?.value,
+    careerRef.current?.value,
+    job,
+    portfolioRef.current?.value,
+    githubRef.current?.value,
+    blogRef.current?.value,
+  ]);
 
   const onRemovePost = useCallback(() => {
     if (!me.id) {
@@ -65,7 +73,7 @@ const ResumeForm = ({ post }) => {
       })
     );
     Router.replace(`/mypage/resume/${me.id}`);
-  }, [post?.id, me.id]);
+  }, [post?.id, me?.id]);
 
   const onPostUpdate = useCallback(() => {
     dispatch(

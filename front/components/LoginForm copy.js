@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/user";
 import Router from "next/router";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { TextField } from "./UI/TextField";
 
 import styled from "styled-components";
 import Link from "next/link";
@@ -52,31 +51,13 @@ const LoginForm = () => {
         }}
       >
         <Form_styled>
-          <TextField
-            label="Email"
-            name="user_email"
-            type="email"
-            placeholder="Email"
-          />
-          <TextField
-            label="Password"
-            name="user_password"
-            type="password"
-            placeholder="Password"
-          />
-          {/* <Field
-            label="Email"
-            name="user_email"
-            type="email"
-            placeholder="이메일"
-            required
-          />
+          <Field name="user_email" type="email" placeholder="이메일" required />
           <Field
             name="user_password"
             type="password"
             placeholder="비밀번호"
             required
-          /> */}
+          />
           <button
             type="primary"
             htmltype="submit"
@@ -130,7 +111,7 @@ const MainDiv = styled.div`
     height: 40px;
 
     background: #ffffff;
-    border: 3px solid #414f54;
+    border: 1px solid #e0581d;
     border-radius: 15px;
   }
   div {

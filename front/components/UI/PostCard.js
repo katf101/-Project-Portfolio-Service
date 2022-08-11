@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { loadPost } from "../../actions/post";
-import Resume from "../Resume";
+import AllUserResume from "../AllUserResume";
 import { useDispatch, useSelector } from "react-redux";
 
 const PostCard = ({ post, id, setTestId }) => {
@@ -137,6 +137,6 @@ const MainDiv = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: #3a3845;
 `;

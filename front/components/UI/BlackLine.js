@@ -9,9 +9,14 @@ const BlackLine = () => {
     Router.push(`/mypage/resume/${me?.id}`);
   }, [Router]);
   return (
-    <LineDiv onClick={onResumPush}>
-      이력서를 작성하고 유저들과 공유해 보아요🔥
-    </LineDiv>
+    <>
+      {me && (
+        <LineDiv onClick={onResumPush}>
+          이력서를 작성하고 유저들과 공유해 보아요🔥
+        </LineDiv>
+      )}
+      {!me && <LineDiv>로그인 후 이력서를 작성하세요!</LineDiv>}
+    </>
   );
 };
 

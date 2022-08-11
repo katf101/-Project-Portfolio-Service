@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 3000"
+    "dev": "next -p 3000",
+    "build": "cross-env ANALYZE=ture NODE_ENV=production next build",
+    "start": "cross-env NODE_ENV=production next start -p 3000"
   },
   "author": "Hansol",
   "license": "ISC",
   "dependencies": {
-    "@next/bundle-analyzer": "^12.2.3",
+    "@next/bundle-analyzer": "^12.2.4",
     "@reduxjs/toolkit": "^1.8.3",
     "@tanstack/react-query": "^4.0.10",
     "@tanstack/react-query-devtools": "^4.0.10",
     "axios": "^0.27.2",
+    "babel-plugin-styled-components": "^2.0.7",
+    "cross-env": "^7.0.3",
     "formik": "^2.2.9",
     "next": "^12.2.2",
     "next-images": "^1.8.4",

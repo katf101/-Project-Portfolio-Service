@@ -1,5 +1,6 @@
+const prod = process.env.NODE_ENV === "production";
 module.exports = {
-  backendUrl: "http://localhost:3060",
+  backendUrl: prod ? "https://api.fori.com" : "http://localhost:3060",
   // imageUrl: "http://localhost:3060/image",
-  imageUrl: null,
+  imageUrl: prod ? null : "http://localhost:3060/images",
 };
