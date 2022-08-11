@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "foli.com"],
+    origin: ["http://localhost:3000", "foli.com", "15.164.100.91"],
     // origin: "*",
     // origin: true,
     credentials: true,
