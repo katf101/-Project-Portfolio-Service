@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "foli.com", "15.164.100.91"],
+    origin: ["http://localhost:3000", "foli.com", "http://15.164.100.91"],
     // origin: "*",
     // origin: true,
     credentials: true,
@@ -88,6 +88,6 @@ app.use("/stack", stackRouter);
 app.use("/image", imageRouter);
 // app.use("/stacks", stacskRouter);
 
-app.listen(3060, () => {
+app.listen(80, () => {
   console.log("서버 실행 중!");
 });
