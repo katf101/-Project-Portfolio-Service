@@ -5,6 +5,9 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const hpp = require("hpp");
+const helmet = require("helmet");
+
 const path = require("path");
 const userRouter = require("./routes/user");
 const postRouter = require("./routes/post");
@@ -43,10 +46,17 @@ db.sequelize
 
 passportConfig();
 
-app.use(morgan("dev"));
+if (process.env.NODE.ENV === "production") {
+  app.use(morgan("combined"));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan("dev"));
+}
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "foli.com"],
     // origin: "*",
     // origin: true,
     credentials: true,
