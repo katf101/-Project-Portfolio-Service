@@ -27,10 +27,6 @@ const Footer = ({ children }) => {
         <div>Mysql</div>
         <div>Sequelize</div>
       </StacksDiv2>
-      {/* <div>email: vawav11@gmail.com</div>
-      <div>blog: https://101devroom.tistory.com/</div>
-      <div>github: https://github.com/katf101</div>
-      <div>phone: 010-3825-8768</div> */}
     </MainDiv>
   );
 };

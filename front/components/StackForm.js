@@ -37,7 +37,7 @@ const StackForm = () => {
     );
     setUserStack("");
   };
-
+  const frontUrl = "http://3.37.218.185";
   return (
     <>
       <MainDiv>
@@ -49,10 +49,7 @@ const StackForm = () => {
             name="user_stack"
             onChange={onInputHandler}
           />
-          <Link
-            href={`http://localhost:3000/mypage/resume/${me?.id}`}
-            scroll={false}
-          >
+          <Link href={`${frontUrl}/mypage/resume/${me?.id}`} scroll={false}>
             <StackButton
               id="user_stack"
               name="user_stack"

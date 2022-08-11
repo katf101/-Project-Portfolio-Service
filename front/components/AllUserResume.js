@@ -38,9 +38,9 @@ const AllUserResume = ({ postInfo, testId }) => {
     console.log("여기", imageData);
     // console.log("imageData", imageData);
   }, [testId]);
-
+  const backUrl = "http://13.125.75.190";
   const myLoader = ({ src }) => {
-    return `http://localhost:3060/${imageData.src}`;
+    return `${backUrl}/${imageData.src}`;
   };
 
   return (

@@ -86,9 +86,9 @@ const ProfileImage = ({ imagedata, setImageData }) => {
   const onToggle = useCallback(() => {
     setToggle(!toggle);
   }, [toggle]);
-
+  const backUrl = "http://13.125.75.190";
   const myLoader = ({ src }) => {
-    return `http://localhost:3060/${imagedata}`;
+    return `${backUrl}/${imagedata}`;
   };
 
   const onRemoveCurrentImage = useCallback(() => {

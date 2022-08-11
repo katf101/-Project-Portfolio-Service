@@ -38,7 +38,7 @@ const Resume = () => {
         <meta property="og:title" />
         <meta
           property="og:url"
-          content={`https://localhost3000/mypage/resume/${id}`}
+          content={`https://3.37.218.185/mypage/resume/${id}`}
         />
       </Head>
       <ResumeForm post={singlePost} />

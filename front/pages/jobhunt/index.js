@@ -91,6 +91,7 @@ const IndexPage = () => {
   //     );
   //   }
   // }, [data, page, queryClient]);
+  const address = "http://3.37.218.185";
   useEffect(() => {
     console.log("유즈이펙트", page);
     if (router.query.page < 3) {
@@ -106,16 +107,16 @@ const IndexPage = () => {
     }
 
     if (router.asPath === "/jobhunt") {
-      setPage("http://localhost:3000/jobhunt");
+      setPage(`${address}/jobhunt`);
       setPageNum(1);
     }
     if (router.query?.page) {
-      setPage(`http://localhost:3000/jobhunt?page=${router.query.page}`);
+      setPage(`${address}/jobhunt?page=${router.query.page}`);
       // setBtnIndex(router.query.page);
     }
     if (router.query?.search) {
       setPage(
-        `http://localhost:3000/jobhunt?search=${router.query.search}&page=${router.query.page}`
+        `${address}/jobhunt?search=${router.query.search}&page=${router.query.page}`
       );
       setPageNum(1);
     }
