@@ -5,7 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["http://localhost:3060/"],
+    domains: ["http://api.fori.site/"],
   },
 };
 
