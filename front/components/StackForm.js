@@ -11,14 +11,14 @@ const StackForm = () => {
   const { id } = router.query;
   const dispatch = useDispatch();
   const [userStack, setUserStack] = useState("");
-  const [render, setRender] = useState("");
+  const [render, setRender] = useState(false);
   const { mainStacks, singleStack, addStackLoading, removeStackLoading } =
     useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
 
   useEffect(() => {
     singleStack;
-  }, [singleStack]);
+  }, []);
 
   // useEffect(() => {
   //   console.log("스택폼", singleStack);
