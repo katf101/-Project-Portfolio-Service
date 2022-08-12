@@ -14,8 +14,10 @@ import { imageUrl } from "../config/config";
 import styled from "styled-components";
 import UserImage from "../public/images/UserImage.png";
 import Image from "next/image";
+import { backendUrl } from "../config/config";
 
 const ProfileImage = ({ imagedata, setImageData }) => {
+  const backUrl = backendUrl;
   const route = useRouter();
   const dispatch = useDispatch();
   const { imagePaths, addImageLoading, addImageDone, addImageError } =
@@ -30,6 +32,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
   }, [imageInput.current]);
 
   useEffect(() => {
+    console.log("backendUrl", backendUrl);
     setTest(PreviewImg);
   }, [PreviewImg]);
 
@@ -86,7 +89,6 @@ const ProfileImage = ({ imagedata, setImageData }) => {
   const onToggle = useCallback(() => {
     setToggle(!toggle);
   }, [toggle]);
-  const backUrl = "http://api.semifoli.site";
   const myLoader = ({ src }) => {
     return `${backUrl}/${imagedata}`;
   };

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Router, { useRouter } from "next/router";
-import Layout from "../../components/Layout";
 import styled from "styled-components";
 import PostCard from "../../components/UI/PostCard";
-import Link from "next/link";
 
 import axios from "axios";
-import { loadMyInfo, loadUser, userInfo } from "../../actions/user";
-import { loadPosts, loadPost, addStack } from "../../actions/post";
+import { loadMyInfo } from "../../actions/user";
+import { loadPosts } from "../../actions/post";
 import wrapper from "../../store/configureStore";
 
 import {
@@ -31,6 +29,7 @@ async function fetchProjects(page = 0) {
   const id = window.location.href.substring(30, 36);
   const idValue = window.location.href.substring(37);
   const pageValue = window.location.href.substring(35);
+
   console.log("page", page);
   console.log("id", id);
   console.log("pageValue", pageValue);
@@ -54,6 +53,9 @@ async function fetchProjects(page = 0) {
 }
 
 const IndexPage = () => {
+  const prod = process.env.NODE_ENV === "production";
+  const frontUrl = prod ? "http://semifoli.site" : "http://localhost:3000";
+
   const queryClient = useQueryClient();
   const router = useRouter();
   const [stateId, setStateId] = useState(0);
@@ -91,7 +93,7 @@ const IndexPage = () => {
   //     );
   //   }
   // }, [data, page, queryClient]);
-  const frontUrl = "http://semifoli.site";
+
   useEffect(() => {
     console.log("유즈이펙트", page);
     if (router.query.page < 3) {

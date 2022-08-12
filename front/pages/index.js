@@ -14,7 +14,7 @@ import axios from "axios";
 import { loadMyInfo } from "../actions/user";
 import { loadPosts, loadPost } from "../actions/post";
 import wrapper from "../store/configureStore";
-
+import { backendUrl } from "../config/config";
 import {
   dehydrate,
   useQuery,
@@ -30,6 +30,7 @@ import SearchForm from "../components/SearchForm";
 const Home = () => {
   const { me } = useSelector((state) => state.user);
   useEffect(() => {
+    console.log("backendUrl", backendUrl);
     console.log("me", me);
   });
 

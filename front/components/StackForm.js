@@ -7,6 +7,9 @@ import { addStack, loadStack, removeStack } from "../actions/post";
 import Link from "next/link";
 
 const StackForm = () => {
+  const prod = process.env.NODE_ENV === "production";
+  const frontUrl = prod ? "http://semifoli.site" : "http://localhost:3000";
+
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
@@ -37,7 +40,7 @@ const StackForm = () => {
     );
     setUserStack("");
   };
-  const frontUrl = "http://semifoli.site";
+
   return (
     <>
       <MainDiv>

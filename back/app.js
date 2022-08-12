@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
   app.use(
     cors({
-      origin: true,
+      origin: "http://localhost:3000",
       credentials: true,
     })
   );
@@ -64,7 +64,7 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      domain: ".semifoli.site",
+      domain: process.env.NODE_ENV === "production" ? ".semifoli.site" : null,
       // domain: process.env.NODE_ENV === "production" && ".semifoli.site",
     },
   })
@@ -83,6 +83,12 @@ app.use("/stack", stackRouter);
 app.use("/image", imageRouter);
 // app.use("/stacks", stacskRouter);
 
-app.listen(80, () => {
-  console.log("서버 실행 중!");
-});
+if (process.env.NODE_ENV === "production") {
+  app.listen(80, () => {
+    console.log("80 서버 실행 중!");
+  });
+} else {
+  app.listen(3060, () => {
+    console.log("3060 서버 실행 중!");
+  });
+}

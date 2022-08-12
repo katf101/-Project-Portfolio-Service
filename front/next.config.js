@@ -1,18 +1,18 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const prod = process.env.NODE_ENV === "production";
 
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["http://api.fori.site/"],
+    domains: [prod ? "http://api.foli.site/" : "http://localhost:3060/"],
   },
 };
 
 module.exports = withBundleAnalyzer({
   compress: true,
   webpack(config, { webpack }) {
-    const prod = process.env.NODE_ENV === "production";
     return {
       ...config,
       mode: prod ? "production" : "development",

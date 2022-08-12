@@ -6,8 +6,10 @@ import axios from "axios";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { loadStack } from "../actions/post";
+import { backendUrl } from "../config/config";
 
 const AllUserResume = ({ postInfo, testId }) => {
+  const backUrl = backendUrl;
   const singleStack = useSelector((state) => state.post.singleStack);
   const [imageData, setImageData] = useState("");
   const [idNum, setIdNum] = useState(0);
@@ -38,7 +40,6 @@ const AllUserResume = ({ postInfo, testId }) => {
     console.log("여기", imageData);
     // console.log("imageData", imageData);
   }, [testId]);
-  const backUrl = "http://api.semifoli.site";
   const myLoader = ({ src }) => {
     return `${backUrl}/${imageData.src}`;
   };

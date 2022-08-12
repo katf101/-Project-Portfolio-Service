@@ -113,7 +113,8 @@ const userSlice = createSlice({
       })
       .addCase(loadMyInfo.rejected, (state, action) => {
         state.loadMyInfoLoading = false;
-        state.loadMyInfoError = action.payload;
+        state.loadMyInfoError = null;
+        // state.loadMyInfoError = action.payload;
       })
       .addDefaultCase((state) => state),
 });
