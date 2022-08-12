@@ -24,10 +24,13 @@ const Resume = () => {
     dispatch(loadPost({ userId: me?.id }));
   }, [me?.id]);
 
-  const { singlePost, singleStack } = useSelector((state) => state.post);
+  const { singlePost, singleStack, mainStacks } = useSelector(
+    (state) => state.post
+  );
 
   useEffect(() => {
-    console.log("마이리슘확인", singleStack);
+    console.log("page 싱글스택", singleStack);
+    console.log("page 메인스택", singleStack);
   }, [singleStack]);
 
   return (
