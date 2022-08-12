@@ -76,6 +76,9 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: process.env.COOKIE_SECRET,
+    cookie: {
+      SameSite: "none",
+    },
   })
 );
 app.use(passport.initialize());
