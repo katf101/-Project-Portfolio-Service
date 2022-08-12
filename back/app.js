@@ -77,8 +77,10 @@ app.use(
     resave: false,
     secret: process.env.COOKIE_SECRET,
     cookie: {
+      httpOnly: true,
       sameSite: "none",
       secure: false,
+      domain: process.env.NODE_ENV === "production" && ".semifoli.site",
     },
   })
 );
