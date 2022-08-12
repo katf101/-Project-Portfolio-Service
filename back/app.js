@@ -79,8 +79,8 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: "none",
-      secure: false,
-      domain: process.env.NODE_ENV === "production" && ".semifoli.site",
+      secure: "auto",
+      domain: process.env.NODE_ENV === "production" && "http://semifoli.site",
     },
   })
 );
