@@ -83,12 +83,12 @@ app.use("/stack", stackRouter);
 app.use("/image", imageRouter);
 // app.use("/stacks", stacskRouter);
 
-if (process.env.NODE_ENV === "production") {
-  app.listen(80, () => {
-    console.log("80 서버 실행 중!");
-  });
-} else {
-  app.listen(3060, () => {
-    console.log("3060 서버 실행 중!");
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+app.listen(80, () => {
+  console.log("80 서버 실행 중!");
+});
+// } else {
+//   app.listen(3060, () => {
+//     console.log("3060 서버 실행 중!");
+//   });
+// }
