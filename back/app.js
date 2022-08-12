@@ -77,7 +77,7 @@ app.use(
     resave: false,
     secret: process.env.COOKIE_SECRET,
     cookie: {
-      SameSite: "none",
+      sameSite: "none",
     },
   })
 );
