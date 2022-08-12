@@ -19,7 +19,7 @@ const db = require("./models");
 const passportConfig = require("./passport");
 
 // ################################################################# //
-console.log("배포", process.env.NODE_ENV);
+
 dotenv.config();
 const app = express();
 
