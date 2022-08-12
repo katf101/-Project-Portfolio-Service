@@ -50,18 +50,22 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
   app.use(hpp());
   app.use(helmet());
+  app.use(
+    cors({
+      origin: "http://semifoli.site",
+      credentials: true,
+    })
+  );
 } else {
   app.use(morgan("dev"));
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    })
+  );
 }
 
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "semifoli.site", "http://semifoli.site"],
-    // origin: "*",
-    // origin: true,
-    credentials: true,
-  })
-);
 app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(express.json()); // 프론트에서 data를 json으로 보냈을때 req.body 안에 넣어줌
 app.use(express.urlencoded({ extended: true })); // 프론트에서 form(form 은 url)으로 data를 보냇을때 req.body 안에 넣어줌
