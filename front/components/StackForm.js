@@ -37,7 +37,7 @@ const StackForm = () => {
     );
     setUserStack("");
   };
-  const frontUrl = "http://3.37.218.185";
+  const frontUrl = "http://api.semifoli.site";
   return (
     <>
       <MainDiv>
