@@ -16,9 +16,9 @@ const StackForm = () => {
     useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
 
-  // useEffect(() => {
-  //   singleStack;
-  // }, [singleStack]);
+  useEffect(() => {
+    singleStack;
+  }, [singleStack]);
 
   // useEffect(() => {
   //   console.log("스택폼", singleStack);
