@@ -86,7 +86,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
   const onToggle = useCallback(() => {
     setToggle(!toggle);
   }, [toggle]);
-  const backUrl = "http://13.125.75.190";
+  const backUrl = "http://api.semifoli.site";
   const myLoader = ({ src }) => {
     return `${backUrl}/${imagedata}`;
   };
@@ -110,7 +110,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
               imagedata ? (
                 <Image
                   loader={myLoader}
-                  src={`http://localhost:3060/${imagedata}`}
+                  src={`${backUrl}/${imagedata}`}
                   width={150}
                   height={150}
                 />
@@ -125,7 +125,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             ) : (
               <Image
                 loader={myLoader}
-                src={`http://localhost:3060/${imagedata}`}
+                src={`${backUrl}/${imagedata}`}
                 width={150}
                 height={150}
               />
@@ -140,7 +140,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
                 <PreviewImg
-                  src={`http://localhost:3060/${v}`}
+                  src={`${backUrl}/${v}`}
                   style={{ width: "150px", height: "150px" }}
                   alt={v}
                 />

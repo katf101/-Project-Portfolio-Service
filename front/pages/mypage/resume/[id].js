@@ -38,7 +38,7 @@ const Resume = () => {
         <meta property="og:title" />
         <meta
           property="og:url"
-          content={`https://3.37.218.185/mypage/resume/${id}`}
+          content={`http://api.semifoli.site/mypage/resume/${id}`}
         />
       </Head>
       <ResumeForm post={singlePost} />

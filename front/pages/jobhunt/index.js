@@ -91,7 +91,7 @@ const IndexPage = () => {
   //     );
   //   }
   // }, [data, page, queryClient]);
-  const address = "http://3.37.218.185";
+  const frontUrl = "http://api.semifoli.site";
   useEffect(() => {
     console.log("유즈이펙트", page);
     if (router.query.page < 3) {
@@ -107,16 +107,16 @@ const IndexPage = () => {
     }
 
     if (router.asPath === "/jobhunt") {
-      setPage(`${address}/jobhunt`);
+      setPage(`${frontUrl}/jobhunt`);
       setPageNum(1);
     }
     if (router.query?.page) {
-      setPage(`${address}/jobhunt?page=${router.query.page}`);
+      setPage(`${frontUrl}/jobhunt?page=${router.query.page}`);
       // setBtnIndex(router.query.page);
     }
     if (router.query?.search) {
       setPage(
-        `${address}/jobhunt?search=${router.query.search}&page=${router.query.page}`
+        `${frontUrl}/jobhunt?search=${router.query.search}&page=${router.query.page}`
       );
       setPageNum(1);
     }

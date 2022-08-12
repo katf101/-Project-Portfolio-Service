@@ -38,7 +38,7 @@ const AllUserResume = ({ postInfo, testId }) => {
     console.log("여기", imageData);
     // console.log("imageData", imageData);
   }, [testId]);
-  const backUrl = "http://13.125.75.190";
+  const backUrl = "http://api.semifoli.site";
   const myLoader = ({ src }) => {
     return `${backUrl}/${imageData.src}`;
   };
@@ -60,7 +60,7 @@ const AllUserResume = ({ postInfo, testId }) => {
               <Image
                 loader={myLoader}
                 // src={`http://localhost:3060/${image}`}
-                src={`http://localhost:3060/${imageData.src}`}
+                src={`${backUrl}/${imageData.src}`}
                 width={120}
                 height={120}
               />
