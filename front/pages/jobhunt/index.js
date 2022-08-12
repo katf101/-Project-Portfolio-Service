@@ -33,17 +33,17 @@ async function fetchProjects(page = 0) {
   console.log("page", page);
   console.log("id", id);
   console.log("pageValue", pageValue);
-  console.log("id1", window.location.href.substring(37));
+  console.log("id1", window.location.href);
   console.log("id2", window.location.search);
   console.log("id3", window.location);
   console.log("test");
   //   console.log("page", page);
 
   if (id === "search") {
-    const { data } = await axios.get(`/posts?search=${idValue}`);
+    const { data } = await axios.get(`/posts?search=${idValue}`); // search = 프론트
     return data;
   } else {
-    const { data } = await axios.get(`/posts?page=${pageValue}`);
+    const { data } = await axios.get(`/posts?page=${pageValue}`); // page = 1
     return data;
   }
 
