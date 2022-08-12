@@ -91,7 +91,7 @@ const IndexPage = () => {
   //     );
   //   }
   // }, [data, page, queryClient]);
-  const frontUrl = "http://api.semifoli.site";
+  const frontUrl = "http://semifoli.site";
   useEffect(() => {
     console.log("유즈이펙트", page);
     if (router.query.page < 3) {
