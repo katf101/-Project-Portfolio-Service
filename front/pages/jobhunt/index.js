@@ -27,7 +27,8 @@ import AllUserResume from "../../components/AllUserResume";
 async function fetchProjects(page = 0) {
   // async function fetchProjects(page = window.location.href.substring(37)) {
   const id = window.location.href.substring(30, 36);
-  const idValue = window.location.href.substring(37);
+  const idValue = window.location.href.substring(34);
+  // const idValue = window.location.href.substring(37); // 로컬
   const pageValue = window.location.href.substring(35);
 
   console.log("page", page);
