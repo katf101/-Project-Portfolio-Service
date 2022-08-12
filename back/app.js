@@ -14,7 +14,6 @@ const postRouter = require("./routes/post");
 const postsRouter = require("./routes/posts");
 const stackRouter = require("./routes/stack");
 const imageRouter = require("./routes/image");
-// const stacskRouter = require("./routes/stacks");
 
 const db = require("./models");
 const passportConfig = require("./passport");
@@ -23,19 +22,6 @@ const passportConfig = require("./passport");
 
 dotenv.config();
 const app = express();
-
-//######### 채팅 #########//
-// const io = require("socket.io")(app, {
-//   cors: {
-//     origin: "http://localhost:3001",
-//     methods: ["GET", "POST"],
-//   },
-// });
-// io.on("connection", () => {
-//   console.log("user baru terkoneksi");
-// });
-
-//######### 채팅 #########//
 
 db.sequelize
   .sync()
@@ -49,7 +35,7 @@ passportConfig();
 if (process.env.NODE_ENV === "production") {
   app.use(morgan("combined"));
   app.use(hpp());
-  app.use(helmet());
+  app.use(helmet({ contentSecurityPolicy: false }));
   app.use(
     cors({
       origin: "http://semifoli.site",
@@ -69,7 +55,6 @@ if (process.env.NODE_ENV === "production") {
 app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(express.json()); // 프론트에서 data를 json으로 보냈을때 req.body 안에 넣어줌
 app.use(express.urlencoded({ extended: true })); // 프론트에서 form(form 은 url)으로 data를 보냇을때 req.body 안에 넣어줌
-// app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
@@ -78,9 +63,8 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     cookie: {
       httpOnly: true,
-      sameSite: "none",
-      secure: "auto",
-      domain: process.env.NODE_ENV === "production" && "http://semifoli.site",
+      secure: false,
+      domain: process.env.NODE_ENV === "production" && ".semifoli.site",
     },
   })
 );
