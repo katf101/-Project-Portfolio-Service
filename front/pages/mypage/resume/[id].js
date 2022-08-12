@@ -26,11 +26,9 @@ const Resume = () => {
 
   const { singlePost, singleStack } = useSelector((state) => state.post);
 
-  // useEffect(() => {
-  //   singlePost;
-  //   console.log("마이리슘확인", singlePost);
-  //   // console.log("마이리슘확인", singleStack);
-  // }, [singlePost]);
+  useEffect(() => {
+    console.log("마이리슘확인", singleStack);
+  }, [singleStack]);
 
   return (
     <>
