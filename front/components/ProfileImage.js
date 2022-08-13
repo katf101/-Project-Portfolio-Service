@@ -19,8 +19,9 @@ import { backendUrl } from "../config/config";
 const ProfileImage = ({ imagedata, setImageData }) => {
   const route = useRouter();
   const dispatch = useDispatch();
-  const { imagePaths, addImageLoading, addImageDone, addImageError } =
-    useSelector((state) => state.post);
+  const { imagePaths, addImageDone, addImageError } = useSelector(
+    (state) => state.post
+  );
   const me = useSelector((state) => state.user.me);
   const [action, setAction] = useState(null);
   const [toggle, setToggle] = useState(false);
@@ -33,11 +34,6 @@ const ProfileImage = ({ imagedata, setImageData }) => {
   useEffect(() => {
     setTest(PreviewImg);
   }, [PreviewImg]);
-
-  // useEffect(() => {
-  //   console.log("이미지페스길이", imagePaths.length);
-  //   console.log("이미지데이터", imagedata);
-  // });
 
   const onChangeImages = useCallback((e) => {
     setTest(PreviewImg);
@@ -255,7 +251,7 @@ const MainDiv = styled.div`
   height: 500px;
 `;
 
-const PreviewImg = styled.img``;
+const PreviewImg = styled(Image)``;
 
 const BottomDiv = styled.div`
   width: 500px;
