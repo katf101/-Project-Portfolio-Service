@@ -140,8 +140,9 @@ const ProfileImage = ({ imagedata, setImageData }) => {
               <div key={v} style={{ display: "inline-block" }}>
                 <PreviewImg
                   src={`/${v}`}
+                  width={150}
+                  height={150}
                   // src={`${backendUrl}/${v}`} // dev
-                  style={{ width: "150px", height: "150px" }}
                   alt={v}
                 />
                 <div
