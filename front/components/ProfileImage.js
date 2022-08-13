@@ -88,7 +88,8 @@ const ProfileImage = ({ imagedata, setImageData }) => {
     setToggle(!toggle);
   }, [toggle]);
   const myLoader = ({ src }) => {
-    return `${backendUrl}${imagedata}`;
+    return `${imagedata}`; // aws s3
+    // return `${backendUrl}${imagedata}`; // dev
   };
 
   const onRemoveCurrentImage = useCallback(() => {
@@ -110,7 +111,8 @@ const ProfileImage = ({ imagedata, setImageData }) => {
               imagedata ? (
                 <Image
                   loader={myLoader}
-                  src={`${backendUrl}${imagedata}`}
+                  src={`${imagedata}`} // aws s3
+                  // src={`${backendUrl}${imagedata}`} // dev
                   width={150}
                   height={150}
                 />
@@ -125,7 +127,8 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             ) : (
               <Image
                 loader={myLoader}
-                src={`${backendUrl}${imagedata}`}
+                src={`${imagedata}`} // aws s3
+                // src={`${backendUrl}${imagedata}`} // dev
                 width={150}
                 height={150}
               />
@@ -140,7 +143,8 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
                 <PreviewImg
-                  src={`${backendUrl}/${v}`}
+                  src={`/${v}`}
+                  // src={`${backendUrl}/${v}`} // dev
                   style={{ width: "150px", height: "150px" }}
                   alt={v}
                 />

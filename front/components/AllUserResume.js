@@ -11,7 +11,6 @@ import { backendUrl } from "../config/config";
 const AllUserResume = ({ postInfo, testId }) => {
   const singleStack = useSelector((state) => state.post.singleStack);
   const [imageData, setImageData] = useState("");
-  const [idNum, setIdNum] = useState(0);
   const dispatch = useDispatch();
   const post = postInfo?.filter((v) => v.id === +testId);
   // const imageSrc = post.pop();
@@ -40,7 +39,8 @@ const AllUserResume = ({ postInfo, testId }) => {
     // console.log("imageData", imageData);
   }, [testId]);
   const myLoader = ({ src }) => {
-    return `${backendUrl}${imageData.src}`;
+    return `${imageData.src}`; // aws s3
+    // return `${backendUrl}${imageData.src}`; // dev
   };
 
   return (
@@ -59,8 +59,8 @@ const AllUserResume = ({ postInfo, testId }) => {
             {image?.src ? (
               <Image
                 loader={myLoader}
-                // src={`http://localhost:3060/${image}`}
-                src={`${backendUrl}${imageData.src}`}
+                src={`${imageData.src}`} // aws s3
+                // src={`${backendUrl}${imageData.src}`} // dev
                 width={120}
                 height={120}
               />
