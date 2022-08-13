@@ -5,6 +5,6 @@ module.exports = {
   backendUrl: prod ? "http://localhost:3060/" : "http://api.semifoli.site/",
   frontUrl: prod ? "http://localhost:3000/" : "http://semifoli.site/",
   // imageUrl: "http://localhost:3060/image",
-  // imageUrl: prod ? null : "http://api.semifoli.site/images",
+  imageUrl: prod ? "http://api.semifoli.site/images" : null,
   // imageUrl: prod ? null : "http://localhost:3060/images",
 };
