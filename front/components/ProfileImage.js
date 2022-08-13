@@ -138,13 +138,14 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             {/* <button type="primary" htmltype="submit" loading={addImageLoading}> */}
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
-                <PreviewImg
+                <Image
+                  // <PreviewImg
                   loader={myLoader}
                   src={`${v}`}
                   width={150}
                   height={150}
                   // src={`${backendUrl}/${v}`} // dev
-                  alt={v}
+                  // alt={v}
                 />
                 <div
                   style={{
