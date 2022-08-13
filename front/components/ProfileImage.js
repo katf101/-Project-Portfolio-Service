@@ -139,6 +139,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
                 <PreviewImg
+                  loader={v}
                   src={`${v}`}
                   width={150}
                   height={150}
