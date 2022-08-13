@@ -6,7 +6,6 @@ import styled from "styled-components";
 import ProTypes from "prop-types";
 import Foli from "../public/images/Foli.png";
 import MenuForm from "./MenuForm";
-import Link from "next/link";
 
 const Layout = ({ children }) => {
   const onMainPush = useCallback(() => {

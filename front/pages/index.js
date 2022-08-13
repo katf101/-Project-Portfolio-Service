@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Router, { useRouter } from "next/router";
-import Layout from "../components/Layout";
+
 import SlideForm from "../components/SlideForm";
 import MyForm from "../components/MyForm";
 import styled from "styled-components";
-import PostCard from "../components/UI/PostCard";
-import Link from "next/link";
-import Our from "../public/images/Our.png";
-import Image from "next/image";
 
 import axios from "axios";
 import { loadMyInfo } from "../actions/user";

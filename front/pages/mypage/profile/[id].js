@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { loadMyInfo } from "../../../actions/user";
 // import ProfileForm from "../../../components/ProfileForm";
 import wrapper from "../../../store/configureStore";
-import Head from "next/head";
 import axios from "axios";
 import styled from "styled-components";
 

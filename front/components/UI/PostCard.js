@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import Link from "next/link";
 import { loadPost } from "../../actions/post";
-import AllUserResume from "../AllUserResume";
 import { useDispatch, useSelector } from "react-redux";
 
 const PostCard = ({ post, id, setTestId }) => {

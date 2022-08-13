@@ -5,8 +5,6 @@ import Router from "next/router";
 
 import styled from "styled-components";
 
-import * as Yup from "yup";
-import axios from "axios";
 import StackForm from "./StackForm";
 
 const ResumeForm = ({ post }) => {

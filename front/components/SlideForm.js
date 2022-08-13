@@ -3,7 +3,6 @@ import styled from "styled-components";
 import wanted from "../public/images/wanted.png";
 import roket from "../public/images/roket.png";
 import wanted2 from "../public/images/wanted2.png";
-import sliderdiv from "../public/images/sliderdiv.png";
 import Slider from "react-slick";
 import Image from "next/image";
 

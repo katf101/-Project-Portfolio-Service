@@ -1,4 +1,3 @@
-import { symbol } from "prop-types";
 import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";

@@ -10,9 +10,7 @@ import postSlice from "../reducers/post";
 import basic from "../public/images/basic.png";
 import Router, { useRouter } from "next/router";
 
-import { imageUrl } from "../config/config";
 import styled from "styled-components";
-import UserImage from "../public/images/UserImage.png";
 import Image from "next/image";
 import { backendUrl } from "../config/config";
 

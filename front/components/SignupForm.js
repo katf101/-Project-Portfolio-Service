@@ -2,7 +2,6 @@ import React, { useCallback, useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
-import axios from "axios";
 import { signup } from "../actions/user";
 import { TextField } from "./UI/TextField";
 
