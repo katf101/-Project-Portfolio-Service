@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMyInfo } from "../../../actions/user";
-import { frontUrl } from "../config/config";
+import { frontUrl } from "../../../config/config";
 import {
   loadPost,
   loadPosts,
@@ -16,7 +16,6 @@ import ResumeForm from "../../../components/ResumeForm";
 import wrapper from "../../../store/configureStore";
 
 const Resume = () => {
-  const frontUrl = frontUrl;
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
