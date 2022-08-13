@@ -43,10 +43,9 @@ async function fetchProjects(page = 0) {
   console.log("page", page);
   console.log("id", id);
   console.log("pageValue", pageValue);
-  console.log("id1", window.location.href.substring(34));
-  console.log("id2", window.location.search);
-  console.log("id3", window.location);
-  console.log("test");
+  console.log("searchValue", searchValue);
+  console.log("window.location.search", window.location.search);
+  console.log("window.location", window.location);
   //   console.log("page", page);
 
   if (id === "search") {
