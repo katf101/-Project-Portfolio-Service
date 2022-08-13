@@ -32,7 +32,7 @@ db.sequelize
 
 passportConfig();
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV !== "development") {
   app.use(morgan("combined"));
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
@@ -46,8 +46,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
   app.use(
     cors({
-      origin: true,
-      // origin: "http://localhost:3000",
+      // origin: true,
+      origin: "http://localhost:3000",
       credentials: true,
     })
   );
@@ -65,8 +65,8 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      // domain: process.env.NODE_ENV === "production" ? ".semifoli.site" : null,
-      domain: ".semifoli.site",
+      domain: process.env.NODE_ENV === "development" ? null : ".semifoli.site",
+      // domain: ".semifoli.site",
     },
   })
 );
@@ -84,12 +84,14 @@ app.use("/stack", stackRouter);
 app.use("/image", imageRouter);
 // app.use("/stacks", stacskRouter);
 
-// if (process.env.NODE_ENV === "production") {
-app.listen(80, () => {
-  console.log("80 서버 실행 중!");
-});
-// } else {
-//   app.listen(3060, () => {
-//     console.log("3060 서버 실행 중!");
-//   });
-// }
+if (process.env.NODE_ENV === "development") {
+  app.listen(3060, () => {
+    console.log("propsess", process.env.NODE_ENV);
+    console.log("3060 서버 실행 중!");
+  });
+} else {
+  app.listen(80, () => {
+    console.log("propsess", process.env.NODE_ENV);
+    console.log("80 서버 실행 중!");
+  });
+}

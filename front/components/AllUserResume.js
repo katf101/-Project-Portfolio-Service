@@ -9,7 +9,6 @@ import { loadStack } from "../actions/post";
 import { backendUrl } from "../config/config";
 
 const AllUserResume = ({ postInfo, testId }) => {
-  const backUrl = backendUrl;
   const singleStack = useSelector((state) => state.post.singleStack);
   const [imageData, setImageData] = useState("");
   const [idNum, setIdNum] = useState(0);
@@ -41,7 +40,7 @@ const AllUserResume = ({ postInfo, testId }) => {
     // console.log("imageData", imageData);
   }, [testId]);
   const myLoader = ({ src }) => {
-    return `${backUrl}/${imageData.src}`;
+    return `${backendUrl}${imageData.src}`;
   };
 
   return (
@@ -61,7 +60,7 @@ const AllUserResume = ({ postInfo, testId }) => {
               <Image
                 loader={myLoader}
                 // src={`http://localhost:3060/${image}`}
-                src={`${backUrl}/${imageData.src}`}
+                src={`${backendUrl}${imageData.src}`}
                 width={120}
                 height={120}
               />

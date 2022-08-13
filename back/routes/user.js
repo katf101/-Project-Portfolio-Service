@@ -58,7 +58,6 @@ router.get("/", async (req, res, next) => {
 
 // 로그인 post /user/login
 router.post("/login", isNotLoggedIn, (req, res, next) => {
-  console.log("배포", process.env.NODE_ENV);
   // 미들웨어 확장, passport는 req, res,next를 사용하지 못하기 때문에 미들웨어 확장하여 사용
   passport.authenticate("local", (err, user, clientErr) => {
     // 서버에러

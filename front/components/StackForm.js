@@ -4,12 +4,10 @@ import styled from "styled-components";
 import StackCard from "./UI/StackCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addStack, loadStack, removeStack } from "../actions/post";
+import { backendUrl, frontUrl } from "../config/config";
 import Link from "next/link";
 
 const StackForm = () => {
-  const prod = process.env.NODE_ENV === "production";
-  const frontUrl = prod ? "http://semifoli.site" : "http://localhost:3000";
-
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
@@ -52,7 +50,7 @@ const StackForm = () => {
             name="user_stack"
             onChange={onInputHandler}
           />
-          <Link href={`${frontUrl}/mypage/resume/${me?.id}`} scroll={false}>
+          <Link href={`${frontUrl}mypage/resume/${me?.id}`} scroll={false}>
             <StackButton
               id="user_stack"
               name="user_stack"

@@ -17,7 +17,6 @@ import Image from "next/image";
 import { backendUrl } from "../config/config";
 
 const ProfileImage = ({ imagedata, setImageData }) => {
-  const backUrl = backendUrl;
   const route = useRouter();
   const dispatch = useDispatch();
   const { imagePaths, addImageLoading, addImageDone, addImageError } =
@@ -32,7 +31,6 @@ const ProfileImage = ({ imagedata, setImageData }) => {
   }, [imageInput.current]);
 
   useEffect(() => {
-    console.log("backendUrl", backendUrl);
     setTest(PreviewImg);
   }, [PreviewImg]);
 
@@ -112,7 +110,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
               imagedata ? (
                 <Image
                   loader={myLoader}
-                  src={`${backUrl}/${imagedata}`}
+                  src={`${backendUrl}${imagedata}`}
                   width={150}
                   height={150}
                 />
@@ -127,7 +125,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             ) : (
               <Image
                 loader={myLoader}
-                src={`${backUrl}/${imagedata}`}
+                src={`${backendUrl}${imagedata}`}
                 width={150}
                 height={150}
               />

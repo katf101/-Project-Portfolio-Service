@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMyInfo } from "../../../actions/user";
+import { backendUrl, frontUrl } from "../config/config";
 import {
   loadPost,
   loadPosts,
@@ -37,10 +38,7 @@ const Resume = () => {
     <>
       <Head>
         <meta property="og:title" />
-        <meta
-          property="og:url"
-          content={`http://semifoli.site/mypage/resume/${id}`}
-        />
+        <meta property="og:url" content={`${frontUrl}mypage/resume/${id}`} />
       </Head>
       <ResumeForm post={singlePost} />
     </>

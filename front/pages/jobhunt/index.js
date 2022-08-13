@@ -8,6 +8,7 @@ import axios from "axios";
 import { loadMyInfo } from "../../actions/user";
 import { loadPosts } from "../../actions/post";
 import wrapper from "../../store/configureStore";
+import { backendUrl, frontUrl } from "../../config/config";
 
 import {
   dehydrate,
@@ -27,9 +28,17 @@ import AllUserResume from "../../components/AllUserResume";
 async function fetchProjects(page = 0) {
   // async function fetchProjects(page = window.location.href.substring(37)) {
   const id = window.location.href.substring(30, 36);
-  const idValue = window.location.href.substring(34);
-  // const idValue = window.location.href.substring(37); // 로컬
-  const pageValue = window.location.href.substring(35);
+  // const idValue = window.location.href.substring(34);
+  // const searchValue = window.location.href.substring(37); // 로컬
+  // const pageValue = window.location.href.substring(35);
+  const pageValue =
+    process.env.NODE_ENV === "development"
+      ? window.location.href.substring(35)
+      : window.location.href.substring(34);
+  const searchValue =
+    process.env.NODE_ENV === "development"
+      ? window.location.href.substring(37)
+      : window.location.href.substring(36);
 
   console.log("page", page);
   console.log("id", id);
@@ -41,7 +50,7 @@ async function fetchProjects(page = 0) {
   //   console.log("page", page);
 
   if (id === "search") {
-    const { data } = await axios.get(`/posts?search=${idValue}`); // search = 프론트
+    const { data } = await axios.get(`/posts?search=${searchValue}`); // search = 프론트
     return data;
   } else {
     const { data } = await axios.get(`/posts?page=${pageValue}`); // page = 1
@@ -54,9 +63,6 @@ async function fetchProjects(page = 0) {
 }
 
 const IndexPage = () => {
-  const prod = process.env.NODE_ENV === "production";
-  const frontUrl = prod ? "http://semifoli.site" : "http://localhost:3000";
-
   const queryClient = useQueryClient();
   const router = useRouter();
   const [stateId, setStateId] = useState(0);
@@ -110,16 +116,16 @@ const IndexPage = () => {
     }
 
     if (router.asPath === "/jobhunt") {
-      setPage(`${frontUrl}/jobhunt`);
+      setPage(`${frontUrl}jobhunt`);
       setPageNum(1);
     }
     if (router.query?.page) {
-      setPage(`${frontUrl}/jobhunt?page=${router.query.page}`);
+      setPage(`${frontUrl}jobhunt?page=${router.query.page}`);
       // setBtnIndex(router.query.page);
     }
     if (router.query?.search) {
       setPage(
-        `${frontUrl}/jobhunt?search=${router.query.search}&page=${router.query.page}`
+        `${frontUrl}jobhunt?search=${router.query.search}&page=${router.query.page}`
       );
       setPageNum(1);
     }
