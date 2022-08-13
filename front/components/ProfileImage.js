@@ -88,7 +88,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
     setToggle(!toggle);
   }, [toggle]);
   const myLoader = ({ src }) => {
-    return `${backUrl}/${imagedata}`;
+    return `${backendUrl}${imagedata}`;
   };
 
   const onRemoveCurrentImage = useCallback(() => {
@@ -140,7 +140,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
             {imagePaths.map((v, i) => (
               <div key={v} style={{ display: "inline-block" }}>
                 <PreviewImg
-                  src={`${backUrl}/${v}`}
+                  src={`${backendUrl}/${v}`}
                   style={{ width: "150px", height: "150px" }}
                   alt={v}
                 />
