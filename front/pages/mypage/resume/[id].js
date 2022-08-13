@@ -16,6 +16,7 @@ import ResumeForm from "../../../components/ResumeForm";
 import wrapper from "../../../store/configureStore";
 
 const Resume = () => {
+  const frontUrl = frontUrl;
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
