@@ -4,7 +4,7 @@ import styled from "styled-components";
 import StackCard from "./UI/StackCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addStack, loadStack, removeStack } from "../actions/post";
-import { backendUrl, frontUrl } from "../config/config";
+import { frontUrl } from "../config/config";
 import Link from "next/link";
 
 const StackForm = () => {

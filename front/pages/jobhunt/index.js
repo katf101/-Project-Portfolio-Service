@@ -8,7 +8,7 @@ import axios from "axios";
 import { loadMyInfo } from "../../actions/user";
 import { loadPosts } from "../../actions/post";
 import wrapper from "../../store/configureStore";
-import { backendUrl, frontUrl } from "../../config/config";
+import { frontUrl } from "../../config/config";
 
 import {
   dehydrate,
