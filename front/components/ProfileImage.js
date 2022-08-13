@@ -140,7 +140,7 @@ const ProfileImage = ({ imagedata, setImageData }) => {
               <div key={v} style={{ display: "inline-block" }}>
                 <Image
                   // <PreviewImg
-                  loader={myLoader}
+                  loader={({ src }) => `${v}`}
                   src={`${v}`}
                   width={150}
                   height={150}
