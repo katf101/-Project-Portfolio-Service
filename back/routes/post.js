@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const multerS3 = require("multer-s3");
+const AWS = require("aws-sdk");
 
 const { Post, Image, User, Stack } = require("../models");
 const { isLoggedIn } = require("./middlewares");
@@ -16,23 +18,38 @@ try {
   fs.mkdirSync("uploads");
 }
 
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2",
+});
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, done) {
-      done(null, "uploads");
-    },
-    filename(req, file, done) {
-      // image.png
-      const ext = path.extname(file.originalname); // 확장자 추출(.png)
-      const basename = path.basename(file.originalname, ext); // image
-      done(null, basename + "_" + new Date().getTime() + ext); // image20220726.png
+  //########### dev (삭제 x) ################//
+  // storage: multer.diskStorage({
+  //   destination(req, file, done) {
+  //     done(null, "uploads");
+  //   },
+  //   filename(req, file, done) {
+  //     // image.png
+  //     const ext = path.extname(file.originalname); // 확장자 추출(.png)
+  //     const basename = path.basename(file.originalname, ext); // image
+  //     done(null, basename + "_" + new Date().getTime() + ext); // image20220726.png
+  //   },
+  // }),
+  //############################################//
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: "semifoli",
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`);
     },
   }),
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
 });
 
 router.post("/image", isLoggedIn, upload.array("image"), (req, res, next) => {
-  res.json(req.files.map((v) => v.filename));
+  res.json(req.files.map((v) => v.location)); // aws s3
+  // res.json(req.files.map((v) => v.filename)); // dev
   // res.json(req.body.image);
 });
 
@@ -106,32 +123,11 @@ router.put("/:postId", isLoggedIn, async (req, res, next) => {
         where: {
           id: req.params.postId,
           UserId: req.user.id,
-          // UserId: req.params.userId,
         },
       }
     );
     const post = await Post.findOne({ where: { id: req.params.postId } });
-    // if (hashtags) {
-    //   const result = await Promise.all(
-    //     hashtags.map((tag) =>
-    //       Hashtag.findOrCreate({
-    //         where: { name: tag.slice(1).toLowerCase() },
-    //       })
-    //     )
-    //   ); // [[노드, true], [리액트, true]]
-    //   await post.setHashtags(result.map((v) => v[0]));
-    // }
     res.status(200);
-    // .json({
-    //   PostId: parseInt(req.params.postId, 10),
-    //   introduce: req.body.introduce,
-    //   position: req.body.position,
-    //   career: req.body.career,
-    //   job: req.body.job,
-    //   portfolio: req.body.portfolio,
-    //   github: req.body.github,
-    //   blog: req.body.blog,
-    // });
   } catch (error) {
     console.error(error);
     next(error);
@@ -227,15 +223,7 @@ router.get("/image", async (req, res, next) => {
     if (!image) {
       return res.status(404).send("존재하지 않는 게시글입니다.");
     }
-    // const fullPost = await Post.findOne({
-    //   where: { id: post.id },
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ["id", "name"],
-    //     },
-    //   ],
-    // });
+
     res.status(200).json(image);
   } catch (error) {
     console.error(error);
