@@ -27,7 +27,10 @@ import AllUserResume from "../../components/AllUserResume";
 
 async function fetchProjects(page = 0) {
   const url = window.location.href;
-  const id = window.location.href.substring(30, 36);
+  const id =
+    process.env.NODE_ENV === "development"
+      ? window.location.href.substring(30, 36)
+      : window.location.href.substring(29, 35);
   const pageValue =
     process.env.NODE_ENV === "development"
       ? window.location.href.substring(35)
