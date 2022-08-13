@@ -26,11 +26,8 @@ import AllUserResume from "../../components/AllUserResume";
 // ######################################################## //
 
 async function fetchProjects(page = 0) {
-  // async function fetchProjects(page = window.location.href.substring(37)) {
+  const url = window.location.href;
   const id = window.location.href.substring(30, 36);
-  // const idValue = window.location.href.substring(34);
-  // const searchValue = window.location.href.substring(37); // 로컬
-  // const pageValue = window.location.href.substring(35);
   const pageValue =
     process.env.NODE_ENV === "development"
       ? window.location.href.substring(35)
@@ -38,7 +35,7 @@ async function fetchProjects(page = 0) {
   const searchValue =
     process.env.NODE_ENV === "development"
       ? window.location.href.substring(37)
-      : window.location.href.substring(36);
+      : url.substring(36);
 
   console.log("page", page);
   console.log("id", id);
