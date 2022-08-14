@@ -36,13 +36,13 @@ const StackForm = () => {
       return;
     }
     setRender(mainStacks);
-    setUserStack("");
     dispatch(
       addStack({
         stack: userStack,
       })
     );
     alert("추가한 스택:", userStack);
+    setUserStack("");
   });
 
   return (
