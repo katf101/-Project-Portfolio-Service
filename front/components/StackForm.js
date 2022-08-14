@@ -31,7 +31,6 @@ const StackForm = () => {
   });
 
   const onAddStack = useCallback(() => {
-    e.pre;
     if (userStack.length < 2) {
       alert("2글자이상 입력하세요");
       return;
