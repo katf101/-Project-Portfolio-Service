@@ -19,7 +19,7 @@ const StackForm = () => {
 
   useEffect(() => {
     singleStack;
-  }, []);
+  });
 
   // useEffect(() => {
   //   console.log("스택폼", singleStack);

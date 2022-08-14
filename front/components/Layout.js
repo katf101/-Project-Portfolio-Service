@@ -126,7 +126,8 @@ const ContainerDiv = styled.div`
 
 const HeaderDiv = styled.header`
   position: fixed;
-  width: 99.06vw;
+  width: 100%;
+  /* width: 99.06vw; */
   height: 9.9vw;
   right: 0;
   top: 0;
