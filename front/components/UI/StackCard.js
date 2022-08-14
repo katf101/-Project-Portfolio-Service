@@ -9,9 +9,9 @@ const StackCard = ({ stack }) => {
   const { me } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   console.log("스택", stack);
-  // });
+  useEffect(() => {
+    stack;
+  });
 
   const onRemoveStack = useCallback(() => {
     const scrollY = window.scrollY;
