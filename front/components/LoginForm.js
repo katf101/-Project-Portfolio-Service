@@ -26,13 +26,23 @@ const LoginForm = () => {
   useEffect(() => {
     if (action) {
       if (loginError) {
-        console.log("에러");
+        console.log(loginError);
         // message.error(JSON.stringify(loginError, null, 4)).then();
       }
       action.setSubmitting(false);
       setAction(null);
     }
   }, [loginError]);
+
+  useEffect(() => {
+    if (action) {
+      if (loginDone === true) {
+        Router.push("/");
+      }
+      action.setSubmitting(false);
+      setAction(null);
+    }
+  }, [loginDone]);
 
   return (
     <MainDiv>
@@ -50,13 +60,6 @@ const LoginForm = () => {
             })
           );
           setAction({ setSubmitting, resetForm });
-
-          if (loginDone === true) {
-            Router.push("/");
-            return;
-          } else {
-            alert(loginError);
-          }
         }}
       >
         <Form_styled>
