@@ -21,9 +21,10 @@ const StackForm = () => {
     singleStack;
   });
 
-  // useEffect(() => {
-  //   console.log("스택폼", singleStack);
-  // });
+  useEffect(() => {
+    console.log("싱글스택", singleStack);
+    console.log("메인스택", mainStacks);
+  });
 
   const onInputHandler = useCallback((e) => {
     setUserStack(e.target.value);
