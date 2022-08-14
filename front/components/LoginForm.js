@@ -35,12 +35,8 @@ const LoginForm = () => {
   }, [loginError]);
 
   useEffect(() => {
-    if (action) {
-      if (loginDone === true) {
-        Router.push("/");
-      }
-      action.setSubmitting(false);
-      setAction(null);
+    if (loginDone === true) {
+      Router.push("/");
     }
   }, [loginDone]);
 
