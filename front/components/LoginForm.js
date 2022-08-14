@@ -48,6 +48,10 @@ const LoginForm = () => {
             })
           );
           setAction({ setSubmitting, resetForm });
+          if (loginError) {
+            alert("아이디 또는 비밀번호가 맞지 않습니다.");
+            return;
+          }
           Router.push("/");
         }}
       >
