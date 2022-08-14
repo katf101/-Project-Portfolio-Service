@@ -48,6 +48,8 @@ const LoginForm = () => {
             })
           );
           setAction({ setSubmitting, resetForm });
+
+          alert(loginError);
           if (loginError) {
             alert("아이디 또는 비밀번호가 맞지 않습니다.");
             return;
