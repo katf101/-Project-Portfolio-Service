@@ -106,9 +106,7 @@ const ResumeForm = ({ post }) => {
         <textarea
           ref={introduceRef}
           defaultValue={post?.position}
-          placeholder={
-            post !== null ? post?.introduce : "자기소개를 적어 주세요."
-          }
+          placeholder={"자기소개를 적어 주세요."}
           // required
         />
       </IntroDiv>
@@ -117,13 +115,13 @@ const ResumeForm = ({ post }) => {
           ref={positionRef}
           defaultValue={post?.position}
           type="text"
-          placeholder={post ? post.position : "ex) 프론트 엔드"}
+          placeholder={"ex) 프론트 엔드"}
         />
         <input
           ref={careerRef}
           defaultValue={post?.career}
           type="text"
-          placeholder={post ? post?.career : "ex) 2년, 신입일 경우 신입"}
+          placeholder={"ex) 2년, 신입일 경우 신입"}
           // required
         />
       </JobDiv>
@@ -143,21 +141,21 @@ const ResumeForm = ({ post }) => {
           ref={portfolioRef}
           defaultValue={post?.portfolio}
           type="text"
-          placeholder={post ? post.portfolio : "포트폴리오"}
+          placeholder={"포트폴리오"}
           // required
         />
         <input
           ref={githubRef}
           defaultValue={post?.github}
           type="text"
-          placeholder={post ? post.github : "Github"}
+          placeholder={"Github"}
           // required
         />
         <input
           ref={blogRef}
           defaultValue={post?.blog}
           type="text"
-          placeholder={post ? post.blog : "Blog"}
+          placeholder={"Blog"}
           // required
         />
         {post && (
