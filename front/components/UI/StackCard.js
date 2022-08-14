@@ -52,11 +52,15 @@ const Maindiv = styled.div`
   height: 28px;
   background: #db7e57;
   border-radius: 15px;
+
   button {
     width: auto;
     height: auto;
     border: none;
     color: #ffffff;
     background: none;
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
