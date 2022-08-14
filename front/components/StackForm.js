@@ -16,20 +16,21 @@ const StackForm = () => {
   const { mainStacks, singleStack, addStackLoading, removeStackLoading } =
     useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
+  const [myStack, setMySteck] = useState(singleStack);
 
-  useEffect(() => {
-    singleStack;
-  });
+  // useEffect(() => {
+  //   singleStack;
+  // });
 
   // useEffect(() => {
   //   console.log("스택폼", singleStack);
   // });
 
-  const onInputHandler = (e) => {
+  const onInputHandler = useCallback((e) => {
     setUserStack(e.target.value);
-  };
+  });
 
-  const onAddStack = () => {
+  const onAddStack = useCallback(() => {
     setRender(mainStacks);
     dispatch(
       addStack({
@@ -37,7 +38,7 @@ const StackForm = () => {
       })
     );
     setUserStack("");
-  };
+  });
 
   return (
     <>

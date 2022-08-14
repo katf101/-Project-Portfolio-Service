@@ -32,7 +32,7 @@ const Resume = () => {
   useEffect(() => {
     console.log("page 싱글스택", singleStack);
     console.log("page 메인스택", singleStack);
-  }, [singleStack]);
+  });
 
   return (
     <>

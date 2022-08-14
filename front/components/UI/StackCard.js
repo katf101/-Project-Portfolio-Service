@@ -13,7 +13,7 @@ const StackCard = ({ stack }) => {
   //   console.log("스택", stack);
   // });
 
-  const onRemoveStack = () => {
+  const onRemoveStack = useCallback(() => {
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
     dispatch(
@@ -24,7 +24,7 @@ const StackCard = ({ stack }) => {
     Router.replace(`/mypage/resume/${me.id}`).then(() =>
       window.scrollTo(scrollX, scrollY)
     );
-  };
+  }, [stack.id]);
 
   return (
     <Maindiv>
