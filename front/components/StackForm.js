@@ -35,12 +35,12 @@ const StackForm = () => {
       return;
     }
     setRender(mainStacks);
+    setUserStack("");
     dispatch(
       addStack({
         stack: userStack,
       })
     );
-    setUserStack("");
   });
 
   return (
