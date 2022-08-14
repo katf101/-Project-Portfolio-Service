@@ -88,7 +88,7 @@ const StackCardDiv = styled.div`
   /* background: #d34b4b; */
 `;
 
-const StackButton = styled.div`
+const StackButton = styled.button`
   width: 97px;
   height: 39px;
   background: #0a5ab9;
