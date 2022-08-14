@@ -21,6 +21,7 @@ const StackCard = ({ stack }) => {
         stackId: stack.id,
       })
     );
+    alert("스택을 삭제하였습니다.");
     Router.replace(`/mypage/resume/${me.id}`).then(() =>
       window.scrollTo(scrollX, scrollY)
     );

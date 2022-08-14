@@ -31,6 +31,7 @@ const StackForm = () => {
   });
 
   const onAddStack = useCallback(() => {
+    e.pre;
     if (userStack.length < 2) {
       alert("2글자이상 입력하세요");
       return;
@@ -41,7 +42,7 @@ const StackForm = () => {
         stack: userStack,
       })
     );
-    alert("추가한 스택:", userStack);
+    alert("스택을 추가하였습니다.");
     setUserStack("");
   });
 

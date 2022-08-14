@@ -86,6 +86,7 @@ const ResumeForm = ({ post }) => {
         blog: blogRef.current.value,
       })
     );
+    alert("수정완료");
   }, [
     post?.id,
     introduceRef.current?.value,
