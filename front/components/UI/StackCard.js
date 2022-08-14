@@ -52,7 +52,9 @@ const Maindiv = styled.div`
   height: 28px;
   background: #db7e57;
   border-radius: 15px;
-
+  :hover {
+    cursor: pointer;
+  }
   button {
     width: auto;
     height: auto;
