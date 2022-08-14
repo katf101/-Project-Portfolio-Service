@@ -54,7 +54,7 @@ const StackForm = () => {
             <StackButton
               id="user_stack"
               name="user_stack"
-              type="button"
+              // type="button"
               loading={addStackLoading}
               onClick={onAddStack}
             >
