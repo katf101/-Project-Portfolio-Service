@@ -24,13 +24,8 @@ const LoginForm = () => {
   );
 
   useEffect(() => {
-    if (action) {
-      if (loginError) {
-        console.log(loginError);
-        // message.error(JSON.stringify(loginError, null, 4)).then();
-      }
-      action.setSubmitting(false);
-      setAction(null);
+    if (loginError) {
+      console.log(loginError);
     }
   }, [loginError]);
 
