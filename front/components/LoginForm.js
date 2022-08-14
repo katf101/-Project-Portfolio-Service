@@ -19,7 +19,9 @@ const LoginFormSchema = Yup.object().shape({
 const LoginForm = () => {
   const dispatch = useDispatch();
   const [action, setAction] = useState(null);
-  const { loginLoading, loginError } = useSelector((state) => state.user);
+  const { loginLoading, loginError, loginDone } = useSelector(
+    (state) => state.user
+  );
 
   useEffect(() => {
     if (action) {
@@ -49,12 +51,12 @@ const LoginForm = () => {
           );
           setAction({ setSubmitting, resetForm });
 
-          alert(loginError);
-          if (loginError) {
-            alert("아이디 또는 비밀번호가 맞지 않습니다.");
+          if (loginDone === true) {
+            Router.push("/");
             return;
+          } else {
+            alert(loginError);
           }
-          Router.push("/");
         }}
       >
         <Form_styled>
