@@ -81,17 +81,8 @@ const IndexPage = () => {
     }
   );
 
-  const dispatch = useDispatch();
   // const { id } = router.query;
-  const {
-    postStack,
-    mainPosts,
-    loadPostsLoading,
-    hasMorePosts,
-    singlePost,
-    singleStack,
-  } = useSelector((state) => state.post);
-  const { loadUser } = useSelector((state) => state.user);
+
   // React.useEffect(() => {
   //   if (data?.hasMore) {
   //     queryClient.prefetchQuery(["projects", page + 1], () =>

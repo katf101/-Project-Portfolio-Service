@@ -23,13 +23,13 @@ import SearchForm from "../components/SearchForm";
 // ######################################################## //
 
 const Home = () => {
-  const { me } = useSelector((state) => state.user);
-  useEffect(() => {
-    console.log("propsess", process.env.NODE_ENV);
-    console.log("backendUrl", backendUrl);
-    console.log("frontUrl", frontUrl);
-    console.log("me", me);
-  });
+  // const { me } = useSelector((state) => state.user);
+  // useEffect(() => {
+  //   console.log("propsess", process.env.NODE_ENV);
+  //   console.log("backendUrl", backendUrl);
+  //   console.log("frontUrl", frontUrl);
+  //   console.log("me", me);
+  // });
 
   return (
     <MainDiv>
