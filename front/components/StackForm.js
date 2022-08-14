@@ -16,7 +16,6 @@ const StackForm = () => {
   const { mainStacks, singleStack, addStackLoading, removeStackLoading } =
     useSelector((state) => state.post);
   const { me } = useSelector((state) => state.user);
-  const [myStack, setMySteck] = useState(singleStack);
 
   // useEffect(() => {
   //   singleStack;

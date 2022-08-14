@@ -29,10 +29,10 @@ const Resume = () => {
     (state) => state.post
   );
 
-  useEffect(() => {
-    console.log("page 싱글스택", singleStack);
-    console.log("page 메인스택", singleStack);
-  });
+  // useEffect(() => {
+  //   console.log("page 싱글스택", singleStack);
+  //   console.log("page 메인스택", mainStacks);
+  // });
 
   return (
     <>
