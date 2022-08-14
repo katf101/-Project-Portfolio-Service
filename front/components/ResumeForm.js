@@ -106,7 +106,7 @@ const ResumeForm = ({ post }) => {
       <IntroDiv>
         <textarea
           ref={introduceRef}
-          defaultValue={post?.position}
+          defaultValue={post?.introduce}
           placeholder={"자기소개를 적어 주세요."}
           // required
         />
