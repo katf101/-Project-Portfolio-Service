@@ -1,17 +1,28 @@
 # Semi Resume Sharing Service
-사람인, 로켓펀치 같은 채용 서비스를 모티브하여 개발자들의 세미 이력서를 유저들과 공유하는 서비스입니다.
-# 참여자 : 1명
 
-### 디자인툴
-Figma
-### 사용할 스택
-1. React
-2. Next.js
-3. styled-components
-4. Axios
-5. Redux-toolkit
-6. node.js / express
-7. Mysql / Sequelize
+사람인, 로켓펀치 같은 채용 서비스를 모티브하여 개발자들의 세미 이력서를 유저들과 공유하는 서비스입니다.
+
+**참여자 : 1명**
+
+
+**사용한 스택**
+Frontend
+- React
+- Next 
+- styled-components
+- Redux-toolkit
+- React-query
+
+Backend
+- Node
+- Express
+- Mysql
+- Sequelize
+
+**구현한 기술**
+회원가입 / 패스포트 로그인 / 로그아웃
+페이지네이션 / 필터링 검색
+게시글 등록, 게시글 삭제, 게시글 수정, 프로필 사진 등록
 
 
 # Time Line
