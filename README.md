@@ -13,6 +13,8 @@ Figma
 6. node.js / express
 7. Mysql / Sequelize
 
+
+# Time Line
 ### 2022/07/20
 1. db설계
 2. 페이지 구성
