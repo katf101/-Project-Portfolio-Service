@@ -76,7 +76,6 @@ router.post("/", isLoggedIn, async (req, res, next) => {
     });
     res.status(201).json(fullPost);
   } catch (error) {
-    console.log("에러 반환");
     console.error(error);
     next(error);
   }
@@ -95,7 +94,6 @@ router.post(
       console.log(JSON.stringify(image));
       res.status(201).json(JSON.stringify(image));
     } catch (error) {
-      console.log("에러 반환");
       console.error(error);
       next(error);
     }
@@ -106,8 +104,6 @@ router.post(
 // router.patch("/:userId", isLoggedIn, async (req, res, next) => {
 router.put("/:postId", isLoggedIn, async (req, res, next) => {
   // PATCH /post/10
-  console.log("qwe", req.params.userId);
-  console.log("qwe", req.user.id);
   try {
     await Post.update(
       {
@@ -137,9 +133,6 @@ router.put("/:postId", isLoggedIn, async (req, res, next) => {
 // router.get("/", async (req, res, next) => {
 router.get("/:postId", async (req, res, next) => {
   // GET /post/1
-  console.log("params", req.params.postId);
-  console.log("params", req.params);
-  // console.log("아디", req.query.userId);
   try {
     const post = await Post.findOne({
       where: { id: req.params.postId },
@@ -165,8 +158,6 @@ router.get("/:postId", async (req, res, next) => {
 
 router.get("/resume/:userId", async (req, res, next) => {
   // GET /post/1
-  console.log("resumeuserid", req.params.userId);
-  // console.log("아디", req.query.userId);
   try {
     const post = await Post.findOne({
       where: { UserId: req.params.userId },
@@ -205,11 +196,6 @@ router.delete("/:postId", isLoggedIn, async (req, res, next) => {
 
 router.get("/image", async (req, res, next) => {
   // GET /post/1
-  console.log("3131");
-  console.log("인포", req.query.info);
-  console.log("둘둘", req.query.userId);
-  console.log("삼삼", req.body);
-  // console.log("아디", req.params.postId);
   try {
     const image = await Image.findOne({
       where: { UserId: req.query.userId },

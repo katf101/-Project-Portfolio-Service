@@ -7,11 +7,6 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   // GET /post/1
-  console.log("3131");
-  console.log("인포", req.query.info);
-  console.log("둘둘", req.query.userId);
-  console.log("삼삼", req.body);
-  // console.log("아디", req.params.postId);
   try {
     const image = await Image.findOne({
       where: { UserId: req.query.info },
@@ -36,8 +31,6 @@ router.get("/", async (req, res, next) => {
 
 router.delete("/:UserId", isLoggedIn, async (req, res, next) => {
   // DELETE /post/10
-  console.log("444");
-  console.log("444", req.params.UserId);
   try {
     await Image.destroy({
       where: {

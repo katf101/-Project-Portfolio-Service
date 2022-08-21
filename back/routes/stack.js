@@ -23,7 +23,6 @@ router.post("/", isLoggedIn, async (req, res, next) => {
     });
     res.status(201).json(fullStack);
   } catch (error) {
-    console.log("에러 반환");
     console.error(error);
     next(error);
   }
@@ -31,7 +30,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
 
 router.get("/:userId", async (req, res, next) => {
   // GET /post/1
-  console.log("stackid", req.params.userId);
+  // console.log("stackid", req.params.userId);
   try {
     const stack = await Stack.findAll({
       where: { UserId: req.params.userId },
@@ -56,7 +55,6 @@ router.get("/:userId", async (req, res, next) => {
     });
     res.status(200).json(fullPost);
   } catch (error) {
-    console.log("에러 반환");
     console.error(error);
     next(error);
   }
@@ -64,8 +62,8 @@ router.get("/:userId", async (req, res, next) => {
 
 router.delete("/:stackId", isLoggedIn, async (req, res, next) => {
   // DELETE /post/10
-  console.log("stackid", req.params.stackId);
-  console.log("userid", req.user.id);
+  // console.log("stackid", req.params.stackId);
+  // console.log("userid", req.user.id);
   try {
     await Stack.destroy({
       where: {
