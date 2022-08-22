@@ -22,7 +22,7 @@ const Portfolio = ({ Component, pageProps }) => {
         <Hydrate state={pageProps.dehydratedState}>
           <Head>
             <meta charSet="utf-8" />
-            <title>포폴사이트</title>
+            <title>Foli</title>
             <link
               rel="stylesheet"
               type="text/css"

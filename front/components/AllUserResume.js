@@ -131,55 +131,55 @@ const AllUserResume = ({ postInfo, testId }) => {
 export default AllUserResume;
 
 const DefaultBox = styled.div`
-  width: 400px;
-  height: 300px;
+  width: 20.83vw;
+  height: 15.63vw;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  font-size: 25px;
+  font-size: 1.3vw;
   color: #ffffff;
 
   background: #3a3845;
 `;
 
 const DefaultDiv = styled.div`
-  width: 650px;
-  height: 500px;
+  width: 33.85vw;
+  height: 26.04vw;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  border: 10px solid #3a3845;
+  border: 0.52vw solid #3a3845;
 
   background: #b8aca2;
 `;
 
 const StackDiv = styled.div`
   width: 100%;
-  height: 150px;
+  height: 7.81vw;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   div {
     width: 90%;
-    margin-bottom: 5px;
+    margin-bottom: 0.26vw;
     display: flex;
     justify-content: center;
     /* background: #3173d7; */
     :nth-child(1) {
       div {
-        margin-right: 1px;
+        margin-right: 0.05vw;
         width: auto;
         :nth-child(2) {
           width: auto;
-          height: 30px;
+          height: 1.56vw;
           background: #ffcaca;
-          border-radius: 5px;
+          border-radius: 0.26vw;
           color: #485af4;
         }
       }
@@ -187,16 +187,16 @@ const StackDiv = styled.div`
     :nth-child(2) {
       div {
         width: auto;
-        height: 300px;
-        margin-right: 15px;
+        height: 15.63vw;
+        margin-right: 0.78vw;
         display: flex;
         justify-content: center;
         :nth-child(n) {
-          padding-left: 10px;
-          padding-right: 10px;
-          height: 36px;
+          padding-left: 0.52vw;
+          padding-right: 0.52vw;
+          height: 1.88vw;
           background: #db7e57;
-          border-radius: 15px;
+          border-radius: 0.78vw;
           color: #ffffff;
         }
       }
@@ -206,34 +206,34 @@ const StackDiv = styled.div`
 `;
 
 const BlogDiv = styled.div`
-  margin-bottom: 30px;
-  margin-left: 15px;
+  margin-bottom: 1.56vw;
+  margin-left: 0.78vw;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   div {
     :nth-child(2) {
-      font-size: 16px;
+      font-size: 0.83vw;
     }
   }
   /* background: #000000; */
 `;
 
 const GithubDiv = styled.div`
-  margin-bottom: 30px;
-  margin-left: 15px;
+  margin-bottom: 1.56vw;
+  margin-left: 0.78vw;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   div {
     :nth-child(2) {
-      font-size: 16px;
+      font-size: 0.83vw;
     }
   }
 
@@ -241,28 +241,28 @@ const GithubDiv = styled.div`
 `;
 
 const PortfolioDiv = styled.div`
-  margin-bottom: 30px;
-  margin-left: 15px;
+  margin-bottom: 1.56vw;
+  margin-left: 0.78vw;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   div {
     :nth-child(2) {
-      font-size: 16px;
+      font-size: 0.83vw;
     }
   }
 `;
 
 const JobDiv = styled.div`
   width: 90%;
-  height: 100px;
+  height: 5.21vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   div {
     display: flex;
     /* background: #5dcef2; */
@@ -276,10 +276,10 @@ const JobDiv = styled.div`
 
 const CareerDiv = styled.div`
   width: 100%;
-  height: 100px;
+  height: 5.21vw;
   display: flex;
   justify-content: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   div {
     width: 90%;
     display: flex;
@@ -288,12 +288,12 @@ const CareerDiv = styled.div`
     /* background: #5dcef2; */
     div {
       width: auto;
-      margin-right: 1px;
+      margin-right: 0.05vw;
       :nth-child(2) {
         width: auto;
-        height: 25px;
+        height: 1.3vw;
         background: #a7dfff;
-        border-radius: 5px;
+        border-radius: 0.26vw;
         color: #485af4;
       }
     }
@@ -302,11 +302,11 @@ const CareerDiv = styled.div`
 
 const PositionDiv = styled.div`
   width: 100%;
-  height: 100px;
+  height: 5.21vw;
   display: flex;
   text-align: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 1.25vw;
   div {
     width: 90%;
     display: flex;
@@ -315,12 +315,12 @@ const PositionDiv = styled.div`
     /* background: #5dcef2; */
     div {
       width: auto;
-      margin-right: 1px;
+      margin-right: 0.05vw;
       :nth-child(2) {
         width: auto;
-        height: 25px;
+        height: 1.3vw;
         background: #aaf5bf;
-        border-radius: 5px;
+        border-radius: 0.26vw;
         color: #485af4;
       }
     }
@@ -330,17 +330,17 @@ const PositionDiv = styled.div`
 `;
 
 const IntroBox = styled.div`
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  /* width: 400px; */
+  padding-top: 0.78vw;
+  padding-bottom: 0.78vw;
+  padding-left: 0.78vw;
+  padding-right: 0.78vw;
+  /* width: 20.83vw; */
   /* height: 80px; */
   display: flex;
   justify-content: center;
   align-items: center;
 
-  font-size: 16px;
+  font-size: 0.83vw;
   color: #ffffff;
 
   background: #3a3845;
@@ -358,7 +358,7 @@ const IntroDiv = styled.div`
 
 const ImageDiv = styled.div`
   width: 100%;
-  height: 120px;
+  height: 6.25vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -367,13 +367,13 @@ const ImageDiv = styled.div`
 `;
 
 const NameBox = styled.div`
-  width: 400px;
-  height: 80px;
+  width: 20.83vw;
+  height: 4.17vw;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  font-size: 25px;
+  font-size: 1.3vw;
   color: #ffffff;
 
   background: #3a3845;
@@ -381,7 +381,7 @@ const NameBox = styled.div`
 
 const NameDiv = styled.div`
   width: 100%;
-  height: 120px;
+  height: 6.25vw;
 
   display: flex;
   justify-content: center;
@@ -390,15 +390,15 @@ const NameDiv = styled.div`
 `;
 
 const ResumeDiv = styled.div`
-  width: 650px;
-  height: 1000px;
+  width: 33.85vw;
+  height: 52.08vw;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  border: 10px solid #3a3845;
+  border: 0.52vw solid #3a3845;
 
   background: #b8aca2;
 `;

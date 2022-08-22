@@ -254,8 +254,8 @@ export default IndexPage;
 
 const PageDiv = styled.div`
   /* position: fixed; */
-  width: 400px;
-  height: 150px;
+  width: 20.83vw;
+  height: 7.81vw;
 
   display: flex;
   align-items: center;
@@ -263,13 +263,13 @@ const PageDiv = styled.div`
 
   /* background: #e87777; */
   button {
-    width: 50px;
-    height: 25px;
+    width: 2.6vw;
+    height: 1.3vw;
 
     /* Rectangle 46 */
 
     background: #ffffff;
-    border: 2px solid #3a3845;
+    border: 0.1vw solid #3a3845;
   }
 `;
 
@@ -297,8 +297,8 @@ const CardDiv = styled.div`
 
 const RightDiv = styled.div`
   position: sticky;
-  right: 50px;
-  margin-top: 50px;
+  right: 2.6vw;
+  margin-top: 2.6vw;
   margin-bottom: 24.48vw;
   width: 19.27vw;
   height: 20.42vw;

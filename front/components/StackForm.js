@@ -88,41 +88,41 @@ const InputButtonDiv = styled.div`
 
 const StackCardDiv = styled.div`
   width: 100%;
-  height: 100px;
+  height: 5.21vw;
   display: flex;
   justify-content: center;
   /* background: #d34b4b; */
 `;
 
 const StackButton = styled.button`
-  width: 97px;
-  height: 39px;
+  width: 5.05vw;
+  height: 2.03vw;
   background: #0a5ab9;
   border: none;
-  border-radius: 15px;
+  border-radius: 0.78vw;
   :hover {
     background: #084995;
   }
   font-family: "Inter";
   /* font-style: normal; */
   /* font-weight: 400; */
-  font-size: 15px;
+  font-size: 0.78vw;
   color: #ffffff;
 `;
 
 const MainDiv = styled.div`
   width: 100%;
-  height: 170px;
+  height: 8.85vw;
   display: flex;
   flex-direction: column;
   input {
     :focus {
       outline: none;
     }
-    width: 286px;
-    height: 39px;
+    width: 14.9vw;
+    height: 2.03vw;
     border: none;
     /* background: #ffffff; */
-    border-bottom: 1px solid #d6d5d5;
+    border-bottom: 0.05vw solid #d6d5d5;
   }
 `;

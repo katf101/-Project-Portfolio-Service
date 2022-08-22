@@ -34,73 +34,73 @@ const Footer = ({ children }) => {
 export default Footer;
 
 const StacksDiv2 = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 15.63vw;
+  height: 15.63vw;
 
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: baseline;
   div {
-    margin-bottom: 15px;
+    margin-bottom: 0.78vw;
   }
 
-  font-size: 24px;
+  font-size: 1.25vw;
   color: #767474;
 
   /* background: #000000; */
 `;
 const StacksDiv = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 15.63vw;
+  height: 15.63vw;
 
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: baseline;
   div {
-    margin-bottom: 15px;
+    margin-bottom: 0.78vw;
   }
 
-  font-size: 24px;
+  font-size: 1.25vw;
   color: #767474;
 
   /* background: #000000; */
 `;
 const UsingStackDiv = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 15.63vw;
+  height: 15.63vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  font-size: 42px;
+  font-size: 2.19vw;
   color: #767474;
 `;
 const MyDiv = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 15.63vw;
+  height: 15.63vw;
 
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: baseline;
   div {
-    margin-bottom: 15px;
+    margin-bottom: 0.78vw;
   }
 
-  font-size: 24px;
+  font-size: 1.25vw;
   color: #767474;
   /* background: #000000; */
 `;
 const ProjectDiv = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 15.63vw;
+  height: 15.63vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  font-size: 42px;
+  font-size: 2.19vw;
   color: #767474;
 
   /* background: #000000; */
@@ -110,10 +110,10 @@ const MainDiv = styled.footer`
   position: relative;
   /* top: 65vw; */
   /* top: -300px; */
-  margin-top: 150px;
-  margin-left: -9px;
+  margin-top: 7.81vw;
+  margin-left: -0.47vw;
   width: 99.2vw;
-  height: 300px;
+  height: 15.63vw;
 
   z-index: 0;
 

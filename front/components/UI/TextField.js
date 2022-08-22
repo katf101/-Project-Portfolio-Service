@@ -15,6 +15,6 @@ export const TextField = ({ label, ...props }) => {
 };
 
 const ErrMessage = styled(ErrorMessage)`
-  width: 337px;
+  width: 17.55vw;
   color: red;
 `;

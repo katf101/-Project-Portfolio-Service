@@ -45,14 +45,14 @@ const StackCard = ({ stack }) => {
 export default StackCard;
 
 const Maindiv = styled.div`
-  margin-top: 10px;
-  margin-right: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-top: 0.52vw;
+  margin-right: 0.26vw;
+  padding-left: 0.52vw;
+  padding-right: 0.52vw;
   width: auto;
   height: 28px;
   background: #db7e57;
-  border-radius: 15px;
+  border-radius: 0.78vw;
   :hover {
     cursor: pointer;
   }

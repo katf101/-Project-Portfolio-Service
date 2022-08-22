@@ -61,11 +61,11 @@ const MyChanner = styled.div`
   flex-direction: column;
   justify-content: center;
   background: #3a3845;
-  border-radius: 10px;
-  font-size: 18px;
+  border-radius: 0.52vw;
+  font-size: 0.94vw;
   color: #ffffff;
   div {
-    margin-left: 15px;
+    margin-left: 0.78vw;
   }
   a:visited {
     color: #ffffff;
@@ -153,7 +153,7 @@ const HeaderDiv = styled.header`
 
 // const Header = styled.div`
 //   position: fixed;
-//   margin-top: -10px;
+//   margin-top: -0.52vw;
 //   width: 100%;
 //   height: 50px;
 

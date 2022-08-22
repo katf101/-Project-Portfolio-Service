@@ -64,22 +64,22 @@ export const getServerSideProps = wrapper.getServerSideProps(
 export default Profile;
 
 const EmailDiv = styled.div`
-  margin-bottom: 15px;
-  width: 200px;
-  height: 40px;
+  margin-bottom: 0.78vw;
+  width: 10.42vw;
+  height: 2.08vw;
   background: #ffffff;
-  border: 10px solid #3a3845;
+  border: 0.52vw solid #3a3845;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const NameDiv = styled.div`
-  margin-bottom: 15px;
-  width: 200px;
-  height: 40px;
+  margin-bottom: 0.78vw;
+  width: 10.42vw;
+  height: 2.08vw;
   background: #ffffff;
-  border: 10px solid #3a3845;
+  border: 0.52vw solid #3a3845;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -59,13 +59,13 @@ const MenuDiv = styled.div`
 `;
 
 const MainDiv = styled.div`
-  margin-right: 20px;
+  margin-right: 1.04vw;
   width: 100%;
   width: 99.1146vw;
   height: 2.34vw;
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid #ece7e7;
+  border-bottom: 0.05vw solid #ece7e7;
 
   /* background: #eeeeee; */
   /* flex-direction: column; */

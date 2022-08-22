@@ -202,30 +202,30 @@ const ProfileImage = ({ imagedata, setImageData }) => {
 export default ProfileImage;
 
 const RemoveImageButton = styled.button`
-  margin-top: 15px;
-  width: 74px;
-  height: 18px;
+  margin-top: 0.78vw;
+  width: 3.85vw;
+  height: 0.94vw;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  border: 1px solid #8b8b8b;
-  border-radius: 5px;
+  border: 0.05vw solid #8b8b8b;
+  border-radius: 0.26vw;
   :hover {
     background: #eeeeee;
   }
   cursor: pointer;
 `;
 const CloseImageButton = styled.button`
-  margin-top: 15px;
-  width: 74px;
-  height: 18px;
+  margin-top: 0.78vw;
+  width: 3.85vw;
+  height: 0.94vw;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  border: 1px solid #8b8b8b;
-  border-radius: 5px;
+  border: 0.05vw solid #8b8b8b;
+  border-radius: 0.26vw;
   :hover {
     background: #eeeeee;
   }
@@ -233,14 +233,14 @@ const CloseImageButton = styled.button`
 `;
 
 const AddImageButton = styled.button`
-  width: 74px;
-  height: 18px;
+  width: 3.85vw;
+  height: 0.94vw;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  border: 1px solid #8b8b8b;
-  border-radius: 5px;
+  border: 0.05vw solid #8b8b8b;
+  border-radius: 0.26vw;
   :hover {
     background: #eeeeee;
   }
@@ -249,28 +249,28 @@ const AddImageButton = styled.button`
 
 const MainDiv = styled.div`
   width: auto;
-  height: 500px;
+  height: 26.04vw;
 `;
 
 const PreviewImg = styled(Image)``;
 
 const BottomDiv = styled.div`
-  width: 500px;
-  height: 50px;
+  width: 26.04vw;
+  height: 2.6vw;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   label {
-    width: 74px;
-    height: 38px;
+    width: 3.85vw;
+    height: 1.98vw;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #ffffff;
-    border: 1px solid #8b8b8b;
-    border-radius: 5px;
+    border: 0.05vw solid #8b8b8b;
+    border-radius: 0.26vw;
     :hover {
       background: #eeeeee;
     }
@@ -279,15 +279,15 @@ const BottomDiv = styled.div`
 
   input {
     display: none;
-    margin-left: 180px;
+    margin-left: 9.38vw;
   }
 
   /* background: #8e2c2c; */
 `;
 
 const MiddleDiv = styled.div`
-  width: 500px;
-  height: 300px;
+  width: 26.04vw;
+  height: 15.63vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -296,9 +296,9 @@ const MiddleDiv = styled.div`
 `;
 
 const ImageDiv = styled.div`
-  margin-top: 50px;
+  margin-top: 2.6vw;
   width: 100%;
-  height: 250px;
+  height: 13.02vw;
   display: flex;
   justify-content: center;
   align-items: center;

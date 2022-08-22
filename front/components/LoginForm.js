@@ -88,7 +88,7 @@ const LoginForm = () => {
           >
             로그인
           </button>
-          <div style={{ marginTop: "15px" }}>
+          <div style={{ marginTop: "0.78" }}>
             <Link href="/log/signup">
               <a>회원가입</a>
             </Link>
@@ -108,11 +108,11 @@ const Form_styled = styled(Form)`
 `;
 
 const MainDiv = styled.div`
-  margin-top: 300px;
+  margin-top: 15.63vw;
   margin-left: 10%;
 
   width: 80%;
-  height: 960px;
+  height: 50vw;
 
   /* background: #d9d9d9; */
   a:visited {
@@ -126,21 +126,21 @@ const MainDiv = styled.div`
   }
 
   input {
-    margin-top: 30px;
+    margin-top: 1.56vw;
 
-    width: 331px;
-    height: 40px;
+    width: 17.24vw;
+    height: 2.08vw;
 
     background: #ffffff;
-    border: 3px solid #414f54;
-    border-radius: 15px;
+    border: 0.16vw solid #414f54;
+    border-radius: 0.78vw;
   }
   div {
     &:nth-child(3) {
-      margin-top: 15px;
+      margin-top: 0.78vw;
 
-      width: 112px;
-      height: 33px;
+      width: 5.83vw;
+      height: 1.72vw;
 
       text-align: center;
 
@@ -148,14 +148,14 @@ const MainDiv = styled.div`
     }
   }
   button {
-    margin-top: 20px;
+    margin-top: 1.04vw;
 
-    width: 144px;
-    height: 34px;
+    width: 7.5vw;
+    height: 1.77vw;
 
     background: #b9dfeb;
-    border-radius: 15px;
-    border: 0px;
+    border-radius: 0.78vw;
+    border: 0vw;
     &:hover {
       background: #5ec7e9;
     }

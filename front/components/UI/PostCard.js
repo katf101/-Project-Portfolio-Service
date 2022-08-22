@@ -43,25 +43,25 @@ const PostCard = ({ post, id, setTestId }) => {
 export default PostCard;
 
 const PositionDiv = styled.div`
-  width: 178px;
-  height: 33px;
-  line-height: 33px;
+  width: 9.27vw;
+  height: 1.72vw;
+  line-height: 1.72vw;
 
   /* background: #8e3838; */
 `;
 
 const CareerDiv = styled.div`
-  width: 178px;
-  height: 33px;
-  line-height: 33px;
+  width: 9.27vw;
+  height: 1.72vw;
+  line-height: 1.72vw;
 
   /* background: #8e3838; */
 `;
 
 const RightDiv = styled.div`
-  padding-left: 15px;
-  width: 200px;
-  height: 120px;
+  padding-left: 0.78vw;
+  width: 10.42vw;
+  height: 6.25vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,8 +86,8 @@ const LineDiv = styled.div`
 
 const JobhuntDiv = styled.div`
   width: 230px;
-  height: 33px;
-  line-height: 33px;
+  height: 1.72vw;
+  line-height: 1.72vw;
   font-weight: bold;
 
   /* background: #8e3838; */
@@ -95,16 +95,16 @@ const JobhuntDiv = styled.div`
 
 const EmailDiv = styled.div`
   width: 230px;
-  height: 33px;
-  line-height: 33px;
+  height: 1.72vw;
+  line-height: 1.72vw;
 
   /* background: #8e3838; */
 `;
 
 const NameDiv = styled.div`
   width: auto;
-  height: 33px;
-  line-height: 33px;
+  height: 1.72vw;
+  line-height: 1.72vw;
 
   cursor: pointer;
   :hover {
@@ -114,27 +114,27 @@ const NameDiv = styled.div`
 `;
 
 const LeftDiv = styled.div`
-  padding-left: 15px;
-  width: 220px;
-  height: 120px;
+  padding-left: 0.78vw;
+  width: 11.46vw;
+  height: 6.25vw;
   display: flex;
   flex-direction: column;
   align-items: baseline;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 0.26vw;
   background: #d9d8d5;
 `;
 
 const MainDiv = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 2.08vw;
 
-  width: 500px;
-  height: 140px;
+  width: 26.04vw;
+  height: 7.29vw;
 
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0vw 0.21vw 0.21vw rgba(0, 0, 0, 0.25);
   background: #3a3845;
 `;

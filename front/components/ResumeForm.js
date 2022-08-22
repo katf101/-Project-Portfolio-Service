@@ -199,38 +199,38 @@ export default ResumeForm;
 
 const PortfolioDiv = styled.div`
   width: 100%;
-  height: 332px;
+  height: 17.29vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* background: #334eab; */
   input {
-    margin-top: 20px;
-    width: 386px;
-    height: 40px;
+    margin-top: 1.04vw;
+    width: 20.1vw;
+    height: 2.08vw;
     background: #ffffff;
-    border: 1px solid #e0581d;
-    border-radius: 15px;
+    border: 0.05vw solid #e0581d;
+    border-radius: 0.78vw;
     font-family: "Inter";
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.04vw;
+    line-height: 1.25vw;
     color: #000000;
   }
   button {
-    margin-top: 58px;
-    width: 97px;
-    height: 39px;
+    margin-top: 3.02;
+    width: 5.05vw;
+    height: 2.03vw;
     background: #0a5ab9;
     border: none;
-    border-radius: 15px;
+    border-radius: 0.78vw;
     :hover {
       background: #084995;
     }
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.04vw;
+    line-height: 1.25vw;
     /* identical to box height */
     color: #ffffff;
   }
@@ -238,40 +238,40 @@ const PortfolioDiv = styled.div`
 
 const JobHuntDiv = styled.div`
   width: 100%;
-  height: 98px;
+  height: 5.1vw;
   display: flex;
   align-items: center;
   justify-content: center;
   /* background: #17234f; */
   button {
-    width: 90px;
-    height: 41px;
+    width: 4.69vw;
+    height: 2.14vw;
     background: #44c82f;
     border: none;
-    border-radius: 15px;
+    border-radius: 0.78vw;
     :hover {
       background: #2a8c1a;
     }
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 0.94vw;
+    line-height: 1.25vw;
     color: #000000;
   }
   div {
     text-align: center;
-    width: 280px;
-    height: 41px;
-    line-height: 41px;
+    width: 14.58vw;
+    height: 2.14vw;
+    line-height: 2.14vw;
     background: #ffffff;
-    border-bottom: 1px solid #d6d5d5;
+    border-bottom: 0.05vw solid #d6d5d5;
   }
 `;
 
 const StackDiv = styled.div`
   width: 100%;
-  height: 170px;
+  height: 8.85vw;
   display: flex;
   flex-direction: column;
   /* align-items: center; */
@@ -280,7 +280,7 @@ const StackDiv = styled.div`
   div {
     :nth-child(2) {
       width: 100%;
-      height: 100px;
+      height: 5.21vw;
       background: #d34b4b;
     }
   }
@@ -288,88 +288,88 @@ const StackDiv = styled.div`
     :focus {
       outline: none;
     }
-    width: 286px;
-    height: 39px;
+    width: 14.9vw;
+    height: 2.03vw;
     border: none;
     /* background: #ffffff; */
-    border-bottom: 1px solid #d6d5d5;
+    border-bottom: 0.05vw solid #d6d5d5;
   }
   button {
-    width: 97px;
-    height: 39px;
+    width: 5.05vw;
+    height: 2.03vw;
     background: #0a5ab9;
     border: none;
-    border-radius: 15px;
+    border-radius: 0.78vw;
     :hover {
       background: #084995;
     }
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 24px;
+    font-size: 0.78vw;
+    line-height: 1.25vw;
     color: #ffffff;
   }
 `;
 
 const JobDiv = styled.div`
   width: 100%;
-  height: 168px;
+  height: 8.75vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* background: #ec8f8f; */
   input {
-    margin-top: 25px;
-    width: 386px;
-    height: 40px;
+    margin-top: 1.3vw;
+    width: 20.1vw;
+    height: 2.08vw;
     background: #ffffff;
-    border: 1px solid #e0581d;
-    border-radius: 15px;
+    border: 0.05vw solid #e0581d;
+    border-radius: 0.78vw;
   }
 `;
 
 const IntroDiv = styled.div`
   width: 100%;
-  height: 184px;
+  height: 9.58vw;
   display: flex;
   justify-content: center;
   align-items: center;
   /* background: #952e2e; */
   textarea {
-    width: 383px;
-    height: 150px;
+    width: 19.95vw;
+    height: 7.81vw;
     resize: none;
     background: #ffffff;
-    border: 1px solid #e0581d;
-    border-radius: 15px;
+    border: 0.05vw solid #e0581d;
+    border-radius: 0.78vw;
   }
 `;
 
 const UserNameDiv = styled.div`
   margin-top: 100px;
   width: 100%;
-  height: 72px;
+  height: 3.75vw;
   display: flex;
   justify-content: center;
   align-items: center;
   /* background: #e05555; */
   input {
-    width: 385px;
-    height: 39px;
+    width: 20.05vw;
+    height: 2.03vw;
     background: #ffffff;
-    border: 1px solid #e0581d;
-    border-radius: 15px;
+    border: 0.05vw solid #e0581d;
+    border-radius: 0.78vw;
   }
 `;
 
 const MainDiv = styled.div`
-  margin-top: 200px;
+  margin-top: 10.42vw;
   margin-left: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 90%;
-  height: 1250px;
+  height: 65.1vw;
   /* background: #d9d9d9; */
 `;

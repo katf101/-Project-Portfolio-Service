@@ -53,7 +53,7 @@ const SearchMainDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 0.52vw;
 
     background: rgb(83, 107, 107);
     background: linear-gradient(
@@ -67,21 +67,21 @@ const SearchMainDiv = styled.div`
   }
 
   input {
-    padding: 5px;
+    padding: 0.26vw;
     width: 23.44vw;
     height: 2.08vw;
 
     background: #ffffff;
-    border: 0px;
-    border-radius: 10px 0px 0px 10px;
+    border: 0vw;
+    border-radius: 0.52vw 0vw 0vw 0.52vw;
   }
 
   button {
-    width: 49px;
+    width: 2.55vw;
     height: 2.6vw;
 
     background: #eaeaea;
-    border: 0px;
-    border-radius: 0px 10px 10px 0px;
+    border: 0vw;
+    border-radius: 0vw 0.52vw 0.52vw 0vw;
   }
 `;
