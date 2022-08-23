@@ -4,6 +4,10 @@
 
 Demo: http://semifoli.site/jobhunt
 
+### 테스트 계정
+id: test369@test.com
+pw: test
+
 **참여자 : 1명**
 
 **사용한 스택**
