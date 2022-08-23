@@ -3,8 +3,6 @@
 사람인, 로켓펀치 같은 채용 서비스를 모티브하여 개발자들의 세미 이력서를 유저들과 공유하는 서비스입니다.
 
 Demo: http://semifoli.site/jobhunt
-
-### 테스트 계정
 id: test369@test.com
 pw: test
 
