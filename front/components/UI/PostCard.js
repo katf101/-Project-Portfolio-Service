@@ -65,27 +65,12 @@ const RightDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 0.26vw;
   background: #fff4cf;
 `;
 
-const Line = styled.div`
-  width: 0px;
-  height: 80px;
-
-  border: 1px solid #338496;
-`;
-
-const LineDiv = styled.div`
-  width: 7px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  /* background: #3e58b7; */
-`;
-
 const JobhuntDiv = styled.div`
-  width: 230px;
+  width: 11.98vw;
   height: 1.72vw;
   line-height: 1.72vw;
   font-weight: bold;
@@ -94,10 +79,10 @@ const JobhuntDiv = styled.div`
 `;
 
 const EmailDiv = styled.div`
-  width: 230px;
+  width: 11.98vw;
   height: 1.72vw;
   line-height: 1.72vw;
-
+  font-size: 14px;
   /* background: #8e3838; */
 `;
 
